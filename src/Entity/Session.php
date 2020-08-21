@@ -30,14 +30,14 @@ class Session
     private $end_date;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Course::class, inversedBy="course_session")
-     */
-    private $course;
-
-    /**
-     * @ORM\ManyToMany(targetEntity=user::class, inversedBy="user")
+     * @ORM\ManyToMany(targetEntity=User::class, inversedBy="sessions")
      */
     private $user;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Course::class, inversedBy="session")
+     */
+    private $course;
 
     public function __construct()
     {
@@ -73,27 +73,15 @@ class Session
         return $this;
     }
 
-    public function getCourse(): ?Course
-    {
-        return $this->course;
-    }
-
-    public function setCourse(?Course $course): self
-    {
-        $this->course = $course;
-
-        return $this;
-    }
-
     /**
-     * @return Collection|user[]
+     * @return Collection|User[]
      */
     public function getUser(): Collection
     {
         return $this->user;
     }
 
-    public function addUser(user $user): self
+    public function addUser(User $user): self
     {
         if (!$this->user->contains($user)) {
             $this->user[] = $user;
@@ -102,11 +90,23 @@ class Session
         return $this;
     }
 
-    public function removeUser(user $user): self
+    public function removeUser(User $user): self
     {
         if ($this->user->contains($user)) {
             $this->user->removeElement($user);
         }
+
+        return $this;
+    }
+
+    public function getCourse(): ?Course
+    {
+        return $this->course;
+    }
+
+    public function setCourse(?Course $course): self
+    {
+        $this->course = $course;
 
         return $this;
     }

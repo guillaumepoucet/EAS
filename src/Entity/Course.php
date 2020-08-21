@@ -25,13 +25,13 @@ class Course
     private $course_name;
 
     /**
-     * @ORM\OneToMany(targetEntity=session::class, mappedBy="course")
+     * @ORM\OneToMany(targetEntity=Session::class, mappedBy="course")
      */
-    private $course_session;
+    private $session;
 
     public function __construct()
     {
-        $this->course_session = new ArrayCollection();
+        $this->session = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -52,30 +52,30 @@ class Course
     }
 
     /**
-     * @return Collection|session[]
+     * @return Collection|Session[]
      */
-    public function getCourseSession(): Collection
+    public function getSession(): Collection
     {
-        return $this->course_session;
+        return $this->session;
     }
 
-    public function addCourseSession(session $courseSession): self
+    public function addSession(Session $session): self
     {
-        if (!$this->course_session->contains($courseSession)) {
-            $this->course_session[] = $courseSession;
-            $courseSession->setCourse($this);
+        if (!$this->session->contains($session)) {
+            $this->session[] = $session;
+            $session->setCourse($this);
         }
 
         return $this;
     }
 
-    public function removeCourseSession(session $courseSession): self
+    public function removeSession(Session $session): self
     {
-        if ($this->course_session->contains($courseSession)) {
-            $this->course_session->removeElement($courseSession);
+        if ($this->session->contains($session)) {
+            $this->session->removeElement($session);
             // set the owning side to null (unless already changed)
-            if ($courseSession->getCourse() === $this) {
-                $courseSession->setCourse(null);
+            if ($session->getCourse() === $this) {
+                $session->setCourse(null);
             }
         }
 

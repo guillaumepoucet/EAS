@@ -62,11 +62,6 @@ class User implements UserInterface
     private $isVerified = false;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Session::class, mappedBy="user")
-     */
-    private $user;
-
-    /**
      * @ORM\OneToMany(targetEntity=Post::class, mappedBy="user")
      */
     private $posts;
@@ -76,10 +71,16 @@ class User implements UserInterface
      */
     private $announcements;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=Session::class, mappedBy="user")
+     */
+    private $sessions;
+
     public function __construct()
     {
         $this->posts = new ArrayCollection();
         $this->announcements = new ArrayCollection();
+        $this->sessions = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -209,34 +210,6 @@ class User implements UserInterface
     }
 
     /**
-     * @return Collection|Session[]
-     */
-    public function getUser(): Collection
-    {
-        return $this->user;
-    }
-
-    public function addUser(Session $user): self
-    {
-        if (!$this->user->contains($user)) {
-            $this->user[] = $user;
-            $user->addUser($this);
-        }
-
-        return $this;
-    }
-
-    public function removeUser(Session $user): self
-    {
-        if ($this->user->contains($user)) {
-            $this->user->removeElement($user);
-            $user->removeUser($this);
-        }
-
-        return $this;
-    }
-
-    /**
      * @return Collection|Post[]
      */
     public function getPosts(): Collection
@@ -293,6 +266,34 @@ class User implements UserInterface
             if ($announcement->getUser() === $this) {
                 $announcement->setUser(null);
             }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Session[]
+     */
+    public function getSessions(): Collection
+    {
+        return $this->sessions;
+    }
+
+    public function addSession(Session $session): self
+    {
+        if (!$this->sessions->contains($session)) {
+            $this->sessions[] = $session;
+            $session->addUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSession(Session $session): self
+    {
+        if ($this->sessions->contains($session)) {
+            $this->sessions->removeElement($session);
+            $session->removeUser($this);
         }
 
         return $this;

@@ -19,6 +19,30 @@
     </ul>
 </div>
 
-<p>{{ app.user.lastname }}</p>
-<p>{{ app.user.firstname }}</p>
+
+<p>Nom et prénom :<br>{{ app.user.firstname }} {{ app.user.lastname }}</p>
+{% for session in sessions %}
+<table>
+    <thead>
+        <tr>
+            <th>id</th>
+            <th>date de début</th>
+            <th>date de fin</th>
+            <th>formation</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <tr>
+            <td>{{ session.id }}</td>
+            <td>{{ session.startDate | date("d/m/Y") }}</td>
+            <td>{{ session.endDate | date("d/m/Y") }}</td>
+            <td>{{ session.course.courseName }}</td>
+        </tr>
+    </tbody>
+</table>
+
+
+{% endfor %}
+
 {% endblock %}
