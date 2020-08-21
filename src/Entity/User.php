@@ -76,11 +76,6 @@ class User implements UserInterface
      */
     private $announcements;
 
-    /**
-     * @ORM\OneToOne(targetEntity=Practitioner::class, mappedBy="user", cascade={"persist", "remove"})
-     */
-    private $practitioner;
-
     public function __construct()
     {
         $this->posts = new ArrayCollection();
@@ -303,21 +298,4 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getPractitioner(): ?Practitioner
-    {
-        return $this->practitioner;
-    }
-
-    public function setPractitioner(?Practitioner $practitioner): self
-    {
-        $this->practitioner = $practitioner;
-
-        // set (or unset) the owning side of the relation if necessary
-        $newUser = null === $practitioner ? null : $this;
-        if ($practitioner->getUser() !== $newUser) {
-            $practitioner->setUser($newUser);
-        }
-
-        return $this;
-    }
 }

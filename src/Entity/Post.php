@@ -50,7 +50,7 @@ class Post
     private $is_archived;
 
     /**
-     * @ORM\OneToMany(targetEntity=image::class, mappedBy="post")
+     * @ORM\OneToMany(targetEntity=Image::class, mappedBy="post")
      */
     private $image;
 
