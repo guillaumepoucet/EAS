@@ -18,7 +18,6 @@ class UserController extends AbstractController
         $user = $this->getUser();
         $sessions = $userRepo->find($user)->getSessions();
         $sessionTable = [];
-        $courseTable = [];
         foreach ($sessions as $session) {
             $course = $sessionRepo->find($session)->getCourse();
             $course = $courseRepo->find($course)->getCourseName();
