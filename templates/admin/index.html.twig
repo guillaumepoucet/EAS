@@ -73,6 +73,7 @@
 						<th>Date de début</th>
 						<th>Date de fin</th>
 						<th></th>
+						<th>Liste des apprenants</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -84,6 +85,9 @@
 							<td>
 								<a href="/admin/delete/session/{{session.id}}">Supprimer</a>
 							</td>
+							{% for user in session.user %}
+								<td>{{user.firstName}} {{user.lastName}}</td>
+							{% endfor %}
 						</tr>
 					{% endfor %}
 				</tbody>

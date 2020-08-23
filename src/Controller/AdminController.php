@@ -25,41 +25,13 @@ class AdminController extends AbstractController
     {
         // retrieve users info
         $users = $userRepo->findAll();
-        foreach ($users as $user) {
-            $userId = $user->getId();
-            $sessions = $userRepo->find($userId)->getSessions();
-            foreach ($sessions as $session) {
-                $course = $sessionRepo->find($session)->getCourse();
-                $course = $courseRepo->find($course)->getCourseName();
-            }
-        }
-        // dump($users);
 
         // retrieve courses info
         $courses = $courseRepo->findAll();
-        // foreach ($courses as $course) {
-        //     $userId = $user->getId();
-        //     $sessions = $userRepo->find($userId)->getSessions();
-        //     foreach ($sessions as $session) {
-        //         $course = $sessionRepo->find($session)->getCourse();
-        //         $course = $courseRepo->find($course)->getCourseName();
-        //     }
-        // }
-        // dump($courses);
 
         // retrieve sessions info
         $sessions = $sessionRepo->findAll();
-        // foreach ($courses as $course) {
-        //     $userId = $user->getId();
-        //     $sessions = $userRepo->find($userId)->getSessions();
-        // foreach ($sessions as $session) {
-            // $session_id = $session->getId();
-            // $course = $sessionRepo->find($session)->getCourse();
-            // $course = $courseRepo->find($session_id)->getCourseName();
-        // }
-        // }
-        dump($sessions);
-
+    
         // creating form to add users
         $newUser = new User;
 
