@@ -35,6 +35,18 @@ class AdminController extends AbstractController
         }
         // dump($users);
 
+        // retrieve courses info
+        $courses = $courseRepo->findAll();
+        // foreach ($courses as $course) {
+        //     $userId = $user->getId();
+        //     $sessions = $userRepo->find($userId)->getSessions();
+        //     foreach ($sessions as $session) {
+        //         $course = $sessionRepo->find($session)->getCourse();
+        //         $course = $courseRepo->find($course)->getCourseName();
+        //     }
+        // }
+        // dump($users);
+
         // creating form to add users
         $newUser = new User;
 
@@ -85,6 +97,9 @@ class AdminController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($newCourse);
             $entityManager->flush();
+
+            return $this->redirectToRoute('admin');
+
         }
 
         // creating form to add course sessions
@@ -99,11 +114,15 @@ class AdminController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($newSession);
             $entityManager->flush();
+
+            return $this->redirectToRoute('admin');
+
         }
 
         return $this->render('admin/index.html.twig', [
             'controller_name' => 'AdminController',
             'users' => $users,
+            'courses' => $courses,
             'userForm' => $userForm->createView(),
             'courseForm' => $courseForm->createView(),
             'sessionForm' => $sessionForm->createView(),
@@ -114,11 +133,24 @@ class AdminController extends AbstractController
      * @Route("/admin/delete/user/{id}", name="delete_user")
      */
 
-    public function delete(UserRepository $userRepo, $id)
+    public function deleteUser(UserRepository $userRepo, $id)
     {
         $entityManager = $this->getDoctrine()->getManager();
         $user = $userRepo->find($id);
         $entityManager->remove($user);
+        $entityManager->flush();
+        return $this->redirectToRoute('admin');
+    }
+
+    /**
+     * @Route("/admin/delete/course/{id}", name="delete_course")
+     */
+
+    public function deleteCourse(CourseRepository $courseRepo, $id)
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+        $course = $courseRepo->find($id);
+        $entityManager->remove($course);
         $entityManager->flush();
         return $this->redirectToRoute('admin');
     }

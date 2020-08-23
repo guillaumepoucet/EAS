@@ -32,7 +32,9 @@
 							{{session.course.courseName}}<br>
 						{% endfor %}
 					</td>
-					<td><a href="/admin/delete/user/{{user.id}}">Supprimer</a></td>
+					<td>
+						<a href="/admin/delete/user/{{user.id}}">Supprimer</a>
+					</td>
 				</tr>
 			{% endfor %}
 		</tbody>
@@ -40,8 +42,27 @@
 
 	<h2>Ajouter des utilisateurs</h2>
 	{{ form(userForm) }}
-	<h2>Ajouter une formation</h2>
-	{{ form(courseForm) }}
-	<h2>Ajouter une session de formation</h2>
-	{{ form(sessionForm) }}
-	{% endblock %}
+
+		<h2>Ajouter une formation</h2>
+		{{ form(courseForm) }}
+			<table>
+				<thead>
+					<tr>
+						<th>Nom de la formation</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for course in courses %}
+						<tr>
+							<td>{{course.courseName}}</td>
+							<td>
+								<a href="/admin/delete/course/{{course.id}}">Supprimer</a>
+							</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</tbody>
+		</table>
+		<h2>Ajouter une session de formation</h2>
+		{{ form(sessionForm) }}{% endblock %}
