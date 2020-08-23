@@ -45,7 +45,20 @@ class AdminController extends AbstractController
         //         $course = $courseRepo->find($course)->getCourseName();
         //     }
         // }
-        // dump($users);
+        // dump($courses);
+
+        // retrieve sessions info
+        $sessions = $sessionRepo->findAll();
+        // foreach ($courses as $course) {
+        //     $userId = $user->getId();
+        //     $sessions = $userRepo->find($userId)->getSessions();
+        foreach ($sessions as $session) {
+            $session_id = $session->getId();
+            // $course = $sessionRepo->find($session)->getCourse();
+            $course = $courseRepo->find($session_id)->getCourseName();
+        }
+        // }
+        // dump($sessions);
 
         // creating form to add users
         $newUser = new User;
@@ -99,7 +112,6 @@ class AdminController extends AbstractController
             $entityManager->flush();
 
             return $this->redirectToRoute('admin');
-
         }
 
         // creating form to add course sessions
@@ -116,13 +128,13 @@ class AdminController extends AbstractController
             $entityManager->flush();
 
             return $this->redirectToRoute('admin');
-
         }
 
         return $this->render('admin/index.html.twig', [
             'controller_name' => 'AdminController',
             'users' => $users,
             'courses' => $courses,
+            'sessions' => $sessions,
             'userForm' => $userForm->createView(),
             'courseForm' => $courseForm->createView(),
             'sessionForm' => $sessionForm->createView(),
