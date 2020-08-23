@@ -108,14 +108,14 @@ class AdminController extends AbstractController
             'courseForm' => $courseForm->createView(),
             'sessionForm' => $sessionForm->createView(),
         ]);
-
     }
+
     /**
      * @Route("/admin/delete/user/{id}", name="delete_user")
      */
 
     public function delete(UserRepository $userRepo, $id)
-    { 
+    {
         $entityManager = $this->getDoctrine()->getManager();
         $user = $userRepo->find($id);
         $entityManager->remove($user);
