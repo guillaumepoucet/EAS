@@ -3,7 +3,11 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Entity\Course;
+use App\Entity\Session;
 use App\Form\AddUserType;
+use App\Form\AddCourseType;
+use App\Form\AddSessionType;
 use App\Repository\UserRepository;
 use App\Repository\CourseRepository;
 use App\Repository\SessionRepository;
@@ -32,36 +36,78 @@ class AdminController extends AbstractController
         // dump($users);
 
         // creating form to add users
-        $user = new User;
+        $newUser = new User;
 
-        $form = $this->createForm(AddUserType::class, $user);
+        $userForm = $this->createForm(AddUserType::class, $newUser);
 
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
+        $userForm->handleRequest($request);
+        if ($userForm->isSubmitted() && $userForm->isValid()) {
             // $form->getData() holds the submitted values
             // but, the original `$task` variable has also been updated
-            $user = $form->getData();
+            $newUser = $userForm->getData();
+
             // encode the plain password
-            $user->setPassword(
+            $newUser->setPassword(
                 $passwordEncoder->encodePassword(
-                    $user,
-                    $form->get('password')->getData()
+                    $newUser,
+                    $userForm->get('password')->getData()
                 )
             );
+
+            $sessions = $userForm->get('sessions')->getData();
+            $sessionsId = [];
+            // foreach ($sessions as $session) {
+            //     $sessionsId = $session;
+            // };
+
+            // $newUser->addSession($newUser)->getId();
+            // dump($sessions);
+            // exit;
 
             // ... perform some action, such as saving the task to the database
             // for example, if Task is a Doctrine entity, save it!
             $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($user);
+            $entityManager->persist($newUser);
             $entityManager->flush();
 
             // return $this->redirectToRoute('task_success');
         }
 
+        // creating form to add courses
+        $newCourse = new Course;
+
+        $courseForm = $this->createForm(AddCourseType::class, $newCourse);
+
+        $courseForm->handleRequest($request);
+        if ($courseForm->isSubmitted() && $courseForm->isValid()) {
+            $newCourse = $courseForm->getData();
+
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($newCourse);
+            $entityManager->flush();
+        }
+
+        // creating form to add course sessions
+        $newSession = new Session;
+
+        $sessionForm = $this->createForm(AddSessionType::class, $newSession);
+
+        $sessionForm->handleRequest($request);
+        if ($sessionForm->isSubmitted() && $sessionForm->isValid()) {
+            $newSession = $sessionForm->getData();
+
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($newSession);
+            $entityManager->flush();
+        }
+
         return $this->render('admin/index.html.twig', [
             'controller_name' => 'AdminController',
             'users' => $users,
-            'form' => $form->createView(),
+            'userForm' => $userForm->createView(),
+            'courseForm' => $courseForm->createView(),
+            'sessionForm' => $sessionForm->createView(),
         ]);
+
     }
 }
