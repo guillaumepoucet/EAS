@@ -72,6 +72,7 @@
 						<th>Nom de la formation</th>
 						<th>Date de début</th>
 						<th>Date de fin</th>
+						<th></th>
 					</tr>
 				</thead>
 				<tbody>
@@ -80,6 +81,9 @@
 							<td>{{session.course.courseName}}</td>
 							<td>{{session.startDate | date("d/m/Y")}}</td>
 							<td>{{session.endDate | date("d/m/Y")}}</td>
+							<td>
+								<a href="/admin/delete/session/{{session.id}}">Supprimer</a>
+							</td>
 						</tr>
 					{% endfor %}
 				</tbody>

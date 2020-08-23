@@ -52,13 +52,13 @@ class AdminController extends AbstractController
         // foreach ($courses as $course) {
         //     $userId = $user->getId();
         //     $sessions = $userRepo->find($userId)->getSessions();
-        foreach ($sessions as $session) {
-            $session_id = $session->getId();
+        // foreach ($sessions as $session) {
+            // $session_id = $session->getId();
             // $course = $sessionRepo->find($session)->getCourse();
-            $course = $courseRepo->find($session_id)->getCourseName();
-        }
+            // $course = $courseRepo->find($session_id)->getCourseName();
         // }
-        // dump($sessions);
+        // }
+        dump($sessions);
 
         // creating form to add users
         $newUser = new User;
@@ -163,6 +163,19 @@ class AdminController extends AbstractController
         $entityManager = $this->getDoctrine()->getManager();
         $course = $courseRepo->find($id);
         $entityManager->remove($course);
+        $entityManager->flush();
+        return $this->redirectToRoute('admin');
+    }
+
+    /**
+     * @Route("/admin/delete/session/{id}", name="delete_session")
+     */
+
+    public function deleteSession(SessionRepository $sessionRepo, $id)
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+        $session = $sessionRepo->find($id);
+        $entityManager->remove($session);
         $entityManager->flush();
         return $this->redirectToRoute('admin');
     }
