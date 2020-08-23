@@ -110,4 +110,16 @@ class AdminController extends AbstractController
         ]);
 
     }
+    /**
+     * @Route("/admin/delete/user/{id}", name="delete_user")
+     */
+
+    public function delete(UserRepository $userRepo, $id)
+    { 
+        $entityManager = $this->getDoctrine()->getManager();
+        $user = $userRepo->find($id);
+        $entityManager->remove($user);
+        $entityManager->flush();
+        return $this->redirectToRoute('admin');
+    }
 }
