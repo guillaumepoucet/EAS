@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}&Eacute;diter une session de formation
+{% endblock %}
+
+{% block body %}
+<div class="container">
+	{{ form_start(sessionForm) }}
+    {{ form_widget(sessionForm) }}
+    <button class="btn btn-primary">&Eacute;diter</button>
+    {{ form_end(sessionForm) }}
+</div>
+{% endblock %}
