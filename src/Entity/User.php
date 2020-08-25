@@ -17,7 +17,7 @@ class User implements UserInterface
 {
     public const ROLE_USER = 'ROLE_USER';
     public const ROLE_ADMIN = 'ROLE_ADMIN';
-
+ 
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()

@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}&Eacute;diter un utilisateur
+{% endblock %}
+
+{% block body %}
+    {{ form_start(userForm) }}
+    {{ form_widget(userForm) }}
+    <button class="btn btn-primary">&Eacute;diter</button>
+    {{ form_end(userForm) }}
+{% endblock %}
