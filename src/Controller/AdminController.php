@@ -224,9 +224,21 @@ class AdminController extends AbstractController
      * @Route("/admin/user/make_admin/{id}", name="admin.make.admin")
      */
 
-    public function makeAdmin(User $user, Request $request, UserPasswordEncoderInterface $passwordEncoder)
+    public function makeAdmin(User $user)
     {
         $user->setRoles(array("ROLE_ADMIN"));
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->flush();
+        return $this->redirectToRoute('users.management');
+    }
+
+    /**
+     * @Route("/admin/user/del_admin/{id}", name="admin.del.admin")
+     */
+
+    public function delAdmin(User $user)
+    {
+        $user->setRoles(array());
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->flush();
         return $this->redirectToRoute('users.management');

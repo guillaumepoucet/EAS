@@ -25,7 +25,7 @@
 
 							{% if user.roles|length == 2 %}
 								<span class="badge badge-pill badge-dark">admin</span><br>
-								<a href="{{ path('admin.make.admin', {id: user.id}) }}">Révoquer</a>
+								<a href="{{ path('admin.del.admin', {id: user.id}) }}">Révoquer</a>
 							{% else %}
 								<a href="{{ path('admin.make.admin', {id: user.id}) }}">Modifer</a>
 							{% endif %}
