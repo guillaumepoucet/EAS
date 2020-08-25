@@ -31,7 +31,7 @@ class AdminController extends AbstractController
 
         // retrieve sessions info
         $sessions = $sessionRepo->findAll();
-    
+
         // creating form to add users
         $newUser = new User;
 
@@ -52,13 +52,11 @@ class AdminController extends AbstractController
             );
 
             $sessions = $userForm->get('sessions')->getData();
-            $sessionsId = [];
-            // foreach ($sessions as $session) {
-            //     $sessionsId = $session;
-            // };
+            foreach ($sessions as $session) {
+                $session->addUser($newUser);
+            };
 
-            // $newUser->addSession($newUser)->getId();
-            // dump($sessions);
+            // dump($session);
             // exit;
 
             // ... perform some action, such as saving the task to the database
@@ -67,7 +65,7 @@ class AdminController extends AbstractController
             $entityManager->persist($newUser);
             $entityManager->flush();
 
-            // return $this->redirectToRoute('task_success');
+            return $this->redirectToRoute('admin');
         }
 
         // creating form to add courses
