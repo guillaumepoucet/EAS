@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Gestion des apprenants
+{% endblock %}
+
+{% block body %}
+<div class="container">
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Nom de la formation</th>
+				<th>Date de début</th>
+				<th>Date de fin</th>
+				<th></th>
+				<th></th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for session in sessions %}
+			<tr>
+				<td>{{session.course.courseName}}</td>
+				<td>{{session.startDate | date("d/m/Y")}}</td>
+				<td>{{session.endDate | date("d/m/Y")}}</td>
+				<td>
+					<a href="">Liste des apprenants</a>
+					<ul>
+						{% for user in session.user %}
+						<li>{{user.firstName}}
+							{{user.lastName}}</li>
+						{% endfor %}
+					</ul>
+				</td>
+				<td>
+					<a href="{{ path('edit.session', {id: session.id}) }}">&Eacute;diter</a>
+					<a href="/admin/delete/session/{{session.id}}">Supprimer</a>
+				</td>
+			</tr>
+			{% endfor %}
+
+		</tbody>
+	</table>
+	<div class="row">
+		<div class="col-sm-7">
+			<h2>Ajouter une session de formation</h2>
+			{{ form(sessionForm) }}
+		</div>
+		<div class="col-auto">
+			<h2>Ajouter une formation</h2>
+			{{ form(courseForm) }}
+		</div>
+	</div>{% endblock %}

@@ -1,62 +1,18 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}&Eacute;space Administrateur
+{% block title %}Espace Administrateur
 {% endblock %}
 
 {% block body %}
 
-	<a href="{{ path('users.management') }}">Voir la listes des apprenants</a>
+	<div class="container">
+
+		<a href="{{ path('users.management') }}">Gérer les apprenants</a>
+		<a href="{{ path('sessions.management') }}">Gérer les sessions/formations</a>
 
 
-	<h2>Ajouter une formation</h2>
-	{{ form(courseForm) }}
-		<table>
-			<thead>
-				<tr>
-					<th>Nom de la formation</th>
-					<th></th>
-				</tr>
-			</thead>
-			<tbody>
-				{% for course in courses %}
-					<tr>
-						<td>{{course.courseName}}</td>
-						<td>
-							<a href="/admin/delete/course/{{course.id}}">Supprimer</a>
-						</td>
-					</tr>
-				{% endfor %}
-			</tbody>
-		</tbody>
-	</table>
-	<h2>Ajouter une session de formation</h2>
-	{{ form(sessionForm) }}
-		<table>
-			<thead>
-				<tr>
-					<th>Nom de la formation</th>
-					<th>Date de début</th>
-					<th>Date de fin</th>
-					<th></th>
-					<th>Liste des apprenants</th>
-				</tr>
-			</thead>
-			<tbody>
-				{% for session in sessions %}
-					<tr>
-						<td>{{session.course.courseName}}</td>
-						<td>{{session.startDate | date("d/m/Y")}}</td>
-						<td>{{session.endDate | date("d/m/Y")}}</td>
-						<td>
-							<a href="/admin/delete/session/{{session.id}}">Supprimer</a>
-						</td>
-						{% for user in session.user %}
-							<td>{{user.firstName}}
-								{{user.lastName}}</td>
-						{% endfor %}
-					</tr>
-				{% endfor %}
-			</tbody>
-		</tbody>
-	</table>
+
+
+
+	</div>
 {% endblock %}

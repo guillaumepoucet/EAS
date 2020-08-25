@@ -4,24 +4,25 @@
 {% endblock %}
 
 {% block body %}
-	<h2>Listes des utilisateurs</h2>
-	<table class="table">
-		<thead>
-			<tr>
-				<th>Prénom</th>
-				<th>Nom</th>
-				<th class="text-center">Rôle</th>
-				<th>Formation en cours</th>
-				<th>Née le</th>
-				<th></th>
-			</tr>
-		</thead>
-		<tbody>
-			{% for user in users %}
+	<div class="container">
+		<h2>Listes des utilisateurs</h2>
+		<table class="table">
+			<thead>
 				<tr>
-					<td>{{user.firstName}}</td>
-					<td>{{user.lastName}}</td>
-					<td class="text-center">
+					<th>Prénom</th>
+					<th>Nom</th>
+					<th class="text-center">Rôle</th>
+					<th>Formation en cours</th>
+					<th>Née le</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for user in users %}
+					<tr>
+						<td>{{user.firstName}}</td>
+						<td>{{user.lastName}}</td>
+						<td class="text-center">
 
 							{% if user.roles|length == 2 %}
 								<span class="badge badge-pill badge-dark">admin</span><br>
@@ -29,24 +30,25 @@
 							{% else %}
 								<a href="{{ path('admin.make.admin', {id: user.id}) }}">Modifer</a>
 							{% endif %}
-					
-					</td>
-					<td>
-						{% for session in user.sessions %}
-							{{session.course.courseName}}<br>
-						{% else %}
-							(Aucune sessions)<br>
-						{% endfor %}
-						<a href="">Modifier</a>
-					</td>
-					<td>{{user.birthDate | date("d/m/Y")}}</td>
-					<td>
-						<a href="{{ path('admin.edit.user', {id: user.id}) }}">&Eacute;diter</a>
-						<a href="/admin/delete/user/{{user.id}}">Supprimer</a>
-					</td>
-				</tr>
-			{% endfor %}
-		</tbody>
-	</table>
-	<a href="{{ path('admin.new.user') }}" type="button" class="btn btn-primary">+ Ajouter un utilisateur</a>
+
+						</td>
+						<td>
+							{% for session in user.sessions %}
+								{{session.course.courseName}}<br>
+							{% else %}
+								(Aucune sessions)<br>
+							{% endfor %}
+							{# <a href="">Gérer</a> #}
+						</td>
+						<td>{{user.birthDate | date("d/m/Y")}}</td>
+						<td>
+							<a href="{{ path('admin.edit.user', {id: user.id}) }}">&Eacute;diter</a>
+							<a href="/admin/delete/user/{{user.id}}">Supprimer</a>
+						</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+		<a href="{{ path('admin.new.user') }}" type="button" class="btn btn-primary">+ Ajouter un utilisateur</a>
+	</div>
 {% endblock %}
