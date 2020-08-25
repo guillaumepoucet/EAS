@@ -4,49 +4,57 @@
 {% endblock %}
 
 {% block body %}
-<div class="container">
-	<table class="table">
-		<thead>
-			<tr>
-				<th>Nom de la formation</th>
-				<th>Date de début</th>
-				<th>Date de fin</th>
-				<th></th>
-				<th></th>
-				<th></th>
-			</tr>
-		</thead>
-		<tbody>
-			{% for session in sessions %}
-			<tr>
-				<td>{{session.course.courseName}}</td>
-				<td>{{session.startDate | date("d/m/Y")}}</td>
-				<td>{{session.endDate | date("d/m/Y")}}</td>
-				<td>
-					<a href="">Liste des apprenants</a>
-					<ul>
-						{% for user in session.user %}
-						<li>{{user.firstName}}
-							{{user.lastName}}</li>
-						{% endfor %}
-					</ul>
-				</td>
-				<td>
-					<a href="{{ path('edit.session', {id: session.id}) }}">&Eacute;diter</a>
-					<a href="/admin/delete/session/{{session.id}}">Supprimer</a>
-				</td>
-			</tr>
-			{% endfor %}
+	<div class="container">
+		<table class="table">
+			<thead>
+				<tr>
+					<th>Nom de la formation</th>
+					<th>Date de début</th>
+					<th>Date de fin</th>
+					<th></th>
+					<th></th>
+					<th></th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for session in sessions %}
+					<tr>
+						<td>{{session.course.courseName}}</td>
+						<td>{{session.startDate | date("d/m/Y")}}</td>
+						<td>{{session.endDate | date("d/m/Y")}}</td>
+						<td>
+							<a data-toggle="collapse" href="#session{{session.id}}UsersList" role="button" aria-expanded="false" aria-controls="session{{session.id}}UsersList">Liste des apprenants
+								<svg width="1em" height="1em" viewbox="0 0 16 16" class="bi bi-caret-down-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+									<path d="M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
+								</svg>
+							</a>
+							<ul class="collapse" id="session{{session.id}}UsersList">
+								{% for user in session.user %}
+									<li>{{user.firstName}}
+										{{user.lastName}}</li>
+								{% endfor %}
+							</ul>
+						</td>
+						<td>
+							<a href="{{ path('edit.session', {id: session.id}) }}">&Eacute;diter</a>
+						</td>
+						<td>
+							<a href="/admin/delete/session/{{session.id}}">Supprimer</a>
+						</td>
+					</tr>
+				{% endfor %}
 
-		</tbody>
-	</table>
-	<div class="row">
-		<div class="col-sm-7">
-			<h2>Ajouter une session de formation</h2>
-			{{ form(sessionForm) }}
-		</div>
-		<div class="col-auto">
-			<h2>Ajouter une formation</h2>
-			{{ form(courseForm) }}
-		</div>
-	</div>{% endblock %}
+			</tbody>
+		</table>
+		<div class="row">
+			<div class="col-sm-7">
+				<h2>Ajouter une session de formation</h2>
+				{{ form(sessionForm) }}
+				</div>
+				<div class="col-auto">
+					<h2>Ajouter une formation</h2>
+					{{ form(courseForm) }}
+					</div>
+				</div>
+			{% endblock %}

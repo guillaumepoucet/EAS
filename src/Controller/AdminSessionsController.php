@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use Twig\Environment;
 use App\Entity\Course;
 use App\Entity\Session;
 use App\Form\AddCourseType;
