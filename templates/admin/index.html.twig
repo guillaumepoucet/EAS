@@ -10,7 +10,15 @@
 		<a href="{{ path('users.management') }}">Gérer les apprenants</a>
 		<a href="{{ path('sessions.management') }}">Gérer les sessions/formations</a>
 
-
+<div class="row">
+	<div class="col">
+		<h4>Créer une annonce</h4>
+		{{ form_start(announcementForm) }}
+		{{ form_widget(announcementForm) }}
+		<button class="btn btn-primary">+ Publier</button>
+		{{ form_end(announcementForm) }}
+	</div>
+</div>
 
 
 
