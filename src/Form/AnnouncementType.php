@@ -3,10 +3,12 @@
 namespace App\Form;
 
 use App\Entity\Announcement;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 
 class AnnouncementType extends AbstractType
 {
@@ -14,8 +16,13 @@ class AnnouncementType extends AbstractType
     {
         $builder
             ->add('announcement_title')
-            ->add('announcement_content')
-            // ->add('is_visible')
+            ->add('announcement_content', CKEditorType::class, [
+                'config_name' => 'announcement_config'
+            ])
+            ->add('is_draft', CheckboxType::class, [
+                'label' => 'Enregistrer comme brouillon',
+                'required' => false,
+            ])
             ->add('announcement_date')
             // ->add('user')
         ;

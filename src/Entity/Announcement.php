@@ -28,11 +28,6 @@ class Announcement
     private $announcement_content;
 
     /**
-     * @ORM\Column(type="boolean")
-     */
-    private $is_visible;
-
-    /**
      * @ORM\Column(type="date")
      */
     private $announcement_date;
@@ -42,6 +37,11 @@ class Announcement
      * @ORM\JoinColumn(nullable=false)
      */
     private $user;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $is_draft;
 
     public function getId(): ?int
     {
@@ -72,18 +72,6 @@ class Announcement
         return $this;
     }
 
-    public function getIsVisible(): ?bool
-    {
-        return $this->is_visible;
-    }
-
-    public function setIsVisible(bool $is_visible): self
-    {
-        $this->is_visible = $is_visible;
-
-        return $this;
-    }
-
     public function getAnnouncementDate(): ?\DateTimeInterface
     {
         return $this->announcement_date;
@@ -104,6 +92,18 @@ class Announcement
     public function setUser(?user $user): self
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function getIsDraft(): ?bool
+    {
+        return $this->is_draft;
+    }
+
+    public function setIsDraft(bool $is_draft): self
+    {
+        $this->is_draft = $is_draft;
 
         return $this;
     }
