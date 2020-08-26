@@ -2,11 +2,12 @@
 
 namespace App\Controller;
 
-use Twig\Environment;
+use App\Entity\User;
 use App\Entity\Course;
 use App\Entity\Session;
 use App\Form\AddCourseType;
 use App\Form\AddSessionType;
+use App\Repository\UserRepository;
 use App\Repository\CourseRepository;
 use App\Repository\SessionRepository;
 use Symfony\Component\HttpFoundation\Request;
@@ -97,8 +98,22 @@ class AdminSessionsController extends AbstractController
      * @Route("/admin/session/edit/{id}", name="edit.session")
      */
 
-    public function editSession(Session $session, Request $request)
+    public function editSession(Session $session, Request $request, UserRepository $userRepo, SessionRepository $sessionRepo)
     {
+        // retrieve users info
+        $users = $userRepo->findAll();
+
+        // retrieve sessions info
+        $sessions = $sessionRepo->findAll();
+
+        foreach ($users as $user) {
+            $userId = $user->getId();
+            $sessions = $userRepo->find($userId)->getSessions();
+            foreach ($sessions as $s) {
+                $sessionId = $s->getId();
+            }
+        }
+
         $sessionForm = $this->createForm(AddSessionType::class, $session);
 
         $sessionForm->handleRequest($request);
@@ -114,7 +129,37 @@ class AdminSessionsController extends AbstractController
         return $this->render('admin/sessions_management/editSession.html.twig', [
             'controller_name' => 'AdminSessionsController',
             'session' => $session,
+            'sessions' => $sessions,
+            'users' => $users,
             'sessionForm' => $sessionForm->createView(),
+        ]);
+    }
+
+    /**
+     * @Route("/admin/session/{session}/add/{user}", name="add.user.session")
+     */
+
+    public function addUserToSession(User $user, Session $session)
+    {
+        $session->addUser($user);
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->flush();
+        return $this->redirectToRoute('edit.session', [
+            'id' => $session->getId()
+        ]);
+    }
+
+    /**
+     * @Route("/admin/session/{session}/remove/{user}", name="remove.user.session")
+     */
+
+    public function removeUserOfSession(User $user, Session $session)
+    {
+        $session->removeUser($user);
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->flush();
+        return $this->redirectToRoute('edit.session', [
+            'id' => $session->getId()
         ]);
     }
 }

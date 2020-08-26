@@ -17,7 +17,7 @@ class User implements UserInterface
 {
     public const ROLE_USER = 'ROLE_USER';
     public const ROLE_ADMIN = 'ROLE_ADMIN';
- 
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -185,6 +185,14 @@ class User implements UserInterface
         return $this;
     }
 
+    public function getFullName(): ?string
+    {
+        $last_name = $this->last_name;
+        $first_name = $this->first_name;
+        return $full_name = $first_name . ', ' . $last_name;
+  
+    }
+
     public function getBirthDate(): ?\DateTimeInterface
     {
         return $this->birth_date;
@@ -298,5 +306,4 @@ class User implements UserInterface
 
         return $this;
     }
-
 }

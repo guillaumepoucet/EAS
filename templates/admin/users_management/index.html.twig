@@ -23,7 +23,6 @@
 						<td>{{user.firstName}}</td>
 						<td>{{user.lastName}}</td>
 						<td class="text-center">
-
 							{% if user.roles|length == 2 %}
 								<span class="badge badge-pill badge-dark">admin</span><br>
 								<a href="{{ path('admin.del.admin', {id: user.id}) }}">Révoquer</a>

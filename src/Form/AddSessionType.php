@@ -18,7 +18,10 @@ class AddSessionType extends AbstractType
             ->add('start_date')
             ->add('end_date')
             // ->add('user', EntityType::class, [
-            //     'class' => User::class
+            //     'class' => User::class,
+            //     'choice_label' => 'fullName',
+            //     'expanded' => false,
+            //     'multiple' => true,
             //     ])
                 
             ->add('course', EntityType::class, [
