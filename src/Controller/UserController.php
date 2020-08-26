@@ -2,9 +2,10 @@
 
 namespace App\Controller;
 
-use App\Repository\CourseRepository;
 use App\Repository\UserRepository;
+use App\Repository\CourseRepository;
 use App\Repository\SessionRepository;
+use App\Repository\AnnouncementRepository;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
@@ -13,7 +14,7 @@ class UserController extends AbstractController
     /**
      * @Route("/user", name="user")
      */
-    public function index(UserRepository $userRepo, SessionRepository $sessionRepo, CourseRepository $courseRepo)
+    public function index(AnnouncementRepository $announcementRepo, UserRepository $userRepo, SessionRepository $sessionRepo, CourseRepository $courseRepo)
     {
         $user = $this->getUser();
         $sessions = $userRepo->find($user)->getSessions();
@@ -26,10 +27,13 @@ class UserController extends AbstractController
 
         // dump($sessionTable);
 
+        $announcements = $announcementRepo->findAll();
+
         return $this->render('user/index.html.twig', [
             'controller_name' => 'UserController',
             'user' => $user,
             'sessions' =>  $sessionTable,
+            'announcements' => $announcements,
         ]);
     }
 }

@@ -1,48 +1,52 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello UserController!{% endblock %}
+{% block title %}Tableau de bord{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
 
-<div class="example-wrapper">
 
-    <h1>Hello {{ controller_name }}! ✅</h1>
+<div class="jumbotron">
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/wamp64/www/EAS/src/Controller/UserController.php'|file_link(0) }}">src/Controller/UserController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/wamp64/www/EAS/templates/user/index.html.twig'|file_link(0) }}">templates/user/index.html.twig</a></code></li>
-    </ul>
+    <p><span class="display-4 text-muted">Bonjour, </span><br><span class="display-2">{{ app.user.firstname }}</span>
+    </p>
 </div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-5">
+            <h3>Vos formations</h3>
+            <table class="table table-sm .table-responsive">
+                <thead>
+                    <tr>
+                        <th scope="col">Formation</th>
+                        <th scope="col">Date de début</th>
+                        <th scope="col">Date de fin</th>
+                    </tr>
+                </thead>
 
-
-<p>Nom et prénom :<br>{{ app.user.firstname }} {{ app.user.lastname }}</p>
-{% for session in sessions %}
-<table>
-    <thead>
-        <tr>
-            <th>id</th>
-            <th>date de début</th>
-            <th>date de fin</th>
-            <th>formation</th>
-        </tr>
-    </thead>
-
-    <tbody>
-        <tr>
-            <td>{{ session.id }}</td>
-            <td>{{ session.startDate | date("d/m/Y") }}</td>
-            <td>{{ session.endDate | date("d/m/Y") }}</td>
-            <td>{{ session.course.courseName }}</td>
-        </tr>
-    </tbody>
-</table>
-
-
+                <tbody>
+                    {% for session in sessions %}
+                    <tr>
+                        <td>{{ session.course.courseName }}</td>
+                        <td>{{ session.startDate | date("d/m/Y") }}</td>
+                        <td>{{ session.endDate | date("d/m/Y") }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+<div class="col-5 offset-1">
+    <h3>Dernières annonces</h3>
+    {% for announcement in announcements %}
+    <div class="card">
+        <h3 class="card-header">{{ announcement.announcementTitle}}</h3>
+        <div class="card-body">
+            {{ announcement.announcementContent | raw }}
+        </div>
+    </div>
 {% endfor %}
+</div>
+    </div>
+
+</div>
 
 {% endblock %}
