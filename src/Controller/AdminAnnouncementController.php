@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Announcement;
 use App\Form\AnnouncementType;
+use App\Repository\AnnouncementRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -11,12 +12,31 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class AdminAnnouncementController extends AbstractController
 {
     /**
-     * @Route("/admin/announcement", name="admin_announcement")
+     * @Route("/admin/announcement/add", name="add.announcement")
      */
-    public function index()
+    public function index(Request $request)
     {
-        return $this->render('admin_announcement/index.html.twig', [
+        // creating form to add course sessions
+        $newAnnouncement = new Announcement;
+
+        $announcementForm = $this->createForm(AnnouncementType::class, $newAnnouncement);
+
+        $announcementForm->handleRequest($request);
+        if ($announcementForm->isSubmitted() && $announcementForm->isValid()) {
+            $newAnnouncement = $announcementForm->getData();
+
+            $newAnnouncement->setUser($this->getUser());
+
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($newAnnouncement);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('admin');
+        }
+
+        return $this->render('admin/announcements_management/form.html.twig', [
             'controller_name' => 'AdminAnnouncementController',
+            'announcementForm' => $announcementForm->createView(),
         ]);
     }
 
@@ -39,10 +59,11 @@ class AdminAnnouncementController extends AbstractController
             return $this->redirectToRoute('admin');
         }
 
-        return $this->render('admin/edit.html.twig', [
+        return $this->render('admin/announcements_management/form.html.twig', [
             'controller_name' => 'AdminAnnouncementController',
             'announcement' => $id,
             'announcementForm' => $announcementForm->createView(),
+            'button' => 'Enregistrer',
         ]);
 
         return $this->render('admin_announcement/index.html.twig', [

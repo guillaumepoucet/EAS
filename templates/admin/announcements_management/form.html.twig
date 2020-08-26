@@ -17,12 +17,16 @@
 				<h4>Créer une annonce</h4>
 				{{ form_start(announcementForm) }}
 				{{ form_widget(announcementForm) }}
-				<button class="btn btn-primary">+ Publier</button>
+				<button class="btn btn-primary">
+					{% if button is defined %}
+						{{ button }}
+					{% else %}
+						+ Publier
+					{% endif %}
+				</button>
 				{{ form_end(announcementForm) }}
 			</div>
 		</div>
-
-		
 
 	</div>
 
