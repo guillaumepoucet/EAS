@@ -37,7 +37,7 @@ class AdminController extends AbstractController
         if ($announcementForm->isSubmitted() && $announcementForm->isValid()) {
             $newAnnouncement = $announcementForm->getData();
 
-            $newAnnouncement->setUser($this->getUser()); 
+            $newAnnouncement->setUser($this->getUser());
 
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($newAnnouncement);
@@ -58,7 +58,7 @@ class AdminController extends AbstractController
         ]);
     }
 
-        /**
+    /**
      * @Route("/admin/announcement/delete/{id}", name="delete.announcement")
      */
     public function deleteAnnouncement(Announcement $id, Request $request, AnnouncementRepository $announcementRepo)

@@ -28,6 +28,7 @@
 					{{ announcement.announcementContent | raw }}
 				</div>
 				<div class="card-footer">
+					<a href=" {{ path('edit.announcement', {id: announcement.id}) }}" type="button" class="btn btn-warning btn-sm">&Eacute;diter</a>
 					<a href=" {{ path('delete.announcement', {id: announcement.id}) }}" type="button" class="btn btn-danger btn-sm">- Supprimer</a>
 				</div>
 			</div>
