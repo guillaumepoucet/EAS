@@ -22,22 +22,27 @@ class UserFixtures extends Fixture
         // $product = new Product();
         // $manager->persist($product);
 
-        $user = new User();
-        $user->setEmail("admin@user.com");
-        $manager->persist($user);
-
-        // $faker = Faker\Factory::create('fr_FR');
-        // $user = [];
+        // $user = new User();
+        // $user->setEmail("admin@user.com");
         
-        // for ($i = 0; $i < 2; $i++) {
-        //     $user[$i] = new User();
-        //     $user[$i]->setPassword($this->passwordEncoder->encodePassword(
-        //         $user[$i],
-        //         'pass'
-        //     ));
-        // }
-        
+        $faker = Faker\Factory::create('fr_FR');
 
+        $user = [];
+        
+        for ($i = 3; $i < 5; $i++) {
+            $user[$i] = new User();
+            $user[$i]->setEmail('user'.$i.'@user.com');
+            $user[$i]->setLastName($faker->lastname);
+            $user[$i]->setLastName($faker->lastname);
+            $user[$i]->setFirstName($faker->firstname);
+            $user[$i]->setPassword($this->passwordEncoder->encodePassword(
+                $user[$i],
+                'password'
+            ));
+            $user[$i]->setBirthDate($faker->dateTime($format = 'Y-m-d'));
+            $manager->persist($user[$i]);
+        }
+        
         $manager->flush();
     }
 }
