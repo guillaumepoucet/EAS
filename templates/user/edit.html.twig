@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}&Eacute;diter mon profil{% endblock %}
+
+{% block body %}
+<div class="container">
+    {{ form_start(userForm) }}
+    {{ form_widget(userForm) }}
+    <button class="btn btn-primary">&Eacute;diter</button>
+    {{ form_end(userForm) }}
+</div>
+{% endblock %}

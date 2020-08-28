@@ -1,85 +1,91 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}&Eacute;diter
-	{{session.course.courseName}}
+{{session.course.courseName}}
 {% endblock %}
 
 {% block body %}
 <a href="/admin">Retour admin</a>
 <a href="{{ path('sessions.management') }}">Retour session</a>
 <a href="{{ path('users.management') }}">Retour apprenant</a>
-	<div class="container">
-		<h2>&Eacute;diter
-			{{session.course.courseName}}
-			{{session.id}}</h2>
-		<div class="row">
-			<div class="col-sm-6">
-				{{ form_start(sessionForm) }}
-				{{ form_widget(sessionForm) }}
-				<button class="btn btn-primary">&Eacute;diter</button>
-				{{ form_end(sessionForm) }}
-			</div>
-			<div class="col-sm-6">
-				<h4>Modifier la liste des apprenants</h4>
-				<table id="sessionUsersList" class="table table-sm">
-					<thead>
-						<tr>
-							<th>Nom, Prénom</th>
-							<th class="text-center">Enlever</th>
-						</tr>
-					</thead>
-					<tbody>
-						{% for user in session.user %}
-							<tr>
-								<td>{{user.fullName}}</td>
-								<td class="text-center">
-									<a href="{{ path('remove.user.session', {user: user.id, session: session.id}) }}" class="font-weight-bold">&#10005;</a>
-								</td>
-							</tr>
-						{% endfor %}
-					</tbody>
-				</table>
-			</div>
+<div class="container">
+	<h2>&Eacute;diter
+		{{session.course.courseName}}
+		{{session.id}}</h2>
+	<div class="row">
+		<div class="col-sm-6">
+			{{ form_start(sessionForm) }}
+			{{ form_widget(sessionForm) }}
+			<button class="btn btn-primary">&Eacute;diter</button>
+			{{ form_end(sessionForm) }}
 		</div>
-		<div class="row">
-			<div class="col">
-				<h4>Ajouter un apprenant</h4>
-				<table id="userList" class="table table-sm">
-					<thead>
-						<tr>
-							<th>Nom, Prénom</th>
-							<th class="text-center">Ajouter</th>
-						</tr>
-					</thead>
-					<tbody>
-						{% for user in users %}
-							<tr>
-								<td>{{user.fullName}}</td>
-								<td class="text-center">
-									{% set inSession = "" %}
-									{% for sessions in user.sessions %}
-										{% if session.id == sessions.id %}
-											{% set inSession = true %}
-										{% endif %}
-									{% endfor %}
-									{% if inSession == true %}
-										<button type="button" class="btn btn-light btn-sm" disabled>
-											Déjà inscrit</button>
-									{% else %}
-										<a href="{{ path('add.user.session', {user: user.id, session: session.id}) }}" type="button" class="btn btn-info btn-sm font-weight-bold">+ Ajouter</a>
-									{% endif %}
-								</td>
-							</tr>
-						{% endfor %}
-					</tbody>
-				</table>
-			</div>
+		<div class="col-sm-6">
+			<h4>Modifier la liste des apprenants</h4>
+			<table id="sessionUsersList" class="table table-sm">
+				<thead>
+					<tr>
+						<th>Nom, Prénom</th>
+						<th class="text-center">Enlever</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for user in session.user %}
+					<tr>
+						<td>{{user.fullName}}</td>
+						<td class="text-center">
+							<a href="{{ path('remove.user.session', {user: user.id, session: session.id}) }}"
+								class="font-weight-bold">&#10005;</a>
+						</td>
+					</tr>
+					{% endfor %}
+				</tbody>
+			</table>
 		</div>
 	</div>
+	<div class="row">
+		<div class="col">
+			<h4>Ajouter un apprenant</h4>
+			<table id="userList" class="table table-sm">
+				<thead>
+					<tr>
+						<th>Nom, Prénom</th>
+						<th class="text-center">Ajouter</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for user in users %}
+					<tr>
+						<td>{{user.fullName}}</td>
+						<td class="text-center">
+							{% set inSession = "" %}
+							{% for sessions in user.sessions %}
+							{% if session.id == sessions.id %}
+							{% set inSession = true %}
+							{% endif %}
+							{% endfor %}
+							{% if inSession == true %}
+							<button type="button" class="btn btn-light btn-sm" disabled>
+								Déjà inscrit</button>
+							{% else %}
+							<a href="{{ path('add.user.session', {user: user.id, session: session.id}) }}" type="button"
+								class="btn btn-info btn-sm font-weight-bold">+ Ajouter</a>
+							{% endif %}
+						</td>
+					</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
 
-	<script>
-		$(document).ready(function () {
-$('#userList').DataTable();
-});
-	</script>
+<script>
+	$(document).ready(function () {
+		$('#userList').DataTable({
+			"language": {
+				"url": "{{ asset('js/french.lang') }}"
+			},
+		});
+	});
+</script>
 {% endblock %}

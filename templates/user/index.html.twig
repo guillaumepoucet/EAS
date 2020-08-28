@@ -13,6 +13,8 @@
         <span class="display-2">{{ app.user.firstname }}</span>
     </p>
     <a href="{{ path('chat', {user: app.user.id}) }}" class="btn btn-info">Messagerie</a>
+    <a href="{{ path('user.edit', {user: app.user.id}) }}" class="btn btn-info">Modifier mon profil</a>
+    <a href="{{ path('logout') }}" class="btn btn-info">D&eacute;connexion</a>
 </div>
 <div class="container-fluid">
     <div class="row">
