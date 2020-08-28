@@ -22,6 +22,7 @@ class AddCourseType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Course::class,
+            'translation_domain' => 'forms'
         ]);
     }
 }

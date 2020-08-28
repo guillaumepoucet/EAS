@@ -2,10 +2,13 @@
 
 namespace App\Controller;
 
+use App\Entity\User;
+use App\Form\EditUserType;
 use App\Repository\UserRepository;
 use App\Repository\CourseRepository;
 use App\Repository\SessionRepository;
 use App\Repository\AnnouncementRepository;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
@@ -34,6 +37,31 @@ class UserController extends AbstractController
             'user' => $user,
             'sessions' =>  $sessionTable,
             'announcements' => $announcements,
+        ]);
+    }
+
+    /**
+     * @Route("/user/{user}/edit", name="user.edit")
+     */
+    public function editProfile(User $user, Request $request)
+    {
+        $userForm = $this->createForm(EditUserType::class, $user);
+
+        $userForm->handleRequest($request);
+        if ($userForm->isSubmitted() && $userForm->isValid()) {
+
+            $user = $userForm->getData();
+            $entityManager = $this->getDoctrine()->getManager();
+
+            $entityManager->flush();
+
+            return $this->redirectToRoute('user');
+        }
+
+
+        return $this->render('user/edit.html.twig', [
+            'controller_name' => 'UserController',
+            'userForm' => $userForm->createView(),
         ]);
     }
 }

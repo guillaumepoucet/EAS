@@ -36,6 +36,7 @@ class AddSessionType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Session::class,
+            'translation_domain' => 'forms'
         ]);
     }
 }
