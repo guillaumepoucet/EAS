@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Messagerie{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="row">
+        {% include 'chat/_userList.html.twig' %}
+        {% include 'chat/_conv.html.twig' %}
+    </div>
+</div>
+{% endblock %}

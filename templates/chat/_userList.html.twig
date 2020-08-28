@@ -1,0 +1,19 @@
+{% block body %}
+<div class="col-3">
+	<ul class="list-group">
+		{% for user in userList %}
+		<li class="list-group-item">
+			<a href="{{ path('chat', {user: app.user.id, otherUser: user.id}) }}" data-index="{{user.id}}"
+				class="user-chat-list">
+				{{user.name}}
+			</a>
+		</li>
+		{% endfor %}
+	</ul>
+</div>
+
+<script>
+	var defaultId = $('.user-chat-list').eq(0).data('index');
+	console.log(defaultId);
+</script>
+{% endblock %}

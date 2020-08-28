@@ -7,8 +7,12 @@
 
 <div class="jumbotron">
 
-    <p><span class="display-4 text-muted">Bonjour, </span><br><span class="display-2">{{ app.user.firstname }}</span>
+    <p>
+        <span class="display-4 text-muted">Bonjour, </span>
+        <br>
+        <span class="display-2">{{ app.user.firstname }}</span>
     </p>
+    <a href="{{ path('chat', {user: app.user.id}) }}" class="btn btn-info">Messagerie</a>
 </div>
 <div class="container-fluid">
     <div class="row">
@@ -34,17 +38,17 @@
                 </tbody>
             </table>
         </div>
-<div class="col-5 offset-1">
-    <h3>Dernières annonces</h3>
-    {% for announcement in announcements %}
-    <div class="card">
-        <h3 class="card-header">{{ announcement.announcementTitle}}</h3>
-        <div class="card-body">
-            {{ announcement.announcementContent | raw }}
+        <div class="col-5 offset-1">
+            <h3>Dernières annonces</h3>
+            {% for announcement in announcements %}
+            <div class="card">
+                <h3 class="card-header">{{ announcement.announcementTitle}}</h3>
+                <div class="card-body">
+                    {{ announcement.announcementContent | raw }}
+                </div>
+            </div>
+            {% endfor %}
         </div>
-    </div>
-{% endfor %}
-</div>
     </div>
 
 </div>

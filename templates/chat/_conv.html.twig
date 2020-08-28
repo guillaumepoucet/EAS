@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+	<!-- <a href="{{ path('chat', {user: app.user.id}) }}">Retour au chat</a> -->
+	<div class="col-9">
+		<div class="card">
+			{# <h5 class="card-header">{{ otherUser.firstName}}</h5> #}
+			<div class="card-body">
+
+				{% for message in messages | sort %}
+					<div class="{{ '2' == message.sender.id ? 'text-right' }}">
+						<small>{{message.messageDate | date('d/m/Y H:m')}}</small>
+						<p>{{ message.messageContent }}</p>
+						<!-- <small>Reporter</small> -->
+						<small>
+							{% if message.sender.id != app.user.id %}
+								{{ message.sender.firstName }}
+							{% else %}
+								Moi
+							{% endif %}
+						</small>
+					</div>
+					<hr>
+				{% endfor %}
+
+			</div>
+			<div class="card-footer">
+				{{ form_start(chatForm) }}
+				{{ form_widget(chatForm) }}
+				<button class="btn btn-primary" type="submit">Envoyer</button>
+				{{ form_end(chatForm) }}
+			</div>
+		</div>
+	</div>
+	{% endblock %}

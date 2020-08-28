@@ -193,6 +193,14 @@ class User implements UserInterface
   
     }
 
+    public function getName(): ?string
+    {
+        $last_name = $this->last_name;
+        $first_name = $this->first_name;
+        return $name = $first_name . ' ' . $last_name;
+  
+    }
+
     public function getBirthDate(): ?\DateTimeInterface
     {
         return $this->birth_date;
