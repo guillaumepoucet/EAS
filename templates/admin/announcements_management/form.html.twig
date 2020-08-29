@@ -7,10 +7,8 @@
 
 	<div class="container">
 
-		<a href="{{ path('users.management') }}">Gérer les apprenants</a>
-		<a href="{{ path('sessions.management') }}">Gérer les sessions/formations</a>
-		<a href="/admin">Retour admin</a>
-
+		{% include 'admin/nav.html.twig' %}
+ 
 
 		<div class="row">
 			<div class="col">

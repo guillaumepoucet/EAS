@@ -4,15 +4,17 @@ namespace App\Controller;
 
 use App\Entity\Announcement;
 use App\Form\AnnouncementType;
-use App\Repository\AnnouncementRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
+/**
+ * @Route("/admin/announcement", name="announcements_")
+ */
 class AdminAnnouncementController extends AbstractController
 {
     /**
-     * @Route("/admin/announcement/add", name="add.announcement")
+     * @Route("/add", name="add")
      */
     public function index(Request $request)
     {
@@ -41,7 +43,7 @@ class AdminAnnouncementController extends AbstractController
     }
 
     /**
-     * @Route("/admin/announcement/edit/{id}", name="edit.announcement")
+     * @Route("/edit/{id}", name="edit")
      */
     public function editAnnouncement(Request $request, Announcement $id)
     {
@@ -69,5 +71,17 @@ class AdminAnnouncementController extends AbstractController
         return $this->render('admin_announcement/index.html.twig', [
             'controller_name' => 'AdminAnnouncementController',
         ]);
+    }
+
+    /**
+     * @Route("/delete/{id}", name="delete")
+     */
+    public function deleteAnnouncement(Announcement $id)
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+
+        $entityManager->remove($id);
+        $entityManager->flush();
+        return $this->redirectToRoute('admin');
     }
 }

@@ -5,26 +5,35 @@
 
 {% block body %}
 
-	<div class="container">
+<div class="jumbotron">
 
-		<a href="{{ path('users.management') }}">Gérer les apprenants</a>
-		<a href="{{ path('sessions.management') }}">Gérer les sessions/formations</a>
+	<p>
+		<span class="display-4 text-muted">Bonjour, </span>
+		<br>
+		<span class="display-2">{{ app.user.firstname }}</span>
+	</p>
+	{% include 'admin/nav.html.twig'%}
+</div>
 
-<a href="{{ path('add.announcement') }}" class="btn btn-info">Ajouter une annonce</a>
-		<h4>Les annonces</h4>
-		{% for announcement in announcements %}
-			<div class="card">
-				<h2 class="card-header">{{ announcement.announcementTitle}}</h2>
-				<div class="card-body">
-					{{ announcement.announcementContent | raw }}
-				</div>
-				<div class="card-footer">
-					<a href=" {{ path('edit.announcement', {id: announcement.id}) }}" type="button" class="btn btn-warning btn-sm">&Eacute;diter</a>
-					<a href=" {{ path('delete.announcement', {id: announcement.id}) }}" type="button" class="btn btn-danger btn-sm">- Supprimer</a>
-				</div>
-			</div>
-		{% endfor %}
+<div class="container">
 
+
+	<h4>Les annonces</h4>
+	{% for announcement in announcements %}
+	<div class="card">
+		<h2 class="card-header">{{ announcement.announcementTitle}}</h2>
+		<div class="card-body">
+			{{ announcement.announcementContent | raw }}
+		</div>
+		<div class="card-footer">
+			<a href=" {{ path('announcement_edit', {id: announcement.id}) }}" type="button"
+				class="btn btn-warning btn-sm">&Eacute;diter</a>
+			<a href=" {{ path('announcement_delete', {id: announcement.id}) }}" type="button"
+				class="btn btn-danger btn-sm">- Supprimer</a>
+		</div>
 	</div>
+	{% endfor %}
+
+</div>
 
 {% endblock %}

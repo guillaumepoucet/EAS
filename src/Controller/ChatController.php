@@ -12,14 +12,16 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
+    /**
+     * @Route("/messages", name="messages")
+     */
 class ChatController extends AbstractController
 {
     /**
-     * @Route("/messages/{user}/{otherUser}", name="chat", defaults={"otherUser" = 3})
+     * @Route("/{user}/{otherUser}", name="_index", defaults={"otherUser" = 3})
      */
     public function index(User $user, User $otherUser, Request $request, MessageRepository $msgRepo, UserRepository $userRepo)
     {
-
 
         $user_id = $user->getId();
 
@@ -94,7 +96,7 @@ class ChatController extends AbstractController
     }
 
     /**
-     * @Route("/messages/{user}/{otherUser}", name="chat.show")
+     * @Route("/{user}/{otherUser}", name="_show")
      */
     public function msg(User $user, User $otherUser, MessageRepository $msgRepo, UserRepository $userRepo, Request $request)
     {

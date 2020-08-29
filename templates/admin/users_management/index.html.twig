@@ -4,9 +4,7 @@
 {% endblock %}
 
 {% block body %}
-<a href="/admin">Retour admin</a>
-<a href="{{ path('sessions.management') }}">Retour session</a>
-<a href="{{ path('users.management') }}">Retour apprenant</a>
+{% include 'admin/nav.html.twig' %}
 	<div class="container">
 		<h2>Listes des utilisateurs</h2>
 		<table class="table">
@@ -28,9 +26,9 @@
 						<td class="text-center">
 							{% if user.roles|length == 2 %}
 								<span class="badge badge-pill badge-dark">admin</span><br>
-								<a href="{{ path('admin.del.admin', {id: user.id}) }}">Révoquer</a>
+								<a href="{{ path('users_demote', {id: user.id}) }}">Révoquer</a>
 							{% else %}
-								<a href="{{ path('admin.make.admin', {id: user.id}) }}">Modifer</a>
+								<a href="{{ path('users_promote', {id: user.id}) }}">Modifer</a>
 							{% endif %}
 
 						</td>
@@ -44,13 +42,13 @@
 						</td>
 						<td>{{user.birthDate | date("d/m/Y")}}</td>
 						<td>
-							<a href="{{ path('admin.edit.user', {id: user.id}) }}">&Eacute;diter</a>
-							<a href="/admin/delete/user/{{user.id}}">Supprimer</a>
+							<a href="{{ path('users_edit', {id: user.id}) }}">&Eacute;diter</a>
+							<a href="{{ path('users_delete', {id: user.id}) }}">Supprimer</a>
 						</td>
 					</tr>
 				{% endfor %}
 			</tbody>
 		</table>
-		<a href="{{ path('admin.new.user') }}" type="button" class="btn btn-primary">+ Ajouter un utilisateur</a>
+		<a href="{{ path('users_add') }}" type="button" class="btn btn-primary">+ Ajouter un utilisateur</a>
 	</div>
 {% endblock %}

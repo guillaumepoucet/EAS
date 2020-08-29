@@ -189,7 +189,7 @@ class User implements UserInterface
     {
         $last_name = $this->last_name;
         $first_name = $this->first_name;
-        return $full_name = $first_name . ', ' . $last_name;
+        return $full_name = $last_name . ', ' . $first_name;
   
     }
 

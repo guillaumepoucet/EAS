@@ -12,10 +12,13 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
+    /**
+     * @Route("/user", name="user_")
+     */
 class UserController extends AbstractController
 {
     /**
-     * @Route("/user", name="user")
+     * @Route("", name="dashboard")
      */
     public function index(AnnouncementRepository $announcementRepo, UserRepository $userRepo, SessionRepository $sessionRepo, CourseRepository $courseRepo)
     {
@@ -41,7 +44,7 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/user/{user}/edit", name="user.edit")
+     * @Route("/edit/{user}", name="edit")
      */
     public function editProfile(User $user, Request $request)
     {
@@ -55,7 +58,7 @@ class UserController extends AbstractController
 
             $entityManager->flush();
 
-            return $this->redirectToRoute('user');
+            return $this->redirectToRoute('user_dashboard');
         }
 
 

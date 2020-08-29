@@ -1,9 +1,11 @@
 {% block body %}
 <div class="col-3">
 	<ul class="list-group">
+		<a class="btn btn-primary btn-sm mb-3">+ Nouvelle conversation</a>
+
 		{% for user in userList %}
 		<li class="list-group-item">
-			<a href="{{ path('chat', {user: app.user.id, otherUser: user.id}) }}" data-index="{{user.id}}"
+			<a href="{{ path('messages_show', {user: app.user.id, otherUser: user.id}) }}" data-index="{{user.id}}"
 				class="user-chat-list">
 				{{user.name}}
 			</a>

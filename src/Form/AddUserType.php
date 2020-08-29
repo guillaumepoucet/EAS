@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\User;
 use App\Entity\Course;
 use App\Entity\Session;
+use DateTime;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -28,7 +29,7 @@ class AddUserType extends AbstractType
             ->add('sessions', EntityType::class, [
                 'class' => Session::class,
                 'choice_label' => function ($course) {
-                    return $course->getCourse()->getCourseName();
+                return $course->getCourse()->getCourseName() . ', du ' . $course->getStartDate()->format('d/m/Y') . ' au ' . $course->getEndDate()->format('d/m/Y');
                 },
                 'multiple' => true,
                 'expanded' => true,

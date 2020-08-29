@@ -5,15 +5,14 @@
 {% endblock %}
 
 {% block body %}
-<a href="/admin">Retour admin</a>
-<a href="{{ path('sessions.management') }}">Retour session</a>
-<a href="{{ path('users.management') }}">Retour apprenant</a>
+{% include 'admin/nav.html.twig' %}
 <div class="container">
 	<h2>&Eacute;diter
-		{{session.course.courseName}}
-		{{session.id}}</h2>
+		{{session.course.courseName}}</h2>
 	<div class="row">
 		<div class="col-sm-6">
+			<h4>Modifier le module</h4>
+
 			{{ form_start(sessionForm) }}
 			{{ form_widget(sessionForm) }}
 			<button class="btn btn-primary">&Eacute;diter</button>
@@ -33,7 +32,7 @@
 					<tr>
 						<td>{{user.fullName}}</td>
 						<td class="text-center">
-							<a href="{{ path('remove.user.session', {user: user.id, session: session.id}) }}"
+							<a href="{{ path('sessions_remove_user', {user: user.id, session: session.id}) }}"
 								class="font-weight-bold">&#10005;</a>
 						</td>
 					</tr>
@@ -67,7 +66,7 @@
 							<button type="button" class="btn btn-light btn-sm" disabled>
 								Déjà inscrit</button>
 							{% else %}
-							<a href="{{ path('add.user.session', {user: user.id, session: session.id}) }}" type="button"
+							<a href="{{ path('sessions_add_user', {user: user.id, session: session.id}) }}" type="button"
 								class="btn btn-info btn-sm font-weight-bold">+ Ajouter</a>
 							{% endif %}
 						</td>

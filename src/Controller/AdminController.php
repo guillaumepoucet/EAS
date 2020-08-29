@@ -37,15 +37,5 @@ class AdminController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/admin/announcement/delete/{id}", name="delete.announcement")
-     */
-    public function deleteAnnouncement(Announcement $id)
-    {
-        $entityManager = $this->getDoctrine()->getManager();
 
-        $entityManager->remove($id);
-        $entityManager->flush();
-        return $this->redirectToRoute('admin');
-    }
 }

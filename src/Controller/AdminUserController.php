@@ -13,10 +13,13 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
+/**
+ * @Route("/admin/users", name="users_")
+ */
 class AdminUserController extends AbstractController
 {
     /**
-     * @Route("/admin/users", name="users.management")
+     * @Route("/admin/users", name="management")
      */
     public function index(UserRepository $userRepo)
     {
@@ -30,7 +33,7 @@ class AdminUserController extends AbstractController
     }
 
     /**
-     * @Route("/admin/delete/user/{id}", name="delete.user")
+     * @Route("/delete/{id}", name="delete")
      */
 
     public function deleteUser(UserRepository $userRepo, $id)
@@ -39,11 +42,11 @@ class AdminUserController extends AbstractController
         $user = $userRepo->find($id);
         $entityManager->remove($user);
         $entityManager->flush();
-        return $this->redirectToRoute('users.management');
+        return $this->redirectToRoute('users_management');
     }
 
-        /**
-     * @Route("/admin/user/new", name="admin.new.user")
+    /**
+     * @Route("/add", name="add")
      */
 
     public function newUser(UserRepository $userRepo, SessionRepository $sessionRepo, CourseRepository $courseRepo, Request $request, UserPasswordEncoderInterface $passwordEncoder)
@@ -81,7 +84,7 @@ class AdminUserController extends AbstractController
             $entityManager->persist($newUser);
             $entityManager->flush();
 
-            return $this->redirectToRoute('users.management');
+            return $this->redirectToRoute('users_management');
         }
 
         return $this->render('admin/users_management/newUser.html.twig', [
@@ -91,7 +94,7 @@ class AdminUserController extends AbstractController
     }
 
     /**
-     * @Route("/admin/user/edit/{id}", name="admin.edit.user")
+     * @Route("/edit/{id}", name="edit")
      */
 
     public function editUser(User $user, Request $request, UserPasswordEncoderInterface $passwordEncoder)
@@ -106,7 +109,7 @@ class AdminUserController extends AbstractController
 
             $entityManager->flush();
 
-            return $this->redirectToRoute('users.management');
+            return $this->redirectToRoute('users_management');
         }
 
         return $this->render('admin/users_management/editUser.html.twig', [
@@ -117,7 +120,7 @@ class AdminUserController extends AbstractController
     }
 
     /**
-     * @Route("/admin/user/make_admin/{id}", name="admin.make.admin")
+     * @Route("/promote/{id}", name="promote")
      */
 
     public function makeAdmin(User $user)
@@ -125,11 +128,11 @@ class AdminUserController extends AbstractController
         $user->setRoles(array("ROLE_ADMIN"));
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->flush();
-        return $this->redirectToRoute('users.management');
+        return $this->redirectToRoute('users_management');
     }
 
     /**
-     * @Route("/admin/user/del_admin/{id}", name="admin.del.admin")
+     * @Route("/demote/{id}", name="demote")
      */
 
     public function delAdmin(User $user)
@@ -137,6 +140,6 @@ class AdminUserController extends AbstractController
         $user->setRoles(array());
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->flush();
-        return $this->redirectToRoute('users.management');
+        return $this->redirectToRoute('users_management');
     }
 }
