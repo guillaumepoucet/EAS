@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file source-language="fr" target-language="fr" datatype="plaintext" original="file.ext">
+    <header>
+      <tool tool-id="symfony" tool-name="Symfony"/>
+    </header>
+    <body>
+      <trans-unit id="588_9PF" resname="Password">
+        <source>Password</source>
+        <target>Mot de passe</target>
+      </trans-unit>
+      <trans-unit id="e0iIBJR" resname="Last name">
+        <source>Last name</source>
+        <target>Nom de famille</target>
+      </trans-unit>
+      <trans-unit id="cC75Ie0" resname="First name">
+        <source>First name</source>
+        <target>Prénom(s)</target>
+      </trans-unit>
+      <trans-unit id="UWSyRRJ" resname="Birth date">
+        <source>Birth date</source>
+        <target>Date de naissance</target>
+      </trans-unit>
+      <trans-unit id="gWlpMQG" resname="Start date">
+        <source>Start date</source>
+        <target>Date de début</target>
+      </trans-unit>
+      <trans-unit id="FDA6oMS" resname="End date">
+        <source>End date</source>
+        <target>Date de fin</target>
+      </trans-unit>
+      <trans-unit id="IJbO_6B" resname="Course">
+        <source>Course</source>
+        <target>Module concerné</target>
+      </trans-unit>
+      <trans-unit id="G0ChXwf" resname="Course name">
+        <source>Course name</source>
+        <target>Nom du module</target>
+      </trans-unit>
+      <trans-unit id="FV_BbAQ" resname="Submit">
+        <source>Submit</source>
+        <target>Ajouter</target>
+      </trans-unit>
+      <trans-unit id="FQn1YfJ" resname="Save">
+        <source>Save</source>
+        <target>Enregistrer</target>
+      </trans-unit>
+      <trans-unit id="Pv7T3p1" resname="File name">
+        <source>File name</source>
+        <target>Nom du fichier</target>
+      </trans-unit>
+      <trans-unit id="TDBj5YC" resname="File desc">
+        <source>File desc</source>
+        <target>Description du fichier</target>
+      </trans-unit>
+      <trans-unit id="MieqlmY" resname="Browse">
+        <source>Browse</source>
+        <target>Parcourir</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>
