@@ -29,9 +29,15 @@ class Course
      */
     private $session;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=document::class, inversedBy="courses")
+     */
+    private $document;
+
     public function __construct()
     {
         $this->session = new ArrayCollection();
+        $this->document = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -77,6 +83,32 @@ class Course
             if ($session->getCourse() === $this) {
                 $session->setCourse(null);
             }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|document[]
+     */
+    public function getDocument(): Collection
+    {
+        return $this->document;
+    }
+
+    public function addDocument(document $document): self
+    {
+        if (!$this->document->contains($document)) {
+            $this->document[] = $document;
+        }
+
+        return $this;
+    }
+
+    public function removeDocument(document $document): self
+    {
+        if ($this->document->contains($document)) {
+            $this->document->removeElement($document);
         }
 
         return $this;

@@ -19,7 +19,7 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 class AdminUserController extends AbstractController
 {
     /**
-     * @Route("/admin/users", name="management")
+     * @Route("", name="management")
      */
     public function index(UserRepository $userRepo)
     {
