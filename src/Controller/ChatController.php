@@ -12,15 +12,15 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-    /**
-     * @Route("/messages", name="messages")
-     */
+/**
+ * @Route("/messages", name="messages")
+ */
 class ChatController extends AbstractController
 {
     /**
-     * @Route("/{user}/{otherUser}", name="_index", defaults={"otherUser" = 3})
+     * @Route("/{user}", name="_index")
      */
-    public function index(User $user, User $otherUser, Request $request, MessageRepository $msgRepo, UserRepository $userRepo)
+    public function index(User $user, Request $request, MessageRepository $msgRepo, UserRepository $userRepo)
     {
 
         $user_id = $user->getId();
@@ -60,8 +60,9 @@ class ChatController extends AbstractController
             }
         };
 
-        $other_id = $otherUser->getId();
-        $messages = $msgRepo->messages($user_id, $other_id);
+        $default_user = reset($userMessageList);
+        $default_user = $default_user['id'];
+        $messages = $msgRepo->messages($user_id, $default_user);
 
         $newMessage = new Message();
 
@@ -71,10 +72,12 @@ class ChatController extends AbstractController
         if ($chatForm->isSubmitted() && $chatForm->isValid()) {
             $newMessage = $chatForm->getData();
 
+            $recipient = $userRepo->find($default_user);
+
             $date = date('Y-m-d H:i:s');
             $newMessage->setMessageDate(\DateTime::createFromFormat('Y-m-d H:i:s', $date));
             $newMessage->setSender($user);
-            $newMessage->setRecipient($otherUser);
+            $newMessage->setRecipient($recipient);
             $newMessage->setIsReported(0);
 
             $entityManager = $this->getDoctrine()->getManager();
@@ -83,12 +86,15 @@ class ChatController extends AbstractController
 
             return $this->redirectToRoute('messages_index', array(
                 'user' => $user_id,
-                'otherUser' => $other_id,
+                'otherUser' => $recipient,
             ));
         }
 
+        
+
         return $this->render('chat/index.html.twig', [
             'controller_name' => 'ChatController',
+            // 'otherUser' => $default_user,
             'userList' => $userMessageList,
             'messages' => $messages,
             'chatForm' => $chatForm->createView(),

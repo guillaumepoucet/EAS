@@ -5,7 +5,7 @@
 			{# <h5 class="card-header">{{ otherUser.firstName}}</h5> #}
 			<div class="card-body">
 				{% for message in messages | sort %}
-					<div class="{{ '2' == message.sender.id ? 'text-right' }}">
+					<div class="{{ app.user.id == message.sender.id ? 'text-right' }}">
 						<small>{{message.messageDate | date('d/m/Y H:m')}}</small>
 						<p>{{ message.messageContent }}</p>
 						<!-- <small>Reporter</small> -->
