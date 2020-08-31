@@ -83,6 +83,10 @@ class User implements UserInterface
         $this->sessions = new ArrayCollection();
     }
 
+    public function __toString(){
+        return "user";
+    }
+
     public function getId(): ?int
     {
         return $this->id;

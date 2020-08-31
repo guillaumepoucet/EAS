@@ -2,10 +2,11 @@
 
 namespace App\Entity;
 
-use App\Repository\DocumentRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use App\Entity\Course;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\DocumentRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity(repositoryClass=DocumentRepository::class)
@@ -35,7 +36,7 @@ class Document
     private $file_size;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Course::class, mappedBy="Document")
+     * @ORM\ManyToMany(targetEntity=Course::class, mappedBy="document")
      */
     private $courses;
 
@@ -47,6 +48,11 @@ class Document
     public function __construct()
     {
         $this->courses = new ArrayCollection();
+    }
+
+    public function __toString()
+    {
+        return "ok";
     }
 
     public function getId(): ?int

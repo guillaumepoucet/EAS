@@ -55,25 +55,25 @@ class AdminUserController extends AbstractController
         $newUser = new User;
 
         $userForm = $this->createForm(AddUserType::class, $newUser);
-
+        
         $userForm->handleRequest($request);
         if ($userForm->isSubmitted() && $userForm->isValid()) {
             // $form->getData() holds the submitted values
             // but, the original `$task` variable has also been updated
             $newUser = $userForm->getData();
-
             // encode the plain password
             $newUser->setPassword(
-                $passwordEncoder->encodePassword(
-                    $newUser,
-                    $userForm->get('password')->getData()
+            $passwordEncoder->encodePassword(
+                $newUser,
+                $userForm->get('password')->getData()
                 )
             );
-
+            
             $sessions = $userForm->get('sessions')->getData();
             foreach ($sessions as $session) {
                 $session->addUser($newUser);
             };
+                
 
             // dump($session);
             // exit;

@@ -18,19 +18,19 @@ use Symfony\Component\HttpFoundation\File\Exception\FileException;
 class DocumentController extends AbstractController
 {
     /**
-     * @Route("/", name="document_index", methods={"GET"})
+     * @Route("/", name="document_index")
      */
     public function index(DocumentRepository $documentRepository, CourseRepository $courseRepository): Response
     {
         $documents = $documentRepository->findAll();
-        foreach ($documents as $document) {
-            $courses = $courseRepository->find($document);
-            // $courses = $courseRepository->find($courses);
-            dump($courses);
-
+        if ($documents) {
+            foreach ($documents as $document) {
+                $courses = $courseRepository->find($document->getId());
+            }
+        } else {
+            $courses = null;
         }
-
-
+ 
         return $this->render('document/index.html.twig', [
             'documents' => $documents,
             'courses' => $courses,
@@ -43,12 +43,13 @@ class DocumentController extends AbstractController
     public function new(Request $request): Response
     {
         $newDocument = new Document();
-
         $form = $this->createForm(DocumentType::class, $newDocument);
+
 
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
             $entityManager = $this->getDoctrine()->getManager();
 
             /** @var UploadedFile $documentFile */
@@ -61,7 +62,7 @@ class DocumentController extends AbstractController
                 // this is needed to safely include the file name as part of the URL
                 // $safeFilename = $slugger->slug($originalFilename);
                 $safeFilename = 'doc';
-                $newFilename = $safeFilename.'-'.uniqid().'.'.$documentFile->guessExtension();
+                $newFilename = $safeFilename . '-' . uniqid() . '.' . $documentFile->guessExtension();
 
                 // Move the file to the directory where documents are stored
                 try {
@@ -72,19 +73,18 @@ class DocumentController extends AbstractController
                 } catch (FileException $e) {
                     // ... handle exception if something happens during file upload
                 }
-                dump($documentFile);
                 // updates the 'documentFilename' property to store the PDF file name
                 // instead of its contents
                 $newDocument->setFileName($newFilename);
             }
 
             // ... persist the $document variable or any other work
-            // $courses = $form->get('course')->getData();
-            // foreach ($courses as $course) {
-            //     $course->addDocument($documentFile);
-            // };
-
+            $courses = $form->get('courses')->getData();
             $entityManager->persist($newDocument);
+            foreach ($courses as $course) {
+                $course->addDocument($newDocument);
+                $entityManager->persist($course);
+            };
             $entityManager->flush();
 
             return $this->redirectToRoute('document_index');
@@ -131,7 +131,7 @@ class DocumentController extends AbstractController
      */
     public function delete(Request $request, Document $document): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$document->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $document->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($document);
             $entityManager->flush();

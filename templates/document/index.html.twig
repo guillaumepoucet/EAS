@@ -1,40 +1,47 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Document index{% endblock %}
+{% block title %}Document index
+{% endblock %}
 
 {% block body %}
-<h1>Document index</h1>
+	<h1>Document index</h1>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>Nom</th>
-            <th>Description</th>
-            <th>Taille</th>
-            <th>Actions</th>
-            <th>Disponibilité(s)</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for document in documents %}
-        <tr>
-            <td>{{ document.fileName }}</td>
-            <td>{{ document.fileDesc }}</td>
-            <td>{{ document.fileSize }}</td>
-            <td>
-                <a href="{{ path('document_show', {'id': document.id}) }}">voir</a>
-                <a href="{{ path('document_edit', {'id': document.id}) }}">&eacute;diter</a>
-            </td>
-     
-        </tr>
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Nom</th>
+				<th>Description</th>
+				<th>Taille</th>
+				<th>Actions</th>
+				<th>Disponibilité(s)</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for document in documents %}
+				<tr>
+					<td>{{ document.fileName }}</td>
+					<td>{{ document.fileDesc }}</td>
+					<td>{{ document.fileSize }}</td>
+					<td>
+						<a href="{{ path('document_show', {'id': document.id}) }}">voir</a>
+						<a href="{{ path('document_edit', {'id': document.id}) }}">&eacute;diter</a>
+					</td>
+					<td>
+						{# {{ dump(document.courses.CourseName) }} #}
+						{% for course in document.courses %}
+							{{ course.courseName }}
+					
+						{% endfor %}
+					</td>
+				</tr>
 
-        {% else %}
-        <tr>
-            <td colspan="6">Aucun fichier(s)</td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
+			{% else %}
+				<tr>
+					<td colspan="6">Aucun fichier(s)</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
 
-<a href="{{ path('document_new') }}" class="btn btn-primary btn-sm">+ Nouveau fichier</a>
+	<a href="{{ path('document_new') }}" class="btn btn-primary btn-sm">+ Nouveau fichier</a>
 {% endblock %}

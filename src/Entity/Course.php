@@ -2,10 +2,12 @@
 
 namespace App\Entity;
 
-use App\Repository\CourseRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use App\Entity\Session;
+use App\Entity\Document;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\CourseRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity(repositoryClass=CourseRepository::class)
@@ -89,14 +91,14 @@ class Course
     }
 
     /**
-     * @return Collection|document[]
+     * @return Collection|Document[]
      */
     public function getDocument(): Collection
     {
         return $this->document;
     }
 
-    public function addDocument(document $document): self
+    public function addDocument(Document $document): self
     {
         if (!$this->document->contains($document)) {
             $this->document[] = $document;
@@ -105,7 +107,7 @@ class Course
         return $this;
     }
 
-    public function removeDocument(document $document): self
+    public function removeDocument(Document $document): self
     {
         if ($this->document->contains($document)) {
             $this->document->removeElement($document);
