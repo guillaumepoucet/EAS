@@ -12,13 +12,13 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-    /**
-     * @Route("/user", name="user_")
-     */
+/**
+ * @Route("/user", name="user")
+ */
 class UserController extends AbstractController
 {
     /**
-     * @Route("", name="dashboard")
+     * @Route("")
      */
     public function index(AnnouncementRepository $announcementRepo, UserRepository $userRepo, SessionRepository $sessionRepo, CourseRepository $courseRepo)
     {
@@ -31,8 +31,6 @@ class UserController extends AbstractController
             $sessionTable[] = $session;
         }
 
-        // dump($sessionTable);
-
         $announcements = $announcementRepo->findAll();
 
         return $this->render('user/index.html.twig', [
@@ -44,7 +42,7 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/edit/{user}", name="edit")
+     * @Route("/edit/{user}", name="_edit")
      */
     public function editProfile(User $user, Request $request)
     {
@@ -58,7 +56,7 @@ class UserController extends AbstractController
 
             $entityManager->flush();
 
-            return $this->redirectToRoute('user_dashboard');
+            return $this->redirectToRoute('user');
         }
 
 
