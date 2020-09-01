@@ -46,9 +46,8 @@ class DocumentType extends AbstractType
                 },
                 'multiple' => true,
                 'expanded' => true,
-            'required' => false,
-            ])
-        ;
+                'required' => false,
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)
