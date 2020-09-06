@@ -1,8 +1,24 @@
 h2 {
   font-size: 1rem;
   font-family: roboto-medium;
-  display: block;
   margin-bottom: .75rem;
+  background-color: rgba(1, 31, 140, 0.25);
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  padding: .5rem .75rem;
+  border-radius: 4px 4px 0 0;
+  color: rgba(1, 31, 140, 0.75);
+}
+
+h2::after {
+  content: "";
+  position: absolute;
+  border-bottom: 1px solid rgba(1, 31, 140, 0.25);
+  width: 100%;
+  display: block;
+  padding-top: .5rem;
+  left: 0;
 }
 
 .card {

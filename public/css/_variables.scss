@@ -11,8 +11,23 @@ $warning: #FCB624;
 h2 {
     font-size: 1rem;
     font-family: roboto-medium;
-    display: block;
+    // display: block;
     margin-bottom: .75rem;
+    background-color: rgba($primary-dk, .25);
+    width: fit-content;
+    padding: .5rem .75rem;
+    border-radius: 4px 4px 0 0;
+    color: rgba($primary-dk, .75);
+
+    &::after {
+        content: "";
+        position: absolute;
+        border-bottom: 1px solid rgba($primary-dk, .25);
+        width: 100%;
+        display: block;
+        padding-top: .5rem;
+        left: 0;
+    }
 }
 
 .card {
