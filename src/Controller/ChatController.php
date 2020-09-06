@@ -2,14 +2,16 @@
 
 namespace App\Controller;
 
+use DateTime;
 use App\Entity\User;
 use App\Entity\Message;
 use App\Form\MessageType;
 use App\Repository\UserRepository;
 use App\Repository\MessageRepository;
-use DateTime;
+use Symfony\Component\Mercure\Update;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Mercure\PublisherInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
@@ -20,7 +22,7 @@ class ChatController extends AbstractController
     /**
      * @Route("/{user}", name="_index")
      */
-    public function index(User $user, Request $request, MessageRepository $msgRepo, UserRepository $userRepo)
+    public function index(User $user, Request $request, MessageRepository $msgRepo, UserRepository $userRepo, PublisherInterface $publisher)
     {
 
         $user_id = $user->getId();
@@ -80,17 +82,15 @@ class ChatController extends AbstractController
             $newMessage->setRecipient($recipient);
             $newMessage->setIsReported(0);
 
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($newMessage);
-            $entityManager->flush();
+            // $entityManager = $this->getDoctrine()->getManager();
+            // $entityManager->persist($newMessage);
+            // $entityManager->flush();
 
             return $this->redirectToRoute('messages_index', array(
                 'user' => $user_id,
                 'otherUser' => $recipient,
             ));
         }
-
-        
 
         return $this->render('chat/index.html.twig', [
             'controller_name' => 'ChatController',
@@ -99,6 +99,52 @@ class ChatController extends AbstractController
             'messages' => $messages,
             'chatForm' => $chatForm->createView(),
         ]);
+    }
+
+    /**
+     * @Route("/send/{user}", name="_send")
+     */
+    public function sendMessage(User $user, Request $request, MessageRepository $msgRepo, UserRepository $userRepo, PublisherInterface $publisher)
+    {
+        $user_id = $user->getId();
+
+        $default_user = reset($userMessageList);
+        $default_user = $default_user['id'];
+        $messages = $msgRepo->messages($user_id, $default_user);
+
+        $newMessage = new Message();
+
+        $chatForm = $this->createForm(MessageType::class, $newMessage);
+
+        $chatForm->handleRequest($request);
+        if ($chatForm->isSubmitted() && $chatForm->isValid()) {
+            $newMessage = $chatForm->getData();
+
+            $recipient = $userRepo->find($default_user);
+
+            $date = date('Y-m-d H:i:s');
+            $newMessage->setMessageDate(\DateTime::createFromFormat('Y-m-d H:i:s', $date));
+            $newMessage->setSender($user);
+            $newMessage->setRecipient($recipient);
+            $newMessage->setIsReported(0);
+
+            // $entityManager = $this->getDoctrine()->getManager();
+            // $entityManager->persist($newMessage);
+            // $entityManager->flush();
+
+            $update = new Update(
+                'http://localhost:8000/messages',
+                "[]"
+            );
+
+            // Sync, or async (RabbitMQ, Kafka...)
+            $publisher($update);
+
+            return $this->redirectToRoute('messages_index', array(
+                'user' => $user_id,
+                'otherUser' => $recipient,
+            ));
+        }
     }
 
     /**

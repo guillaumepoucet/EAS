@@ -1,31 +1,45 @@
 {% extends 'base.html.twig' %}
 {% block body %}
-	<div class="col-9">
-		<div class="card">
-			{# <h5 class="card-header">{{ otherUser.firstName}}</h5> #}
-			<div class="card-body">
-				{% for message in messages | sort %}
-					<div class="{{ app.user.id == message.sender.id ? 'text-right' }}">
-						<small>{{message.messageDate | date('d/m/Y H:m')}}</small>
-						<p>{{ message.messageContent }}</p>
-						<!-- <small>Reporter</small> -->
-						<small>
-							{% if message.sender.id != app.user.id %}
-								{{ message.sender.firstName }}
-							{% else %}
-								Moi
-							{% endif %}
-						</small>
-					</div>
-					<hr>
-				{% endfor %}
+<div class="col-9">
+	<div class="card">
+		{# <h5 class="card-header">{{ otherUser.firstName}}</h5> #}
+		<div class="card-body">
+			{% for message in messages | sort %}
+			<div class="{{ app.user.id == message.sender.id ? 'text-right' }} message">
+				<small class="date">{{message.messageDate | date('d/m/Y H:m')}}</small>
+				<p class="messageContent">{{ message.messageContent }}</p>
+				<!-- <small>Reporter</small> -->
+				<small class="sender">
+					{% if message.sender.id != app.user.id %}
+					{{ message.sender.firstName }}
+					{% else %}
+					Moi
+					{% endif %}
+				</small>
 			</div>
-			<div class="card-footer">
-				{{ form_start(chatForm) }}
-				{{ form_widget(chatForm) }}
-				<button class="btn btn-primary" type="submit">Envoyer</button>
-				{{ form_end(chatForm) }}
-			</div>
+			<hr>
+			{% endfor %}
+		</div>
+
+		<div class="card-footer">
+			{{ form_start(chatForm) }}
+			{{ form_widget(chatForm) }}
+			<button class="btn btn-primary send" type="submit">Envoyer</button>
+			{{ form_end(chatForm) }}
 		</div>
 	</div>
-	{% endblock %}
+</div>
+
+
+
+<script>
+    // URL is a built-in JavaScript class to manipulate URLs
+    const url = new URL('http://localhost:3000/.well-known/mercure');
+    url.searchParams.append('topic', 'http://localhost:8000/messages/{{ app.user.id }}');
+
+    const eventSource = new EventSource(url);
+    eventSource.onmessage = event => {
+       $('.card').insertAdjacentHTML('afterend', "<div class=\"alert alert-success\">Pute</div>")
+    }
+</script>
+{% endblock %}

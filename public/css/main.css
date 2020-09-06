@@ -1,0 +1,15 @@
+@font-face {
+  font-family: "roboto";
+  src: url("fonts/Roboto-Regular.ttf") format("truetype");
+}
+
+@use 'variables.scss';
+body {
+  font-family: roboto !important;
+  line-height: 1.25rem !important;
+}
+
+.navbar {
+  fill: aqua;
+}
+/*# sourceMappingURL=main.css.map */

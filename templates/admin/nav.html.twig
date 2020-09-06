@@ -1,4 +1,17 @@
 {% block body%}
+<div class="navbar">
+    <svg xmlns="http://www.w3.org/2000/svg" width="21" height="14" viewBox="0 0 21 14">
+        <defs>
+          <style>
+            .cls-1 {
+              fill: #fff;
+            }
+          </style>
+        </defs>
+        <path id="Icon_material-menu" data-name="Icon material-menu" class="cls-1" d="M4.5,23h21V20.667H4.5Zm0-5.833h21V14.833H4.5ZM4.5,9v2.333h21V9Z" transform="translate(-4.5 -9)"/>
+      </svg>
+</div>
+
 <nav>
     <a href="{{ path('messages_index', {user: app.user.id}) }}" class="btn btn-info">Messagerie</a>
     <a href="{{ path('user_edit', {user: app.user.id}) }}" class="btn btn-info">Modifier mon profil</a>
