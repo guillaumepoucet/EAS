@@ -8,13 +8,12 @@ h2 {
 .card {
   margin-bottom: 1.5rem;
   border-radius: 8px;
-  -webkit-box-shadow: 0px 1px 12px #b3b3b3e3;
-          box-shadow: 0px 1px 12px #b3b3b3e3;
+  -webkit-box-shadow: 0px 1px 12px rgba(1, 31, 140, 0.05);
+          box-shadow: 0px 1px 12px rgba(1, 31, 140, 0.05);
 }
 
 .card .card-header {
   font-family: roboto-medium;
-  background-color: rgba(1, 31, 140, 0.1);
   border-top-right-radius: 8px;
   border-top-left-radius: 8px;
   display: -ms-grid;
@@ -51,13 +50,12 @@ h2 {
 }
 
 .card .card-body {
-  padding: 1rem 2rem 1rem 3.75rem;
+  padding: .5rem 2rem 1.5rem 3.75rem;
 }
 
 .card-btn {
   border-bottom-right-radius: 8px;
   border-bottom-left-radius: 8px;
-  background-color: rgba(1, 31, 140, 0.05);
   border-top: 1px solid rgba(1, 31, 140, 0.05);
   display: -ms-grid;
   display: grid;
@@ -151,7 +149,7 @@ body {
 .nav-content {
   display: -ms-grid;
   display: grid;
-  background-color: #F5F5F5;
+  background-color: white;
   height: calc(100vh - 48px);
   width: 0;
   position: fixed;
@@ -211,5 +209,9 @@ body {
 .container,
 .jumbotron {
   padding: 12px;
+}
+
+.container {
+  background-color: rgba(1, 31, 140, 0.05);
 }
 /*# sourceMappingURL=main.css.map */

@@ -19,11 +19,13 @@ h2 {
     // border: 1px solid $gray-lg;
     margin-bottom: 1.5rem;
     border-radius: 8px;
-    box-shadow: 0px 1px 12px #b3b3b3e3;
+    box-shadow: 0px 1px 12px rgba($primary-dk, .05);
+    // background-color: rgba($primary-dk, .05);
+
 
     .card-header {
         font-family: roboto-medium;
-        background-color: rgba($primary-dk, .10);
+        // background-color: rgba($primary-dk, .10);
         border-top-right-radius: 8px;
         border-top-left-radius: 8px;
         display: grid;
@@ -54,7 +56,7 @@ h2 {
     }
 
     .card-body {
-        padding: 1rem 2rem 1rem 3.75rem;
+        padding: .5rem 2rem 1.5rem 3.75rem;
     }
 
 }
@@ -63,7 +65,7 @@ h2 {
     // padding: .75rem 2rem;
     border-bottom-right-radius: 8px;
     border-bottom-left-radius: 8px;
-    background-color: rgba($primary-dk, .05);
+    // background-color: rgba($primary-dk, .05);
     border-top: 1px solid rgba($primary-dk, .05);
     display: grid;
     grid-auto-flow: column;

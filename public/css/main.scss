@@ -6,6 +6,7 @@ body {
     font-family: roboto !important;
     line-height: 1.25rem !important;
     letter-spacing: .02rem;
+    // background-color: $gray-lg;
 }
 
 .navbar {
@@ -35,7 +36,7 @@ body {
 
 .nav-content {
     display: grid;
-    background-color: $gray-lg;
+    background-color: $white;
     height: calc(100vh - 48px);
     width: 0;
     position: fixed;
@@ -92,4 +93,8 @@ body {
 .container,
 .jumbotron {
     padding: 12px;
+}
+
+.container {
+    background-color: rgba($primary-dk, .05);
 }
