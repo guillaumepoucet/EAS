@@ -9,27 +9,33 @@
 <div class="jumbotron">
 
 	<p>
-		<span class="display-4 text-muted">Bonjour, </span>
+		<span class="h-sub">Bonjour, </span>
 		<br>
-		<span class="display-2">{{ app.user.firstname }}</span>
+		<span class="h-display">{{ app.user.firstname }}</span>
 	</p>
 </div>
 
 <div class="container">
 
 
-	<h4>Les annonces</h4>
+	<h2>
+		Dernières annonces</h2>
 	{% for announcement in announcements %}
 	<div class="card">
-		<h2 class="card-header">{{ announcement.announcementTitle}}</h2>
+		<div class="card-header">
+			<div><img src="{{ asset('icons/horn.svg') }}" alt=""></div>
+
+			<h4>{{ announcement.announcementTitle}}</h4>
+		</div>
+
 		<div class="card-body">
 			{{ announcement.announcementContent | raw }}
 		</div>
-		<div class="card-footer">
+		<div class="card-btn">
 			<a href=" {{ path('announcements_edit', {id: announcement.id}) }}" type="button"
 				class="btn btn-warning btn-sm">&Eacute;diter</a>
 			<a href=" {{ path('announcements_delete', {id: announcement.id}) }}" type="button"
-				class="btn btn-danger btn-sm">- Supprimer</a>
+				class="btn btn-danger btn-sm">Supprimer</a>
 		</div>
 	</div>
 	{% endfor %}

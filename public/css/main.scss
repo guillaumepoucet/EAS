@@ -5,12 +5,13 @@
 body {
     font-family: roboto !important;
     line-height: 1.25rem !important;
+    letter-spacing: .02rem;
 }
 
 .navbar {
-    background-color: $primary;
+    background-color: $primary-dk;
     color: $white;
-    padding: 12px 8px;
+    padding: 12px;
     height: 24px;
     position: sticky;
     top: 0;
@@ -48,7 +49,7 @@ body {
     }
 
     &>ul {
-        padding: .5rem;
+        padding: .75rem;
         font-family: roboto-medium;
         line-height: 1.5rem;
 
@@ -66,8 +67,29 @@ body {
 
             img {
                 height: .75rem;
-                margin-right: .5rem;
+                margin-right: .75rem;
             }
         }
     }
+}
+
+.jumbotron {
+    background-color: $primary-dk;
+    color: white;
+    height: 74px;
+
+    .h-sub {
+        display: inline-block;
+        margin-bottom: .75rem;
+    }
+
+    .h-display {
+        font-family: roboto-medium;
+        font-size: 2.25rem;
+    }
+}
+
+.container,
+.jumbotron {
+    padding: 12px;
 }
