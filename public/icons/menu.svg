@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="21" height="14" viewBox="0 0 21 14">
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="17" viewBox="0 0 24 17">
   <defs>
     <style>
       .cls-1 {
@@ -6,5 +6,5 @@
       }
     </style>
   </defs>
-  <path id="Icon_material-menu" data-name="Icon material-menu" class="cls-1" d="M4.5,23h21V20.667H4.5Zm0-5.833h21V14.833H4.5ZM4.5,9v2.333h21V9Z" transform="translate(-4.5 -9)"/>
+  <path id="menu" class="cls-1" d="M4.5,26h24V23.167H4.5Zm0-7.083h24V16.083H4.5ZM4.5,9v2.833h24V9Z" transform="translate(-4.5 -9)"/>
 </svg>

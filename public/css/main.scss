@@ -1,9 +1,6 @@
-@font-face {
-    font-family: "roboto";
-    src: url("fonts/Roboto-Regular.ttf") format("truetype");
-}
-
-@use 'variables.scss';
+@import 'variables';
+@import 'fonts';
+@import 'classes';
 
 body {
     font-family: roboto !important;
@@ -12,4 +9,65 @@ body {
 
 .navbar {
     background-color: $primary;
+    color: $white;
+    padding: 12px 8px;
+    height: 24px;
+    position: sticky;
+    top: 0;
+
+    .nav-menu-link {
+        display: inline-block;
+
+        img {
+            height: 17px;
+            margin-right: 4px;
+        }
+
+        span {
+            font-family: roboto-medium;
+            font-size: 1.5rem;
+            line-height: 1.5rem;
+        }
+    }
+
+}
+
+.nav-content {
+    display: grid;
+    background-color: $gray-lg;
+    height: calc(100vh - 48px);
+    width: 0;
+    position: fixed;
+    transition: .35s ease-out;
+    z-index: 1;
+    overflow: hidden;
+    white-space: nowrap;
+
+    &.active {
+        width: 244px;
+    }
+
+    &>ul {
+        padding: .5rem;
+        font-family: roboto-medium;
+        line-height: 1.5rem;
+
+        li {
+            padding: .5rem 1rem .5rem 2rem;
+        }
+    }
+
+    .nav-account {
+        align-self: end;
+        border-top: 1px solid $gray-dk;
+
+        li {
+            padding: .5rem 0 .5rem .75rem !important;
+
+            img {
+                height: .75rem;
+                margin-right: .5rem;
+            }
+        }
+    }
 }

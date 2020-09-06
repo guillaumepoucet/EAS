@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #fff;
+      }
+    </style>
+  </defs>
+  <path id="logout" class="cls-1" d="M9,0V3.429H21V20.571H9V24H24V0ZM6,6.857,0,12l6,5.143V13.714H18V10.286H6Z"/>
+</svg>

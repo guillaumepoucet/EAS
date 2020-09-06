@@ -3,13 +3,86 @@
   src: url("fonts/Roboto-Regular.ttf") format("truetype");
 }
 
-@use 'variables.scss';
+@font-face {
+  font-family: "roboto-medium";
+  src: url("fonts/Roboto-Medium.ttf") format("truetype");
+}
+
+.pointer {
+  cursor: pointer;
+}
+
 body {
   font-family: roboto !important;
   line-height: 1.25rem !important;
 }
 
 .navbar {
-  fill: aqua;
+  background-color: #037CB9;
+  color: white;
+  padding: 12px 8px;
+  height: 24px;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+}
+
+.navbar .nav-menu-link {
+  display: inline-block;
+}
+
+.navbar .nav-menu-link img {
+  height: 17px;
+  margin-right: 4px;
+}
+
+.navbar .nav-menu-link span {
+  font-family: roboto-medium;
+  font-size: 1.5rem;
+  line-height: 1.5rem;
+}
+
+.nav-content {
+  display: -ms-grid;
+  display: grid;
+  background-color: #F5F5F5;
+  height: calc(100vh - 48px);
+  width: 0;
+  position: fixed;
+  -webkit-transition: .35s ease-out;
+  transition: .35s ease-out;
+  z-index: 1;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.nav-content.active {
+  width: 244px;
+}
+
+.nav-content > ul {
+  padding: .5rem;
+  font-family: roboto-medium;
+  line-height: 1.5rem;
+}
+
+.nav-content > ul li {
+  padding: .5rem 1rem .5rem 2rem;
+}
+
+.nav-content .nav-account {
+  -ms-flex-item-align: end;
+      -ms-grid-row-align: end;
+      align-self: end;
+  border-top: 1px solid #c8c8c8;
+}
+
+.nav-content .nav-account li {
+  padding: .5rem 0 .5rem .75rem !important;
+}
+
+.nav-content .nav-account li img {
+  height: .75rem;
+  margin-right: .5rem;
 }
 /*# sourceMappingURL=main.css.map */

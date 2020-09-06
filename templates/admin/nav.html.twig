@@ -1,24 +1,35 @@
 {% block body%}
-<div class="navbar">
-    <svg xmlns="http://www.w3.org/2000/svg" width="21" height="14" viewBox="0 0 21 14">
-        <defs>
-          <style>
-            .cls-1 {
-              fill: #fff;
-            }
-          </style>
-        </defs>
-        <path id="Icon_material-menu" data-name="Icon material-menu" class="cls-1" d="M4.5,23h21V20.667H4.5Zm0-5.833h21V14.833H4.5ZM4.5,9v2.333h21V9Z" transform="translate(-4.5 -9)"/>
-      </svg>
-</div>
+<div id="navbar"></div>
+  <div class="navbar">
+    <div class="pointer nav-menu-link">
+      <img src="{{ asset('icons/menu.svg') }}" alt="">
+      <span>MENU</span>
+    </div>
+  </div>
 
-<nav>
-    <a href="{{ path('messages_index', {user: app.user.id}) }}" class="btn btn-info">Messagerie</a>
-    <a href="{{ path('user_edit', {user: app.user.id}) }}" class="btn btn-info">Modifier mon profil</a>
-    <a href="{{ path('logout') }}" class="btn btn-info">D&eacute;connexion</a>
-    <a href="{{ path('users_management') }}" class="btn btn-info">Gérer les apprenants</a>
-    <a href="{{ path('sessions_management') }}" class="btn btn-info">Gérer les sessions/formations</a>
-    <a href="{{ path('announcements_add') }}" class="btn btn-info">Ajouter une annonce</a>
-    <a href="{{ path('document_index') }}" class="btn btn-info">Gérer les fichiers</a>
-</nav>
+  <nav class="nav-content">
+    <ul>
+      <li><a href="{{ path('users_management') }}">Elèves</a></li>
+      <li><a href="{{ path('sessions_management') }}">Formations</a>
+        <ul>
+          <li><a href="">Gérer les sessions</a></li>
+          <li><a href="">Gérer les modules</a></li>
+        </ul>
+      </li>
+      <li><a href="{{ path('document_index') }}">Fichiers</a>
+        <ul>
+          <li><a href=""></a>Ajouter un fichier</li>
+        </ul>
+      </li>
+      <li><a href="{{ path('announcements_add') }}">Annonces</a></li>
+      <li><a href="{{ path('messages_index', {user: app.user.id}) }}">Messagerie</a></li>
+    </ul>
+    <ul class="nav-account">
+      <li><a href="{{ path('user_edit', {user: app.user.id}) }}">
+       <img src="{{ asset('icons/settings-dk.svg') }}" alt="">Mon compte</a></li>
+      <li><a href="{{ path('logout') }}">
+       <img src="{{ asset('icons/logout-dk.svg') }}" alt="">Déconnection</a></li>
+    </ul>
+  </nav>
+</div>
 {% endblock %}

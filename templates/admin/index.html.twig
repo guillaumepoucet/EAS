@@ -5,6 +5,7 @@
 
 {% block body %}
 
+{% include 'admin/nav.html.twig'%}
 <div class="jumbotron">
 
 	<p>
@@ -12,7 +13,6 @@
 		<br>
 		<span class="display-2">{{ app.user.firstname }}</span>
 	</p>
-	{% include 'admin/nav.html.twig'%}
 </div>
 
 <div class="container">
