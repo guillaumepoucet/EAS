@@ -14,11 +14,11 @@
 	</p>
 </div>
 
-<div class="grid">
-
-	<div class="container announcements">
-		<h2>
-			Dernières annonces</h2>
+<div class="grid" style="min-height: calc(100vh - 146px - 24px);">
+	<div class="container-titles">
+		<h2>Dernières annonces</h2>
+	</div>
+	<div class="container announcements container-grid">
 		{% for announcement in announcements %}
 		<div class="card">
 			<div class="card-header">
@@ -26,17 +26,19 @@
 
 				<h4>{{ announcement.announcementTitle}}</h4>
 			</div>
-			
+
 			<div class="card-body">
 				<small>{{ announcement.announcementDate | date("d/m/Y") }}</small>
 				<p>{{ announcement.announcementContent | raw }}</p>
 			</div>
+			{% if is_granted('ROLE_USER') %}
 			<div class="card-btn">
 				<a href=" {{ path('announcements_edit', {id: announcement.id}) }}" type="button"
 					class="btn btn-warning btn-sm">&Eacute;diter</a>
 				<a href=" {{ path('announcements_delete', {id: announcement.id}) }}" type="button"
 					class="btn btn-danger btn-sm">Supprimer</a>
 			</div>
+			{% endif %}
 		</div>
 		{% endfor %}
 	</div>

@@ -1,8 +1,38 @@
-input[type=search],
-select {
-        padding: 0.25rem;
-}
-
 .text-center {
     text-align: center;
+}
+
+.dataTables_length,
+.dataTables_filter {
+    margin: 1rem 0;
+    font-size: .8rem;
+}
+
+.dataTables_scroll {
+    // font-size: .8rem;
+    margin: 1rem 0 !important;
+}
+
+.dataTables_info,
+#student-table_paginate {
+    font-size: .8rem;
+    margin-bottom: 1rem;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+    font-family: roboto-medium !important;
+}
+
+.paginate_button.current,
+.paginate_button.current:hover {
+    background: rgba($primary-dk, .25) !important;
+    border-radius: 50% !important;
+    border: 0 !important;
+    color: white !important;
+
+}
+
+.dataTables_scrollHead tr th {
+    font-family: roboto-medium;
+    font-weight: normal !important;
 }

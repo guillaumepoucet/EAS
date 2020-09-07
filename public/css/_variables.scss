@@ -8,36 +8,54 @@ $gray-dk: #c8c8c8;
 $danger: #C92A14;
 $warning: #FCB624;
 
-h2 {
-    font-size: 1rem;
-    font-family: roboto-medium;
-    // display: block;
-    margin-bottom: .75rem;
-    background-color: rgba($primary-dk, .25);
-    width: fit-content;
-    padding: .5rem .75rem;
-    border-radius: 4px 4px 0 0;
-    color: rgba($primary-dk, .75);
+.m-auto {
+    margin: auto;
+}
 
-    &::after {
-        content: "";
-        position: absolute;
-        border-bottom: 1px solid rgba($primary-dk, .25);
-        width: 100%;
-        display: block;
-        padding-top: .5rem;
-        left: 0;
+.container-titles {
+    display: flex;
+
+    h2 {
+        font-size: 1rem;
+        font-family: roboto-medium;
+        // display: block;
+        background-color: rgba($primary-dk, .25);
+        width: fit-content;
+        padding: .5rem .75rem;
+        border-radius: 4px 4px 0 0;
+        color: rgba($primary-dk, .75);
+
+        // &::after {
+        //     content: "";
+        //     position: absolute;
+        //     border-bottom: 1px solid rgba($primary-dk, .25);
+        //     width: 100%;
+        //     display: block;
+        //     padding-top: .5rem;
+        //     left: 0;
+        // }
+    }
+
+    .back-to-dashboard {
+        background-color: rgba($white, .25);
+        font-size: .85rem;
+        color: rgba($primary-dk, .75);
+        padding: .25rem .50rem;
+        align-self: end;
+        border-top-left-radius: 0;
     }
 }
 
 .card {
     // border: 1px solid $gray-lg;
-    margin-bottom: 1.5rem;
     border-radius: 8px;
     box-shadow: 0px 1px 12px rgba($primary-dk, .05);
-    // background-color: rgba($primary-dk, .10);
-    background-color: $white;
+    background-color: rgba($primary-dk, .10);
 
+    // background-color: $gray-lg;
+    &:not(:last-of-type) {
+        margin-bottom: 1.5rem;
+    }
 
     .card-header {
         font-family: roboto-medium;
@@ -117,6 +135,7 @@ h2 {
     color: white;
     display: inline-block;
     line-height: 1rem;
+    border: 0;
 
     &:not(:last-of-type) {
         margin-right: .5rem;
@@ -137,12 +156,12 @@ h2 {
 
 .badge-btn {
     background-color: $danger;
-    // height: 23px;
     border-radius: 12px;
     color: white;
     font-family: roboto-medium;
-    // padding: 4px;
     font-size: .8rem;
+    width: min-content;
+    margin: auto;
 
     p {
         display: inline-block;
@@ -150,7 +169,9 @@ h2 {
         left: -3px;
     }
 
-
+    a {
+        padding-right: 8px;
+    }
 }
 
 .badge {
@@ -161,4 +182,23 @@ h2 {
     color: white;
     font-size: .8rem;
 
+    &.user {
+        width: min-content;
+        background-color: $warning;
+        margin: auto;
+    }
+}
+
+.icon {
+    padding: 8px;
+    border-radius: 8px;
+    height: 16px;
+
+    &.edit {
+        background-color: $warning;
+    }
+
+    &.trash {
+        background-color: $danger;
+    }
 }

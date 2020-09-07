@@ -5,10 +5,28 @@
 
 {% block body %}
 {% include 'admin/nav.html.twig' %}
-<div class="container">
-    {{ form_start(userForm) }}
-    {{ form_rest(userForm) }}
-    <button class="btn btn-primary">&Eacute;diter</button>
-    {{ form_end(userForm) }}
+<div class="grid" style="min-height: calc(100vh - 48px - 24px)">
+    <div class="container-titles">
+        <h2>Ajouter un utilisateurs</h2>
+        <h2 class="back-to-dashboard"><a href="{{ path('admin') }}">&#10229; Retour à l'accueil</a></h2>
+    </div>
+    <div class="container">
+        {{ form_start(userForm) }}
+        {{ form_row(userForm.email) }}
+        {{ form_row(userForm.password) }}
+        {{ form_row(userForm.last_name) }}
+        {{ form_row(userForm.first_name) }}
+        <div>
+            {{ form_label(userForm.sessions) }}
+        </div>
+        <div class="form-children">
+            {% for session in userForm.sessions %}
+            {{ form_row(session, { 'attr': {'class': 'children'} }) }}
+            {% endfor %}
+        </div>
+        {{ form_rest(userForm) }}
+        <button class="btn btn-primary-dk pointer">Ajouter</button>
+        {{ form_end(userForm) }}
+    </div>
 </div>
 {% endblock %}

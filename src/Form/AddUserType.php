@@ -33,6 +33,7 @@ class AddUserType extends AbstractType
                 },
                 'multiple' => true,
                 'expanded' => true,
+                
             ])
  
         ;
