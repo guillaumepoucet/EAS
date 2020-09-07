@@ -7,7 +7,6 @@
 
 {% include 'admin/nav.html.twig'%}
 <div class="jumbotron">
-
 	<p>
 		<span class="h-sub">Bonjour, </span>
 		<br>
@@ -15,30 +14,32 @@
 	</p>
 </div>
 
-<div class="container">
+<div class="grid">
 
+	<div class="container announcements">
+		<h2>
+			Dernières annonces</h2>
+		{% for announcement in announcements %}
+		<div class="card">
+			<div class="card-header">
+				<div><img src="{{ asset('icons/horn.svg') }}" alt=""></div>
 
-	<h2>
-		Dernières annonces</h2>
-	{% for announcement in announcements %}
-	<div class="card">
-		<div class="card-header">
-			<div><img src="{{ asset('icons/horn.svg') }}" alt=""></div>
-
-			<h4>{{ announcement.announcementTitle}}</h4>
+				<h4>{{ announcement.announcementTitle}}</h4>
+			</div>
+			
+			<div class="card-body">
+				<small>{{ announcement.announcementDate | date("d/m/Y") }}</small>
+				<p>{{ announcement.announcementContent | raw }}</p>
+			</div>
+			<div class="card-btn">
+				<a href=" {{ path('announcements_edit', {id: announcement.id}) }}" type="button"
+					class="btn btn-warning btn-sm">&Eacute;diter</a>
+				<a href=" {{ path('announcements_delete', {id: announcement.id}) }}" type="button"
+					class="btn btn-danger btn-sm">Supprimer</a>
+			</div>
 		</div>
-
-		<div class="card-body">
-			{{ announcement.announcementContent | raw }}
-		</div>
-		<div class="card-btn">
-			<a href=" {{ path('announcements_edit', {id: announcement.id}) }}" type="button"
-				class="btn btn-warning btn-sm">&Eacute;diter</a>
-			<a href=" {{ path('announcements_delete', {id: announcement.id}) }}" type="button"
-				class="btn btn-danger btn-sm">Supprimer</a>
-		</div>
+		{% endfor %}
 	</div>
-	{% endfor %}
 
 </div>
 

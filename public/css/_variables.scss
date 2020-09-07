@@ -35,7 +35,8 @@ h2 {
     margin-bottom: 1.5rem;
     border-radius: 8px;
     box-shadow: 0px 1px 12px rgba($primary-dk, .05);
-    // background-color: rgba($primary-dk, .05);
+    // background-color: rgba($primary-dk, .10);
+    background-color: $white;
 
 
     .card-header {
@@ -72,6 +73,13 @@ h2 {
 
     .card-body {
         padding: .5rem 2rem 1.5rem 3.75rem;
+
+        small {
+            font-family: roboto-medium;
+            font-size: .8rem;
+            display: block;
+            margin-bottom: .5rem;
+        }
     }
 
 }
@@ -121,4 +129,36 @@ h2 {
     &.btn-warning {
         background-color: $warning;
     }
+
+    &.btn-primary-dk {
+        background-color: $primary-dk;
+    }
+}
+
+.badge-btn {
+    background-color: $danger;
+    // height: 23px;
+    border-radius: 12px;
+    color: white;
+    font-family: roboto-medium;
+    // padding: 4px;
+    font-size: .8rem;
+
+    p {
+        display: inline-block;
+        position: relative;
+        left: -3px;
+    }
+
+
+}
+
+.badge {
+    font-family: roboto-medium;
+    background-color: $primary-dk;
+    padding: 4px 8px;
+    border-radius: 12px;
+    color: white;
+    font-size: .8rem;
+
 }

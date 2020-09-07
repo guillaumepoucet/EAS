@@ -1,6 +1,7 @@
 @import 'variables';
 @import 'fonts';
 @import 'classes';
+@import 'table';
 
 body {
     font-family: roboto !important;
@@ -90,11 +91,15 @@ body {
     }
 }
 
-.container,
+.grid,
 .jumbotron {
     padding: 12px;
 }
 
+.grid {
+    background-color: rgba($primary-dk, .15);
+}
+
 .container {
-    background-color: rgba($primary-dk, .05);
+    min-height: calc(100vh - 72px);
 }
