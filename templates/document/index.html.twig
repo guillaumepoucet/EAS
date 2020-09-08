@@ -4,44 +4,70 @@
 {% endblock %}
 
 {% block body %}
-	<h1>Document index</h1>
+{% include 'admin/nav.html.twig'%}
 
-	<table class="table">
-		<thead>
-			<tr>
-				<th>Nom</th>
-				<th>Description</th>
-				<th>Taille</th>
-				<th>Actions</th>
-				<th>Disponibilité(s)</th>
-			</tr>
-		</thead>
-		<tbody>
-			{% for document in documents %}
-				<tr>
-					<td>{{ document.fileName }}</td>
-					<td>{{ document.fileDesc }}</td>
-					<td>{{ document.fileSize }}</td>
-					<td>
-						<a href="{{ path('document_show', {'id': document.id}) }}">voir</a>
-						<a href="{{ path('document_edit', {'id': document.id}) }}">&eacute;diter</a>
-					</td>
-					<td>
-						{# {{ dump(document.courses.CourseName) }} #}
-						{% for course in document.courses %}
-							{{ course.courseName }}
-					
+<div class="row">
+	<div class="">
+		<div class="container-titles">
+			<h2>Liste des fichiers</h2>
+			<h2 class="back-to-dashboard"><a href="{{ path('admin') }}">&#10229; Retour à l'accueil</a></h2>
+		</div>
+		<div class="container">
+			<div class="card" style="padding: 24px">
+
+				<table class="table display compact" id="documentList">
+					<thead>
+						<tr>
+							<th>Nom</th>
+							<th>Description</th>
+							<th>Taille</th>
+							<th>Actions</th>
+							<th>Disponibilité(s)</th>
+						</tr>
+					</thead>
+					<tbody>
+						{% for document in documents %}
+						<tr>
+							<td>{{ document.fileName }}</td>
+							<td>{{ document.fileDesc }}</td>
+							<td>{{ document.fileSize }}</td>
+							<td>
+								<a href="{{ path('document_show', {'id': document.id}) }}">voir</a>
+								<a href="{{ path('document_edit', {'id': document.id}) }}">&eacute;diter</a>
+							</td>
+							<td>
+								{# {{ dump(document.courses.CourseName) }} #}
+								{% for course in document.courses %}
+								{{ course.courseName }}
+
+								{% endfor %}
+							</td>
+						</tr>
+
+						{% else %}
+						<tr>
+							<td colspan="5">Aucun fichier(s)</td>
+						</tr>
 						{% endfor %}
-					</td>
-				</tr>
+					</tbody>
+				</table>
 
-			{% else %}
-				<tr>
-					<td colspan="6">Aucun fichier(s)</td>
-				</tr>
-			{% endfor %}
-		</tbody>
-	</table>
+				<a href="{{ path('document_new') }}" class="btn btn-primary-dk mt-2">+ Nouveau fichier</a>
 
-	<a href="{{ path('document_new') }}" class="btn btn-primary btn-sm">+ Nouveau fichier</a>
+			</div>
+		</div>
+	</div>
+</div>
+<script>
+	$(document).ready(function () {
+		$('#documentList').DataTable({
+			"scrollX": true,
+			fixedColumns: true,
+			"language": {
+				"url": "{{ asset('js/french.lang') }}"
+			},
+
+		});
+	});
+</script>
 {% endblock %}

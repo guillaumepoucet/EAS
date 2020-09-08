@@ -14,7 +14,11 @@
 }
 
 .dataTables_info,
-#student-table_paginate {
+#student-table_paginate,
+#sessions-table_paginate,
+#userList_paginate,
+#sessionUsersList_paginate,
+.dataTables_paginate .paging_simple_numbers {
     font-size: .8rem;
     margin-bottom: 1rem;
 }
@@ -25,14 +29,39 @@
 
 .paginate_button.current,
 .paginate_button.current:hover {
-    background: rgba($primary-dk, .25) !important;
+    background: $gray-lg !important;
     border-radius: 50% !important;
     border: 0 !important;
-    color: white !important;
 
 }
 
-.dataTables_scrollHead tr th {
+.dataTables_scrollHead tr th,
+thead tr th {
     font-family: roboto-medium;
     font-weight: normal !important;
 }
+
+.del-link {
+    height: 24px;
+    display: grid;
+    place-items: center;
+}
+
+// #sessionUsersList {
+//     thead tr {
+//         border-bottom: 1px solid black;
+
+//         th {
+//             padding: 4px 17px;
+//         }
+
+//     }
+
+//     tbody tr {
+//         height: 40px;
+//         td {
+//             padding: 4px;
+//             border-bottom: 1px solid #e1e1e1;
+//         }
+//     }
+// }

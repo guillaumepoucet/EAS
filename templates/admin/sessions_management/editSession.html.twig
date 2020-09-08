@@ -6,74 +6,103 @@
 
 {% block body %}
 {% include 'admin/nav.html.twig' %}
-<div class="container">
-	<h2>&Eacute;diter
-		{{session.course.courseName}}</h2>
-	<div class="row">
-		<div class="col-sm-6">
-			<h4>Modifier le module</h4>
+<div class="row">
+	<div class="">
+		<div class="container-titles">
+			<h2>&Eacute;diter
+				{{session.course.courseName}}</h2>
+			<h2 class="back-to-dashboard"><a href="{{ path('sessions_management') }}">&#10229; Retour aux sessions</a></h2>
+		</div>
+		<div class="container">
+			<div class="grid-row">
+			<div class="card">
+				<div class="card-header">
+					<div><img src="{{ asset('icons/edit-lg.svg') }}" alt=""></div>
+					<h4>Modifier la session</h4>
+				</div>
+				<div class="card-body">
+					{{ form_start(sessionForm) }}
+					{{ form_row(sessionForm.start_date, {'attr': {'class': 'select-date'}})}}
+					{{ form_row(sessionForm.end_date, {'attr': {'class': 'select-date'}})}}
+					{{ form_row(sessionForm.course) }}
+					<button class="btn btn-primary-dk" type="submit">Ajouter</button>
+					{{ form_end(sessionForm) }}
+				</div>
+			</div>
 
-			{{ form_start(sessionForm) }}
-			{{ form_widget(sessionForm) }}
-			<button class="btn btn-primary">&Eacute;diter</button>
-			{{ form_end(sessionForm) }}
-		</div>
-		<div class="col-sm-6">
-			<h4>Modifier la liste des apprenants</h4>
-			<table id="sessionUsersList" class="table table-sm">
-				<thead>
-					<tr>
-						<th>Nom, Prénom</th>
-						<th class="text-center">Enlever</th>
-					</tr>
-				</thead>
-				<tbody>
-					{% for user in session.user %}
-					<tr>
-						<td>{{user.fullName}}</td>
-						<td class="text-center">
-							<a href="{{ path('sessions_remove_user', {user: user.id, session: session.id}) }}"
-								class="font-weight-bold">&#10005;</a>
-						</td>
-					</tr>
-					{% endfor %}
-				</tbody>
-			</table>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col">
-			<h4>Ajouter un apprenant</h4>
-			<table id="userList" class="table table-sm">
-				<thead>
-					<tr>
-						<th>Nom, Prénom</th>
-						<th class="text-center">Ajouter</th>
-					</tr>
-				</thead>
-				<tbody>
-					{% for user in users %}
-					<tr>
-						<td>{{user.fullName}}</td>
-						<td class="text-center">
-							{% set inSession = "" %}
-							{% for sessions in user.sessions %}
-							{% if session.id == sessions.id %}
-							{% set inSession = true %}
-							{% endif %}
+			<div class="card">
+				<div class="card-header">
+					<div><img src="{{ asset('icons/user-edit.svg') }}" alt=""></div>
+					<h4>Liste des elèves</h4>
+				</div>
+				<div class="card-body">
+					<table id="sessionUsersList" class="table  display">
+						<thead>
+							<tr>
+								<th>Nom, Prénom</th>
+								<th class="text-center">Enlever</th>
+							</tr>
+						</thead>
+						<tbody>
+							{% for user in session.user %}
+							<tr>
+								<td>{{user.fullName}}</td>
+								<td class="text-center">
+									<a href="{{ path('sessions_remove_user', {user: user.id, session: session.id}) }}"
+										class="del-link"><img src="{{ asset('icons/delete.svg') }}" alt="" style="width: 16px;"></a>
+								</td>
+							</tr>
 							{% endfor %}
-							{% if inSession == true %}
-							<button type="button" class="btn btn-light btn-sm" disabled>
-								Déjà inscrit</button>
-							{% else %}
-							<a href="{{ path('sessions_add_user', {user: user.id, session: session.id}) }}" type="button"
-								class="btn btn-info btn-sm font-weight-bold">+ Ajouter</a>
-							{% endif %}
-						</td>
-					</tr>
-					{% endfor %}
-				</tbody>
-			</table>
+						</tbody>
+					</table>
+
+				</div>
+			</div>
+		</div>
+
+			<div class="grid-row">
+
+
+				<div class="card">
+					<div class="card-header">
+						<div><img src="{{ asset('icons/user-edit.svg') }}" alt=""></div>
+						<h4>Ajouter des elèves</h4>
+					</div>
+					<div class="card-body">
+						<table id="userList" class="table compact display">
+							<thead>
+								<tr>
+									<th>Nom, Prénom</th>
+									<th class="text-center">Ajouter</th>
+								</tr>
+							</thead>
+							<tbody>
+								{% for user in users %}
+								<tr>
+									<td>{{user.fullName}}</td>
+									<td class="text-center">
+										{% set inSession = "" %}
+										{% for sessions in user.sessions %}
+										{% if session.id == sessions.id %}
+										{% set inSession = true %}
+										{% endif %}
+										{% endfor %}
+										{% if inSession == true %}
+										<button type="button" class="btn btn-gray-dk" disabled style="width: 85px;">
+											Déjà inscrit</button>
+										{% else %}
+										<a href="{{ path('sessions_add_user', {user: user.id, session: session.id}) }}"
+											type="button" class="btn btn-warning" style="width: 61px;">+
+											Ajouter</a>
+										{% endif %}
+									</td>
+								</tr>
+								{% endfor %}
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 </div>
@@ -81,8 +110,16 @@
 <script>
 	$(document).ready(function () {
 		$('#userList').DataTable({
+			fixedColumns: true,
 			"language": {
-				"url": "{{ asset('bundles/datatables/js/french.lang') }}"
+				"url": "{{ asset('js/french.lang') }}"
+			},
+
+		});
+		$('#sessionUsersList').DataTable({
+			fixedColumns: true,
+			"language": {
+				"url": "{{ asset('js/french.lang') }}"
 			},
 
 		});

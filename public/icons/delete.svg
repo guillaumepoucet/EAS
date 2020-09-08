@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #c92a14;
+      }
+
+      .cls-2 {
+        fill: #fff;
+      }
+    </style>
+  </defs>
+  <g id="Groupe_5" data-name="Groupe 5" transform="translate(-92 -393)">
+    <circle id="Ellipse_1" data-name="Ellipse 1" class="cls-1" cx="16" cy="16" r="16" transform="translate(92 393)"/>
+    <path id="Icon_metro-cross" data-name="Icon metro-cross" class="cls-2" d="M16.443,13.175h0L12.2,8.928l4.247-4.247h0a.439.439,0,0,0,0-.619L14.437,2.056a.439.439,0,0,0-.619,0h0L9.571,6.3,5.324,2.056h0a.439.439,0,0,0-.619,0L2.7,4.062a.439.439,0,0,0,0,.619h0L6.946,8.928,2.7,13.175h0a.438.438,0,0,0,0,.619L4.7,15.8a.439.439,0,0,0,.619,0h0l4.247-4.247L13.818,15.8h0a.438.438,0,0,0,.619,0l2.006-2.006a.438.438,0,0,0,0-.619Z" transform="translate(98.411 399.647)"/>
+  </g>
+</svg>

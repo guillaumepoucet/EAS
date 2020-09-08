@@ -14,7 +14,6 @@ class AddCourseType extends AbstractType
     {
         $builder
             ->add('course_name')
-            ->add('Submit', SubmitType::class)
         ;
     }
 

@@ -3,9 +3,21 @@
 {% block title %}New Document{% endblock %}
 
 {% block body %}
-    <h1>Create new Document</h1>
+{% include 'admin/nav.html.twig'%}
 
-    {{ include('document/_form.html.twig') }}
+<div class="row">
+    <div class="">
+        <div class="container-titles">
+            <h2>Liste des sessions</h2>
+            <h2 class="back-to-dashboard"><a href="{{ path('document_index') }}">&#10229; Retour aux documents</a></h2>
+        </div>
+        <div class="container">
+            <div class="card">
 
-    <a href="{{ path('document_index') }}">back to list</a>
+                {{ include('document/_form.html.twig') }}
+
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}

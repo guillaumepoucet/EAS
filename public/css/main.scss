@@ -18,6 +18,7 @@ body {
     height: 24px;
     position: sticky;
     top: 0;
+    z-index: 9999;
 
     .nav-menu-link {
         display: inline-block;
@@ -93,19 +94,97 @@ body {
 }
 
 .grid,
-.jumbotron {
+.jumbotron,
+.row {
     padding: 12px;
 }
 
 .grid {
-    background-color: rgba($primary-dk, .15);
+    background-color: white;
+    display: grid;
+    place-items: center;
+    // grid-template-columns: repeat(12, 1fr);
+
+    .overflow-auto {
+        overflow-x: auto;
+    }
+
+    .stretch-x {
+        justify-self: stretch;
+    }
+
+    .grid-element-lg {
+        width: max-content;
+    }
+
+    .span-12 {
+        grid-column: span 12;
+    }
+
+    .span-11 {
+        grid-column: span 11;
+    }
+
+    .span-10 {
+        grid-column: span 10;
+    }
+
+    .span-9 {
+        grid-column: span 9;
+    }
+
+    .span-8 {
+        grid-column: span 8;
+    }
+
+    .span-7 {
+        grid-column: span 7;
+    }
+
+    .span-6 {
+        grid-column: span 6;
+    }
+
+    .span-5 {
+        grid-column: span 5;
+    }
+
+    .span-4 {
+        grid-column: span 4;
+    }
+
+    .span-3 {
+        grid-column: span 3;
+    }
+
+    .span-2 {
+        grid-column: span 2;
+    }
+
+    .span-1 {
+        grid-column: span 1;
+    }
 }
 
 .container {
     // min-height: calc(100vh - 72px);
-    background-color: white;
+    background-color: rgba($primary-dk, .25);
+    // background-color: white;
     padding: 1.5rem;
     border-top-right-radius: 4px;
     border-bottom-right-radius: 4px;
     border-bottom-left-radius: 4px;
+}
+
+@media screen and (min-width: 960px) {
+    .grid-row {
+        display: grid;
+        grid-auto-flow: column;
+        grid-column-gap: 24px;
+        margin-bottom: 24px;
+
+        .card {
+            margin-bottom: 0;
+        }
+    }
 }

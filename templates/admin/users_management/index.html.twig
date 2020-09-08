@@ -5,64 +5,68 @@
 
 {% block body %}
 {% include 'admin/nav.html.twig' %}
-<div class="grid" style="min-height: calc(100vh - 146px - 24px)">
-	<div class="container-titles">
-		<h2>Listes des utilisateurs</h2>
-		<h2 class="back-to-dashboard"><a href="{{ path('admin') }}">&#10229; Retour à l'accueil</a></h2>
-	</div>
-	<div class="container">
-		<table class="table nowrap display" id="student-table" style="width: 100%">
-			<thead>
-				<tr>
-					<th data-field="lastName">Nom</th>
-					<th data-field="firstName">Prénom</th>
-					<th class="text-center" data-field="roles">Rôle</th>
-					<th data-field="sessions">Formation en cours</th>
-					<th data-field="birthDate">Née le</th>
-					<th class="text-center">Actions</th>
-				</tr>
-			</thead>
-			<tbody>
-				{% for user in users %}
-				<tr>
-					<td>{{user.lastName}}</td>
-					<td>{{user.firstName}}</td>
-					<td class="text-center">
-						{% if user.roles|length == 2 %}
+<div class="row" style="min-height: calc(100vh - 146px - 24px)">
+	<div class="">
+		<div class="container-titles">
+			<h2>Liste des utilisateur</h2>
+			<h2 class="back-to-dashboard"><a href="{{ path('admin') }}">&#10229; Retour à l'accueil</a></h2>
+		</div>
+		<div class="container">
+			<div class="card" style="padding:24px">
+				<table class="table nowrap display" id="student-table" style="width: 100%">
+					<thead>
+						<tr>
+							<th data-field="lastName">Nom</th>
+							<th data-field="firstName">Prénom</th>
+							<th class="text-center" data-field="roles">Rôle</th>
+							<th data-field="sessions">Formation en cours</th>
+							<th data-field="birthDate">Née le</th>
+							<th class="text-center">Actions</th>
+						</tr>
+					</thead>
+					<tbody>
+						{% for user in users %}
+						<tr>
+							<td>{{user.lastName}}</td>
+							<td>{{user.firstName}}</td>
+							<td class="text-center">
+								{% if user.roles|length == 2 %}
 
-						<div class="badge-btn">
-							<p class="badge">admin</p>
-							<a class="" href="{{ path('users_demote', {id: user.id}) }}"
-								title="Révoquer les droits administrateurs">&#215;</a>
-						</div>
-						{% else %}
-						<!-- <div class="badge-btn"> -->
-						<p class="badge user">elève</p>
-						<!-- <a href="{{ path('users_promote', {id: user.id}) }}">Modifier</a> -->
-						<!-- </div> -->
-						{% endif %}
+								<div class="badge-btn">
+									<p class="badge">admin</p>
+									<a class="" href="{{ path('users_demote', {id: user.id}) }}"
+										title="Révoquer les droits administrateurs">&#215;</a>
+								</div>
+								{% else %}
+								<!-- <div class="badge-btn"> -->
+								<p class="badge user">elève</p>
+								<!-- <a href="{{ path('users_promote', {id: user.id}) }}">Modifier</a> -->
+								<!-- </div> -->
+								{% endif %}
 
-					</td>
-					<td>
-						{% for session in user.sessions %}
-						{{session.course.courseName}}<br>
-						{% else %}
-						(Aucune sessions)<br>
+							</td>
+							<td>
+								{% for session in user.sessions %}
+								{{session.course.courseName}}<br>
+								{% else %}
+								(Aucune sessions)<br>
+								{% endfor %}
+								{# <a href="">Gérer</a> #}
+							</td>
+							<td class="text-center">{{user.birthDate | date("d/m/Y")}}</td>
+							<td class="text-center">
+								<a href="{{ path('users_edit', {id: user.id}) }}"><img class="icon edit"
+										src="{{ asset('icons/edit.svg') }}" alt="" title="&Eacute;diter"></a>
+								<a href="{{ path('users_delete', {id: user.id}) }}"><img class="icon trash"
+										src="{{ asset('icons/trash.svg') }}" alt="" title="Supprimer"></a>
+							</td>
+						</tr>
 						{% endfor %}
-						{# <a href="">Gérer</a> #}
-					</td>
-					<td class="text-center">{{user.birthDate | date("d/m/Y")}}</td>
-					<td class="text-center">
-						<a href="{{ path('users_edit', {id: user.id}) }}"><img class="icon edit"
-								src="{{ asset('icons/edit.svg') }}" alt="" title="&Eacute;diter"></a>
-						<a href="{{ path('users_delete', {id: user.id}) }}"><img class="icon trash"
-								src="{{ asset('icons/trash.svg') }}" alt="" title="Supprimer"></a>
-					</td>
-				</tr>
-				{% endfor %}
-			</tbody>
-		</table>
-		<a href="{{ path('users_add') }}" type="button" class="btn btn-primary-dk">Ajouter un utilisateur</a>
+					</tbody>
+				</table>
+				<a href="{{ path('users_add') }}" type="button" class="btn btn-primary-dk">Ajouter un utilisateur</a>
+			</div>
+		</div>
 	</div>
 </div>
 

@@ -3,11 +3,25 @@
 {% block title %}Edit Document{% endblock %}
 
 {% block body %}
-    <h1>Edit Document</h1>
+{% include 'admin/nav.html.twig'%}
 
-    {{ include('document/_form.html.twig', {'button_label': 'Update'}) }}
+<div class="row">
+    <div class="">
+        <div class="container-titles">
+            <h2>Ajouter un fichier</h2>
+            <h2 class="back-to-dashboard"><a href="{{ path('admin') }}">&#10229; Retour à l'accueil</a></h2>
+        </div>
+        <div class="container">
+            <div class="card">
 
-    <a href="{{ path('document_index') }}">back to list</a>
 
-    {{ include('document/_delete_form.html.twig') }}
+                {{ include('document/_form.html.twig', {'button_label': 'Update'}) }}
+
+                <a href="{{ path('document_index') }}">back to list</a>
+
+                {{ include('document/_delete_form.html.twig') }}
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}
