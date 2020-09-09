@@ -1,5 +1,6 @@
-<form method="post" action="{{ path('document_delete', {'id': document.id}) }}" onsubmit="return confirm('&Ecirc;tes-vous s&ucirc;r de vouloir supprimer ce fichier ?');">
+<form method="post" action="{{ path('document_delete', {'id': document.id}) }}" style="height: 32px;"
+    onsubmit="return confirm('&Ecirc;tes-vous s&ucirc;r de vouloir supprimer ce fichier ?');">
     <input type="hidden" name="_method" value="DELETE">
     <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ document.id) }}">
-    <button class="btn btn-danger">Supprimer</button>
+    <button class="no-btn"><img class="icon trash" src="{{ asset('icons/trash.svg') }}" alt="" title="Supprimer"></button>
 </form>

@@ -1,3 +1,17 @@
+.no-btn {
+  background-color: transparent;
+  border: none;
+  padding: 0;
+}
+
+.d-flex {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-column-gap: 12px;
+          column-gap: 12px;
+}
+
 .m-auto {
   margin: auto;
 }
@@ -20,14 +34,6 @@
   margin-right: 24px;
 }
 
-.mt-2 {
-  margin-top: 24px;
-}
-
-.mb-2 {
-  margin-bottom: 24px;
-}
-
 .container-titles {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -44,7 +50,7 @@
   width: -webkit-fit-content;
   width: -moz-fit-content;
   width: fit-content;
-  padding: .5rem .75rem;
+  padding: .5rem 1.5rem;
   border-radius: 4px 4px 0 0;
   color: rgba(1, 31, 140, 0.75);
   white-space: nowrap;
@@ -263,6 +269,8 @@
 #sessions-table_paginate,
 #userList_paginate,
 #sessionUsersList_paginate,
+#documentList_previous,
+#announcementList_previous,
 .dataTables_paginate .paging_simple_numbers {
   font-size: .8rem;
   margin-bottom: 1rem;
@@ -292,23 +300,42 @@ thead tr th {
   place-items: center;
 }
 
-form {
+.flex {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-column-gap: .5rem;
+          column-gap: .5rem;
+}
+
+.form {
   display: -ms-grid;
   display: grid;
   padding: 24px;
 }
 
-form div {
+.form div {
   display: -ms-grid;
   display: grid;
 }
 
-form div label {
+.form div label {
   margin: .75rem 0 .25rem;
   font-family: roboto-medium;
 }
 
-form .form-children div {
+.form div textarea {
+  font-family: roboto-medium;
+  font-size: .85rem;
+}
+
+.form .form-children div {
   grid-auto-flow: column;
   -ms-grid-columns: min-content auto;
       grid-template-columns: -webkit-min-content auto;
@@ -316,7 +343,7 @@ form .form-children div {
   grid-column-gap: 0.5rem;
 }
 
-form .form-children div input {
+.form .form-children div input {
   -ms-grid-column: 1;
   grid-column: 1;
   -ms-grid-column-align: start;
@@ -324,19 +351,24 @@ form .form-children div input {
   margin: .75rem 0 .25rem;
 }
 
-form .form-children label {
+.form .form-children label {
   font-family: roboto !important;
 }
 
-form button {
+.form button {
   margin-top: 1rem;
+}
+
+.form .option {
+  font-size: .85rem;
 }
 
 input[type=search],
 input[type=password],
 input[type=text],
 input[type=file]::-webkit-file-upload-button,
-select {
+select,
+textarea {
   padding: 0.5rem;
   font-family: roboto-medium;
 }
@@ -344,6 +376,13 @@ select {
 .select-date {
   grid-auto-flow: column;
   grid-column-gap: .5rem;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: start;
+}
+
+.select-date select {
+  width: 80px;
 }
 
 body {

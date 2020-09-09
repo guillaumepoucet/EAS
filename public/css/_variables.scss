@@ -8,6 +8,17 @@ $gray-dk: #c8c8c8;
 $danger: #C92A14;
 $warning: #FCB624;
 
+.no-btn {
+    background-color: transparent;
+    border: none;
+    padding: 0;
+}
+
+.d-flex {
+    display: flex;
+    column-gap: 12px;
+}
+
 .m-auto {
     margin: auto;
 }
@@ -40,7 +51,7 @@ $warning: #FCB624;
         // display: block;
         background-color: rgba($primary-dk, .25);
         width: fit-content;
-        padding: .5rem .75rem;
+        padding: .5rem 1.5rem;
         border-radius: 4px 4px 0 0;
         color: rgba($primary-dk, .75);
         white-space: nowrap;

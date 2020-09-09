@@ -5,9 +5,17 @@ Birth date: Date de naissance
 Start date: Date de début
 End date: Date de fin
 Course: Module concerné
+Courses: Modules
 Course name: Nom du module
 Submit: Ajouter
 Save: Enregistrer
 File name: Nom du fichier
 File desc: Description du fichier
 Browse: Parcourir
+Announcement title: Titre de l'annonce
+Announcement content: Contenu
+Announcement date: Date de création
+Announcemment_title: Titre de l'annonce
+Announcement_content: Contenu
+Announcement_date: Date de création
+Is_draft: Brouillon

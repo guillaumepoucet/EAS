@@ -1,0 +1,16 @@
+{{ form_start(form, {'attr': {'class': 'form'}} ) }}
+{{ form_row(form.announcement_title) }}
+{{ form_row(form.announcement_content) }}
+<div class="form-children option">
+    {{ form_row(form.is_draft) }}
+</div>
+{{ form_row(form.announcement_date, {'attr': {'class': 'select-date'}}) }}
+
+<button class="btn btn-primary-dk">
+    {% if button is defined %}
+    {{ button }}
+    {% else %}
+    Publier
+    {% endif %}
+</button>
+{{ form_end(form) }}

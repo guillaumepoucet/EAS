@@ -4,19 +4,32 @@ namespace App\Controller;
 
 use App\Entity\Announcement;
 use App\Form\AnnouncementType;
+use App\Repository\AnnouncementRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
- * @Route("/admin/announcement", name="announcements_")
+ * @Route("/admin/announcement", name="announcement")
  */
 class AdminAnnouncementController extends AbstractController
 {
     /**
-     * @Route("/add", name="add")
+     * @Route("/", name="_index")
      */
-    public function index(Request $request)
+    public function index(AnnouncementRepository $annRepo)
+    {
+        $announcements = $annRepo->findAll();
+
+        return $this->render('admin/announcements_management/index.html.twig', [
+            'annoucements' => $announcements,
+        ]);
+    }
+
+    /**
+     * @Route("/add", name="_add")
+     */
+    public function addAnnouncement(Request $request)
     {
         // creating form to add course sessions
         $newAnnouncement = new Announcement;
@@ -43,7 +56,7 @@ class AdminAnnouncementController extends AbstractController
     }
 
     /**
-     * @Route("/edit/{id}", name="edit")
+     * @Route("/edit/{id}", name="_edit")
      */
     public function editAnnouncement(Request $request, Announcement $id)
     {
@@ -74,7 +87,7 @@ class AdminAnnouncementController extends AbstractController
     }
 
     /**
-     * @Route("/delete/{id}", name="delete")
+     * @Route("/delete/{id}", name="_delete")
      */
     public function deleteAnnouncement(Announcement $id)
     {

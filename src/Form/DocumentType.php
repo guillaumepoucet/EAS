@@ -28,6 +28,7 @@ class DocumentType extends AbstractType
             ->add('file', FileType::class, [
                 'label' => 'Document',
                 'required' => true,
+                'data_class' => null,
                 // 'constraints' => [
                 //     new File([
                 //         'maxSize' => '1024k',

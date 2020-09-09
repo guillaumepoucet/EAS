@@ -19,6 +19,23 @@ class AnnouncementRepository extends ServiceEntityRepository
         parent::__construct($registry, Announcement::class);
     }
 
+    /**
+     * @return Announcement[] Returns an array of Announcement objects
+     */
+    
+    public function getDrafts()
+    {
+        return $this->createQueryBuilder('a')
+            ->andWhere('a.is_draft = :val')
+            ->setParameter('val', 1)
+            ->orderBy('a.announcement_date', 'ASC')
+            // ->setMaxResults(10)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+    
+
     // /**
     //  * @return Announcement[] Returns an array of Announcement objects
     //  */

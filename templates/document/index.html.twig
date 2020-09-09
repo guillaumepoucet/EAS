@@ -15,14 +15,14 @@
 		<div class="container">
 			<div class="card" style="padding: 24px">
 
-				<table class="table display compact" id="documentList">
+				<table class="table display compact" id="documentList" style="width: 100%">
 					<thead>
 						<tr>
 							<th>Nom</th>
 							<th>Description</th>
 							<th>Taille</th>
-							<th>Actions</th>
 							<th>Disponibilité(s)</th>
+							<th>Actions</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -32,15 +32,19 @@
 							<td>{{ document.fileDesc }}</td>
 							<td>{{ document.fileSize }}</td>
 							<td>
-								<a href="{{ path('document_show', {'id': document.id}) }}">voir</a>
-								<a href="{{ path('document_edit', {'id': document.id}) }}">&eacute;diter</a>
-							</td>
-							<td>
 								{# {{ dump(document.courses.CourseName) }} #}
 								{% for course in document.courses %}
-								{{ course.courseName }}
+								{{ course.courseName }}<br>
 
 								{% endfor %}
+							</td>
+							<td class="flex">
+								<!-- <a href="{{ path('document_show', {'id': document.id}) }}">voir</a> -->
+								
+								<a href="{{ path('document_edit', {'id': document.id}) }}" style="height: 32px;">
+									<img class="icon edit" src="{{ asset('icons/edit.svg') }}" alt=""
+									title="&Eacute;diter"></a>
+									{{ include('document/_delete_form.html.twig') }}
 							</td>
 						</tr>
 
@@ -52,7 +56,7 @@
 					</tbody>
 				</table>
 
-				<a href="{{ path('document_new') }}" class="btn btn-primary-dk mt-2">+ Nouveau fichier</a>
+				<a href="{{ path('document_new') }}" class="btn btn-primary-dk">+ Nouveau fichier</a>
 
 			</div>
 		</div>

@@ -70,7 +70,7 @@
 		</div>
 		<div class="container">
 			<div class="card">
-				{{ form_start(sessionForm) }}
+				{{ form_start(sessionForm, {'attr': {'class': 'form'} }) }}
 				{{ form_row(sessionForm.start_date, {'attr': {'class': 'select-date'}})}}
 				{{ form_row(sessionForm.end_date, {'attr': {'class': 'select-date'}})}}
 				{{ form_row(sessionForm.course) }}
@@ -88,7 +88,7 @@
 		</div>
 		<div class="container">
 			<div class="card">
-				{{ form_start(courseForm) }}
+				{{ form_start(courseForm, {'attr': {'class': 'form'} }) }}
 				{{ form_rest(courseForm) }}
 				<button class="btn btn-primary-dk" type="submit">Ajouter</button>
 				{{ form_end(courseForm) }}

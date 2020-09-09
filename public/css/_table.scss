@@ -18,6 +18,8 @@
 #sessions-table_paginate,
 #userList_paginate,
 #sessionUsersList_paginate,
+#documentList_previous,
+#announcementList_previous,
 .dataTables_paginate .paging_simple_numbers {
     font-size: .8rem;
     margin-bottom: 1rem;
@@ -45,6 +47,13 @@ thead tr th {
     height: 24px;
     display: grid;
     place-items: center;
+}
+
+.flex {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    column-gap: .5rem;
 }
 
 // #sessionUsersList {
