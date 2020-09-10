@@ -33,15 +33,19 @@ class AdminUserController extends AbstractController
     }
 
     /**
-     * @Route("/delete/{id}", name="delete")
+     * @Route("/delete/{id}", name="delete", methods={"DELETE"})
      */
 
-    public function deleteUser(UserRepository $userRepo, $id)
+    public function deleteUser(Request $request, User $user)
     {
-        $entityManager = $this->getDoctrine()->getManager();
-        $user = $userRepo->find($id);
-        $entityManager->remove($user);
-        $entityManager->flush();
+        if ($this->isCsrfTokenValid('delete' . $user->getId(), $request->request->get('_token'))) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->remove($user);
+            $entityManager->flush();
+        }
+
+        $this->addFlash('delete', 'Elève supprimé');
+
         return $this->redirectToRoute('users_management');
     }
 
@@ -55,7 +59,7 @@ class AdminUserController extends AbstractController
         $newUser = new User;
 
         $userForm = $this->createForm(AddUserType::class, $newUser);
-        
+
         $userForm->handleRequest($request);
         if ($userForm->isSubmitted() && $userForm->isValid()) {
             // $form->getData() holds the submitted values
@@ -63,17 +67,18 @@ class AdminUserController extends AbstractController
             $newUser = $userForm->getData();
             // encode the plain password
             $newUser->setPassword(
-            $passwordEncoder->encodePassword(
-                $newUser,
-                $userForm->get('password')->getData()
+                $passwordEncoder->encodePassword(
+                    $newUser,
+                    $userForm->get('password')->getData()
                 )
             );
-            
+
+
             $sessions = $userForm->get('sessions')->getData();
             foreach ($sessions as $session) {
                 $session->addUser($newUser);
             };
-                
+
 
             // dump($session);
             // exit;
@@ -83,6 +88,8 @@ class AdminUserController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($newUser);
             $entityManager->flush();
+
+            $this->addFlash('success', 'Nouvel elève créé');
 
             return $this->redirectToRoute('users_management');
         }
@@ -108,6 +115,8 @@ class AdminUserController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
 
             $entityManager->flush();
+
+            $this->addFlash('edit', 'Elève édité');
 
             return $this->redirectToRoute('users_management');
         }

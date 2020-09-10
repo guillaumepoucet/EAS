@@ -43,6 +43,8 @@ class AdminSessionsController extends AbstractController
             $entityManager->persist($newCourse);
             $entityManager->flush();
 
+            $this->addFlash('success', 'Nouveau module créé');
+
             return $this->redirectToRoute('sessions_management');
         }
 
@@ -58,6 +60,8 @@ class AdminSessionsController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($newSession);
             $entityManager->flush();
+
+            $this->addFlash('success', 'Nouvelle session créée');
 
             return $this->redirectToRoute('sessions_management');
         }
@@ -100,6 +104,8 @@ class AdminSessionsController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->flush();
 
+            $this->addFlash('edit', 'Session éditée');
+
             return $this->redirectToRoute('sessions_management');
         }
 
@@ -122,6 +128,9 @@ class AdminSessionsController extends AbstractController
         $session = $sessionRepo->find($id);
         $entityManager->remove($session);
         $entityManager->flush();
+
+        $this->addFlash('delete', 'Session supprimée');
+
         return $this->redirectToRoute('sessions_management');
     }
     
@@ -134,6 +143,9 @@ class AdminSessionsController extends AbstractController
         $session->addUser($user);
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->flush();
+
+        $this->addFlash('success', 'Elève ajouté à la session');
+
         return $this->redirectToRoute('sessions_edit', [
             'id' => $session->getId()
         ]);
@@ -148,6 +160,9 @@ class AdminSessionsController extends AbstractController
         $session->removeUser($user);
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->flush();
+
+        $this->addFlash('delete', 'Elève supprimé à la session');
+
         return $this->redirectToRoute('sessions_edit', [
             'id' => $session->getId()
         ]);

@@ -6,105 +6,130 @@
 {% block body %}
 {% include 'admin/nav.html.twig'%}
 
-<div class="row">
-	<div class="">
-		<div class="container-titles">
-			<h2>Liste des sessions</h2>
-			<h2 class="back-to-dashboard"><a href="{{ path('admin') }}">&#10229; Retour à l'accueil</a></h2>
-		</div>
-		<div class="container">
-			<div class="card" style="padding: 24px">
-				<table class="table nowrap display" id="sessions-table" style="width: 100%">
-					<thead>
-						<tr>
-							<th>Nom de la formation</th>
-							<th>Date de début</th>
-							<th>Date de fin</th>
-							<th>Liste des elèves</th>
-							<th>Actions</th>
-						</tr>
-					</thead>
-					<tbody>
-						{% for session in sessions %}
-						<tr>
-							<td>{{session.course.courseName}}</td>
-							<td class="text-center">{{session.startDate | date("d/m/Y")}}</td>
-							<td class="text-center">{{session.endDate | date("d/m/Y")}}</td>
-							<td>
-								<a data-toggle="collapse" href="#session{{session.id}}UsersList" role="button"
-									aria-expanded="false" aria-controls="session{{session.id}}UsersList">Liste des
-									apprenants
-									<svg width="1em" height="1em" viewbox="0 0 16 16" class="bi bi-caret-down-fill"
-										fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-										<path
-											d="M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
-									</svg>
-								</a>
-								<ul class="collapse" id="session{{session.id}}UsersList">
-									{% for user in session.user %}
-									<li>{{user.firstName}}
-										{{user.lastName}}</li>
-									{% endfor %}
-								</ul>
-							</td>
-							<td>
-								<a href="{{ path('sessions_edit', {id: session.id}) }}"><img class="icon edit"
-										src="{{ asset('icons/edit.svg') }}" alt="" title="&Eacute;diter"></a>
-								<a href="{{ path('sessions_delete', {id: session.id}) }}"><img class="icon trash"
-										src="{{ asset('icons/trash.svg') }}" alt="" title="Supprimer"></a>
-							</td>
-						</tr>
-						{% endfor %}
+<div class="container-grid">
+	<div class="row sessions-list-container">
+		<div class="">
+			<div class="container-titles">
+				<h2>Liste des sessions</h2>
+				<h2 class="back-to-dashboard"><a href="{{ path('admin') }}">&#10229; Retour à l'accueil</a></h2>
+			</div>
+			<div class="container">
+				<div class="card" style="padding: 24px">
+					<table class="table nowrap display" id="sessions-table">
+						<thead>
+							<tr>
+								<th>Date de début</th>
+								<th>Date de fin</th>
+								<th>Nom de la formation</th>
+								<th>Liste des elèves</th>
+								<th>Actions</th>
+							</tr>
+						</thead>
+						<tbody>
+							{% for session in sessions %}
+							<tr>
+								<td class="text-center">{{session.startDate | date("d/m/Y")}}</td>
+								<td class="textcenter">{{session.endDate | date("d/m/Y")}}</td>
+								<td>{{session.course.courseName}}</td>
+								<td>
+									<a data-toggle="collapse" href="#session{{session.id}}UsersList" role="button"
+										aria-expanded="false" aria-controls="session{{session.id}}UsersList">Liste des
+										apprenants
+										<svg width="1em" height="1em" viewbox="0 0 16 16" class="bi bi-caret-down-fill"
+											fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+											<path
+												d="M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
+										</svg>
+									</a>
+									<ul class="collapse" id="session{{session.id}}UsersList">
+										{% for user in session.user %}
+										<li>{{user.firstName}}
+											{{user.lastName}}</li>
+										{% endfor %}
+									</ul>
+								</td>
+								<td>
+									<a href="{{ path('sessions_edit', {id: session.id}) }}"><img class="icon edit"
+											src="{{ asset('icons/edit.svg') }}" alt="" title="&Eacute;diter"></a>
+									<a href="{{ path('sessions_delete', {id: session.id}) }}"><img class="icon trash"
+											src="{{ asset('icons/trash.svg') }}" alt="" title="Supprimer"></a>
+								</td>
+							</tr>
+							{% endfor %}
 
-					</tbody>
-				</table>
+						</tbody>
+					</table>
+				</div>
 			</div>
 		</div>
 	</div>
-</div>
-<div class="row">
-	<div class="">
-		<div class="container-titles">
-			<h2>Ajouter une session</h2>
-			<h2 class="back-to-dashboard"><a href="{{ path('admin') }}">&#10229; Retour à l'accueil</a></h2>
-		</div>
-		<div class="container">
-			<div class="card">
-				{{ form_start(sessionForm, {'attr': {'class': 'form'} }) }}
-				{{ form_row(sessionForm.start_date, {'attr': {'class': 'select-date'}})}}
-				{{ form_row(sessionForm.end_date, {'attr': {'class': 'select-date'}})}}
-				{{ form_row(sessionForm.course) }}
-				<button class="btn btn-primary-dk" type="submit">Ajouter</button>
-				{{ form_end(sessionForm) }}
+	<div class="row new-session-container">
+		<div class="">
+			<div class="container-titles">
+				<h2>Ajouter une session</h2>
+				<h2 class="back-to-dashboard"><a href="{{ path('admin') }}">&#10229; Retour à l'accueil</a></h2>
+			</div>
+			<div class="container">
+				<div class="card">
+					{{ form_start(sessionForm, {'attr': {'class': 'form'} }) }}
+					{{ form_row(sessionForm.course) }}
+					{{ form_row(sessionForm.start_date, {'attr': {'class': 'select-date'}})}}
+					{{ form_row(sessionForm.end_date, {'attr': {'class': 'select-date'}})}}
+					<button class="btn btn-primary-dk" type="submit">Ajouter</button>
+					{{ form_end(sessionForm) }}
+				</div>
 			</div>
 		</div>
 	</div>
-</div>
-<div class="row">
-	<div class="">
-		<div class="container-titles">
-			<h2>Ajouter un module</h2>
-			<h2 class="back-to-dashboard"><a href="{{ path('admin') }}">&#10229; Retour à l'accueil</a></h2>
-		</div>
-		<div class="container">
-			<div class="card">
-				{{ form_start(courseForm, {'attr': {'class': 'form'} }) }}
-				{{ form_rest(courseForm) }}
-				<button class="btn btn-primary-dk" type="submit">Ajouter</button>
-				{{ form_end(courseForm) }}
+	<div class="row new-course-container">
+		<div class="">
+			<div class="container-titles">
+				<h2>Ajouter un module</h2>
+				<h2 class="back-to-dashboard"><a href="{{ path('admin') }}">&#10229; Retour à l'accueil</a></h2>
+			</div>
+			<div class="container">
+				<div class="card">
+					{{ form_start(courseForm, {'attr': {'class': 'form'} }) }}
+					{{ form_rest(courseForm) }}
+					<button class="btn btn-primary-dk" type="submit">Ajouter</button>
+					{{ form_end(courseForm) }}
+				</div>
 			</div>
 		</div>
 	</div>
-</div>
-<script>
-	$(document).ready(function () {
-		$('#sessions-table').DataTable({
-			"scrollX": true,
-			fixedColumns: true,
-			"language": {
-				"url": "{{ asset('js/french.lang') }}"
-			},
+	{% for message in app.flashes('success') %}
+
+	<div class="alert success">
+		<p>{{ message }}</p>
+	</div>
+
+	{% endfor %}
+
+	{% for message in app.flashes('delete') %}
+
+	<div class="alert delete">
+		<p>{{ message }}</p>
+	</div>
+
+	{% endfor %}
+
+	{% for message in app.flashes('edit') %}
+
+	<div class="alert edit">
+		<p>{{ message }}</p>
+	</div>
+
+	{% endfor %}
+
+	<script>
+		$(document).ready(function () {
+			$('#sessions-table').DataTable({
+				// "scrollX": true,
+				fixedColumns: true,
+				"language": {
+					"url": "{{ asset('js/french.lang') }}"
+				},
+			});
 		});
-	});
-</script>
-{% endblock %}
+	</script>
+	{% endblock %}

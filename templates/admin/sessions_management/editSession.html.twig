@@ -106,7 +106,29 @@
 		</div>
 	</div>
 </div>
+{% for message in app.flashes('success') %}
 
+<div class="alert success">
+	<p>{{ message }}</p>
+</div>
+
+{% endfor %}
+
+{% for message in app.flashes('delete') %}
+
+<div class="alert delete">
+	<p>{{ message }}</p>
+</div>
+
+{% endfor %}
+
+{% for message in app.flashes('edit') %}
+
+<div class="alert edit">
+	<p>{{ message }}</p>
+</div>
+
+{% endfor %}
 <script>
 	$(document).ready(function () {
 		$('#userList').DataTable({

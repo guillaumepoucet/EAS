@@ -40,11 +40,11 @@
 							</td>
 							<td class="flex">
 								<!-- <a href="{{ path('document_show', {'id': document.id}) }}">voir</a> -->
-								
+
 								<a href="{{ path('document_edit', {'id': document.id}) }}" style="height: 32px;">
 									<img class="icon edit" src="{{ asset('icons/edit.svg') }}" alt=""
-									title="&Eacute;diter"></a>
-									{{ include('document/_delete_form.html.twig') }}
+										title="&Eacute;diter"></a>
+								{{ include('document/_delete_form.html.twig') }}
 							</td>
 						</tr>
 
@@ -62,6 +62,29 @@
 		</div>
 	</div>
 </div>
+{% for message in app.flashes('success') %}
+
+<div class="alert success">
+	<p>{{ message }}</p>
+</div>
+
+{% endfor %}
+
+{% for message in app.flashes('delete') %}
+
+<div class="alert delete">
+	<p>{{ message }}</p>
+</div>
+
+{% endfor %}
+
+{% for message in app.flashes('edit') %}
+
+<div class="alert edit">
+	<p>{{ message }}</p>
+</div>
+
+{% endfor %}
 <script>
 	$(document).ready(function () {
 		$('#documentList').DataTable({

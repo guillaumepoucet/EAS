@@ -30,7 +30,7 @@ class DocumentController extends AbstractController
         } else {
             $courses = null;
         }
- 
+
         return $this->render('document/index.html.twig', [
             'documents' => $documents,
             'courses' => $courses,
@@ -76,16 +76,21 @@ class DocumentController extends AbstractController
                 // updates the 'documentFilename' property to store the PDF file name
                 // instead of its contents
                 $newDocument->setFileName($newFilename);
-            }
 
+            }
+            
             // ... persist the $document variable or any other work
             $courses = $form->get('courses')->getData();
             $entityManager->persist($newDocument);
+
             foreach ($courses as $course) {
                 $course->addDocument($newDocument);
                 $entityManager->persist($course);
             };
+            
             $entityManager->flush();
+
+            $this->addFlash('success', 'Document ajouté');
 
             return $this->redirectToRoute('document_index');
         }
@@ -117,6 +122,8 @@ class DocumentController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
+            $this->addFlash('edit', 'Document édité');
+
             return $this->redirectToRoute('document_index');
         }
 
@@ -136,6 +143,8 @@ class DocumentController extends AbstractController
             $entityManager->remove($document);
             $entityManager->flush();
         }
+        $this->addFlash('delete', 'Document supprimé');
+
 
         return $this->redirectToRoute('document_index');
     }

@@ -6,44 +6,47 @@
 {% block body %}
 
 {% include 'admin/nav.html.twig'%}
-<div class="jumbotron">
-	<p>
-		<span class="h-sub">Bonjour, </span>
-		<br>
-		<span class="h-display">{{ app.user.firstname }}</span>
-	</p>
-</div>
+<div>
+	<div class="jumbotron">
+		<p>
+			<span class="h-sub">Bonjour, </span>
+			<br>
+			<span class="h-display">{{ app.user.firstname }}</span>
+		</p>
+	</div>
 
-<div class="grid" style="min-height: calc(100vh - 146px - 24px);">
-	<div class="">
-		<div class="container-titles">
-			<h2>Dernières annonces</h2>
-		</div>
-		<div class="container announcements container-grid">
-			{% for announcement in announcements %}
-			<div class="card">
-				<div class="card-header">
-					<div><img src="{{ asset('icons/horn.svg') }}" alt=""></div>
+	<div class="grid" style="min-height: calc(100vh - 146px - 24px);">
+		<div class="">
+			<div class="container-titles">
+				<h2>Dernières annonces</h2>
+			</div>
+			<div class="container announcements container-grid">
+				{% for announcement in announcements %}
+				{% if announcement.isDraft == 0 %}
+				<div class="card">
+					<div class="card-header">
+						<div><img src="{{ asset('icons/horn.svg') }}" alt=""></div>
 
-					<h4>{{ announcement.announcementTitle}}</h4>
-				</div>
+						<h4>{{ announcement.announcementTitle}}</h4>
+					</div>
 
-				<div class="card-body">
-					<small>{{ announcement.announcementDate | date("d/m/Y") }}</small>
-					<p>{{ announcement.announcementContent | raw }}</p>
-				</div>
-				{% if is_granted('ROLE_USER') %}
-				<div class="card-btn">
-					<a href=" {{ path('announcements_edit', {id: announcement.id}) }}" type="button"
-						class="btn btn-warning btn-sm">&Eacute;diter</a>
-					<a href=" {{ path('announcements_delete', {id: announcement.id}) }}" type="button"
-						class="btn btn-danger btn-sm">Supprimer</a>
+					<div class="card-body">
+						<small>{{ announcement.announcementDate | date("d/m/Y") }}</small>
+						<p>{{ announcement.announcementContent | raw }}</p>
+					</div>
+					{% if is_granted('ROLE_ADMIN') %}
+					<div class="card-btn">
+						<a href=" {{ path('announcement_edit', {id: announcement.id}) }}" type="button"
+							class="btn btn-warning btn-sm">&Eacute;diter</a>
+						<a href=" {{ path('announcement_delete', {id: announcement.id}) }}" type="button"
+							class="btn btn-danger btn-sm">Supprimer</a>
+					</div>
+					{% endif %}
 				</div>
 				{% endif %}
+				{% endfor %}
 			</div>
-			{% endfor %}
 		</div>
 	</div>
 </div>
-
 {% endblock %}

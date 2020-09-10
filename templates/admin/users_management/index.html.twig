@@ -1,18 +1,18 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Gestion des apprenants
+{% block title %}Gestion des elèves
 {% endblock %}
 
 {% block body %}
 {% include 'admin/nav.html.twig' %}
-<div class="row" style="min-height: calc(100vh - 146px - 24px)">
+<div class="row" style="min-height: calc(100vh - 146px - 24px);">
 	<div class="">
 		<div class="container-titles">
-			<h2>Liste des utilisateur</h2>
+			<h2>Liste des elèves</h2>
 			<h2 class="back-to-dashboard"><a href="{{ path('admin') }}">&#10229; Retour à l'accueil</a></h2>
 		</div>
 		<div class="container">
-			<div class="card" style="padding:24px">
+			<div class="card p-2">
 				<table class="table nowrap display" id="student-table" style="width: 100%">
 					<thead>
 						<tr>
@@ -54,21 +54,49 @@
 								{# <a href="">Gérer</a> #}
 							</td>
 							<td class="text-center">{{user.birthDate | date("d/m/Y")}}</td>
-							<td class="text-center">
-								<a href="{{ path('users_edit', {id: user.id}) }}"><img class="icon edit"
-										src="{{ asset('icons/edit.svg') }}" alt="" title="&Eacute;diter"></a>
-								<a href="{{ path('users_delete', {id: user.id}) }}"><img class="icon trash"
-										src="{{ asset('icons/trash.svg') }}" alt="" title="Supprimer"></a>
+							<td class="text-center flex">
+								<a href="{{ path('users_edit', {id: user.id}) }}" style="height: 32px;"><img
+										class="icon edit" src="{{ asset('icons/edit.svg') }}" alt=""
+										title="&Eacute;diter"></a>
+
+								{{ include('admin/users_management/_delete_form.html.twig') }}
+
 							</td>
 						</tr>
 						{% endfor %}
 					</tbody>
 				</table>
-				<a href="{{ path('users_add') }}" type="button" class="btn btn-primary-dk">Ajouter un utilisateur</a>
+				<a href="{{ path('users_add') }}" type="button" class="btn btn-primary-dk">+ Ajouter un utilisateur</a>
 			</div>
 		</div>
 	</div>
 </div>
+
+{% for message in app.flashes('success') %}
+
+<div class="alert success">
+	<p>{{ message }}</p>
+</div>
+
+{% endfor %}
+
+{% for message in app.flashes('delete') %}
+
+<div class="alert delete">
+	<p>{{ message }}</p>
+</div>
+
+{% endfor %}
+
+{% for message in app.flashes('edit') %}
+
+<div class="alert edit">
+	<p>{{ message }}</p>
+</div>
+
+{% endfor %}
+
+
 
 <script>
 	$(document).ready(function () {
@@ -77,8 +105,7 @@
 			fixedColumns: true,
 			"language": {
 				"url": "{{ asset('js/french.lang') }}"
-			},
-
+			}
 		});
 	});
 </script>

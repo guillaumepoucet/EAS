@@ -9,7 +9,7 @@
 }
 
 .dataTables_scroll {
-    // font-size: .8rem;
+    font-size: .9rem;
     margin: 1rem 0 !important;
 }
 
@@ -41,6 +41,10 @@
 thead tr th {
     font-family: roboto-medium;
     font-weight: normal !important;
+}
+
+tbody tr td {
+    vertical-align: top;
 }
 
 .del-link {

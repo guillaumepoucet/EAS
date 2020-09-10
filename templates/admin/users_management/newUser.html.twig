@@ -9,26 +9,28 @@
 
     <div class="">
         <div class="container-titles">
-            <h2>Ajouter un utilisateurs</h2>
+            <h2>Ajouter un utilisateur</h2>
             <h2 class="back-to-dashboard"><a href="{{ path('users_management') }}">&#10229; Liste des elèves</a></h2>
         </div>
         <div class="container">
-            {{ form_start(userForm) }}
-            {{ form_row(userForm.email) }}
-            {{ form_row(userForm.password) }}
-            {{ form_row(userForm.last_name) }}
-            {{ form_row(userForm.first_name) }}
-            <div>
-                {{ form_label(userForm.sessions) }}
+            <div class="card">
+                {{ form_start(userForm, {'attr': {'class': 'form'} }) }}
+                {{ form_row(userForm.email) }}
+                {{ form_row(userForm.password) }}
+                {{ form_row(userForm.last_name) }}
+                {{ form_row(userForm.first_name) }}
+                <div>
+                    {{ form_label(userForm.sessions) }}
+                </div>
+                <div class="form-children">
+                    {% for session in userForm.sessions %}
+                    {{ form_row(session, { 'attr': {'class': 'children'} }) }}
+                    {% endfor %}
+                </div>
+                {{ form_rest(userForm) }}
+                <button class="btn btn-primary-dk pointer">Ajouter</button>
+                {{ form_end(userForm) }}
             </div>
-            <div class="form-children">
-                {% for session in userForm.sessions %}
-                {{ form_row(session, { 'attr': {'class': 'children'} }) }}
-                {% endfor %}
-            </div>
-            {{ form_rest(userForm) }}
-            <button class="btn btn-primary-dk pointer">Ajouter</button>
-            {{ form_end(userForm) }}
         </div>
     </div>
 </div>

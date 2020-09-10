@@ -1,5 +1,5 @@
 {% block body%}
-<div id="navbar"></div>
+<div id="navbar">
   <div class="navbar">
     <div class="pointer nav-menu-link">
       <img src="{{ asset('icons/menu.svg') }}" alt="">
@@ -9,26 +9,26 @@
 
   <nav class="nav-content">
     <ul>
+      <li><a href="{{ path('admin') }}">Accueil</a></li>
       <li><a href="{{ path('users_management') }}">Elèves</a></li>
-      <li><a href="{{ path('sessions_management') }}">Formations</a>
-        <ul>
-          <li><a href="">Gérer les sessions</a></li>
-          <li><a href="">Gérer les modules</a></li>
-        </ul>
-      </li>
+      <li><a href="{{ path('sessions_management') }}">Formations</a></li>
       <li><a href="{{ path('document_index') }}">Fichiers</a>
         <ul>
-          <li><a href=""></a>Ajouter un fichier</li>
+          <li><a href=""></a>+ Ajouter un fichier</li>
         </ul>
       </li>
-      <li><a href="{{ path('announcement_index') }}">Annonces</a></li>
-      <li><a href="{{ path('messages_index', {user: app.user.id}) }}">Messagerie</a></li>
+      <li><a href="{{ path('announcement_index') }}">Annonces</a>
+        <ul>
+          <li><a href="{{ path('announcement_new') }}">+ Créer une annonce</li>
+        </ul>
+      </li>
+      <li><a href=" {{ path('messages_index', {user: app.user.id}) }}">Messagerie</a></li>
     </ul>
     <ul class="nav-account">
       <li><a href="{{ path('user_edit', {user: app.user.id}) }}">
-       <img src="{{ asset('icons/settings-dk.svg') }}" alt="">Mon compte</a></li>
+          <img src="{{ asset('icons/settings-lg.svg') }}" alt="">Mon compte</a></li>
       <li><a href="{{ path('logout') }}">
-       <img src="{{ asset('icons/logout-dk.svg') }}" alt="">Déconnection</a></li>
+          <img src="{{ asset('icons/logout-lg.svg') }}" alt="">Déconnection</a></li>
     </ul>
   </nav>
 </div>

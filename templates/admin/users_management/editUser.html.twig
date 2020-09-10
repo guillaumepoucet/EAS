@@ -12,15 +12,16 @@
             <h2 class="back-to-dashboard"><a href="{{ path('users_management') }}">&#10229; Liste des elèves</a></h2>
         </div>
         <div class="container">
-            {{ form_start(userForm) }}
-            {{ form_row(userForm.first_name) }}
-            {{ form_row(userForm.last_name) }}
-            {{ form_row(userForm.email) }}
-            {{ form_row(userForm.birth_date, {'attr': {'class': 'select-date'} }) }}
-            <button class="btn btn-primary-dk">&Eacute;diter</button>
-            {{ form_end(userForm) }}
+            <div class="card">
+                {{ form_start(userForm, {'attr': {'class': 'form'} }) }}
+                {{ form_row(userForm.first_name) }}
+                {{ form_row(userForm.last_name) }}
+                {{ form_row(userForm.email) }}
+                {{ form_row(userForm.birth_date, {'attr': {'class': 'select-date'} }) }}
+                <button class="btn btn-primary-dk">&Eacute;diter</button>
+                {{ form_end(userForm) }}
+            </div>
         </div>
     </div>
-
 </div>
 {% endblock %}

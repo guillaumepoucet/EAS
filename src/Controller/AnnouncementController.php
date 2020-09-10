@@ -41,6 +41,8 @@ class AnnouncementController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($announcement);
             $entityManager->flush();
+            
+            $this->addFlash('success', 'Nouvelle annonce créée');
 
             return $this->redirectToRoute('announcement_index');
         }
@@ -72,9 +74,11 @@ class AnnouncementController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('announcement_index');
-        }
+            $this->addFlash('success', 'Annonce modifiée');
 
+            return $this->redirectToRoute('announcement_index');    
+        }
+        
         return $this->render('announcement/edit.html.twig', [
             'announcement' => $announcement,
             'form' => $form->createView(),
@@ -91,6 +95,8 @@ class AnnouncementController extends AbstractController
             $entityManager->remove($announcement);
             $entityManager->flush();
         }
+
+        $this->addFlash('success', 'Annonce supprimée');
 
         return $this->redirectToRoute('announcement_index');
     }

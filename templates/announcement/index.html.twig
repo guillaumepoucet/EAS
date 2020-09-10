@@ -10,8 +10,6 @@
         <div class="container-titles">
             <div class="d-flex">
                 <h2>Gestion des annonces</h2>
-                <h2><a href="{{ path('announcement_new') }}">Ajouter une annonces</a>
-                </h2>
             </div>
             <h2 class="back-to-dashboard"><a href="{{ path('admin') }}">&#10229; Retour à l'accueil</a></h2>
         </div>
@@ -19,6 +17,7 @@
         <div class="container">
             <div class="card" style="padding: 24px">
                 <table class="table display compact" id="announcementList" style="width: 100%">
+                    <a href="{{ path('announcement_new') }}" class="btn btn-primary-dk mb-1">+ Nouvelle annonce</a>
 
                     <thead>
                         <tr>
@@ -51,18 +50,39 @@
                         </tr>
                         {% else %}
                         <tr>
-                            <td colspan="6">no records found</td>
+                            <td colspan="6">Aucune annonce</td>
                         </tr>
                         {% endfor %}
                     </tbody>
                 </table>
 
-                <a href="{{ path('announcement_new') }}" class="btn btn-primary-dk">+ Nouvelle annonce</a>
             </div>
         </div>
     </div>
 </div>
+{% for message in app.flashes('success') %}
 
+<div class="alert success">
+    <p>{{ message }}</p>
+</div>
+
+{% endfor %}
+
+{% for message in app.flashes('delete') %}
+
+<div class="alert delete">
+    <p>{{ message }}</p>
+</div>
+
+{% endfor %}
+
+{% for message in app.flashes('edit') %}
+
+<div class="alert edit">
+    <p>{{ message }}</p>
+</div>
+
+{% endfor %}
 <script>
     $(document).ready(function () {
         $('#announcementList').DataTable({
