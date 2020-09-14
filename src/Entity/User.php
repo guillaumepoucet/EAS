@@ -51,6 +51,10 @@ class User implements UserInterface
      */
     private $first_name;
 
+    private $name;
+
+    private $fullNname;
+
     /**
      * @ORM\Column(type="date", nullable=true)
      */

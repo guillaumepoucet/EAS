@@ -4,55 +4,93 @@
 
 {% block body %}
 
+{% include 'admin/nav.html.twig'%}
+<div>
+    
+    <div class="jumbotron m-2">
+        <p>
+            <span class="h-sub">Bonjour, </span>
+            <br>
+            <span class="h-display">{{ app.user.firstname }}</span>
+        </p>
+    </div>
+    <div class="grid align-top" style="min-height: calc(100vh - 146px - 24px);">
+        <div class="span-7 stretch-x">
+            <div class="container-titles">
+                <h2>Dernières annonces</h2>
+            </div>
+            <div class="container announcements container-grid">
+                {% for announcement in announcements %}
+                {% if announcement.isDraft == 0 %}
+                <div class="card">
+                    <div class="card-header">
+                        <div><img src="{{ asset('icons/horn.svg') }}" alt=""></div>
 
-<div class="jumbotron">
+                        <h4>{{ announcement.announcementTitle}}</h4>
+                    </div>
 
-    <p>
-        <span class="display-4 text-muted">Bonjour, </span>
-        <br>
-        <span class="display-2">{{ app.user.firstname }}</span>
-    </p>
-    <a href="{{ path('messages_index', {user: app.user.id}) }}" class="btn btn-info">Messagerie</a>
-    <a href="{{ path('user_edit', {user: app.user.id}) }}" class="btn btn-info">Modifier mon profil</a>
-    <a href="{{ path('logout') }}" class="btn btn-info">D&eacute;connexion</a>
-</div>
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-5">
-            <h3>Vos formations</h3>
-            <table class="table table-sm .table-responsive">
-                <thead>
-                    <tr>
-                        <th scope="col">Formation</th>
-                        <th scope="col">Date de début</th>
-                        <th scope="col">Date de fin</th>
-                    </tr>
-                </thead>
-
-                <tbody>
-                    {% for session in sessions %}
-                    <tr>
-                        <td>{{ session.course.courseName }}</td>
-                        <td>{{ session.startDate | date("d/m/Y") }}</td>
-                        <td>{{ session.endDate | date("d/m/Y") }}</td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
+                    <div class="card-body">
+                        <small>{{ announcement.announcementDate | date("d/m/Y") }}</small>
+                        <p>{{ announcement.announcementContent | raw }}</p>
+                    </div>
+                    {% if is_granted('ROLE_ADMIN') %}
+                    <div class="card-btn">
+                        <a href=" {{ path('announcement_edit', {id: announcement.id}) }}" type="button"
+                            class="btn btn-warning btn-sm">&Eacute;diter</a>
+                        <a href=" {{ path('announcement_delete', {id: announcement.id}) }}" type="button"
+                            class="btn btn-danger btn-sm">Supprimer</a>
+                    </div>
+                    {% endif %}
+                </div>
+                {% endif %}
+                {% endfor %}
+            </div>
         </div>
-        <div class="col-5 offset-1">
-            <h3>Dernières annonces</h3>
-            {% for announcement in announcements %}
-            <div class="card">
-                <h3 class="card-header">{{ announcement.announcementTitle}}</h3>
-                <div class="card-body">
-                    {{ announcement.announcementContent | raw }}
+
+        <div class="span-5 stretch-x">
+            <div class="mb-2">
+                <div class="container-titles">
+                    <h2>Vos derniers messages</h2>
+                </div>
+                <div class="container announcements container-grid">
+                    {% for message in messages %}
+                    <div class="card">
+                        <div class="card-header">
+                            <div><img src="{{ asset('icons/mail.svg') }}" alt=""></div>
+
+                            <h4>Par {{ message.sender.name }},</h4>
+
+                            <small class="justify-self-end">le {{ message.messageDate | date("d/m/Y") }}</small>
+                        </div>
+
+                        <div class="card-body">
+                            <p>{{ message.messageContent }}</p>
+                            <small class="mt-1"><a href="">Lire le message >>
+                                </a></small>
+                        </div>
+                    </div>
+                    {% endfor %}
                 </div>
             </div>
-            {% endfor %}
+
+            <div class="aside">
+                <div class="container-titles">
+                    <h2>Derniers fichiers disponibles</h2>
+                </div>
+                <div class="container announcements container-grid">
+                    {% for file in files %}
+                    <div class="card">
+                        <div class="card-header">
+                            <div><img src="{{ asset('icons/mail.svg') }}" alt=""></div>
+                            {{dump(file)}}
+                        </div>
+   
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
         </div>
     </div>
-
 </div>
 
 {% endblock %}

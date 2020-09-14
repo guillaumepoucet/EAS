@@ -8,6 +8,8 @@ use App\Repository\UserRepository;
 use App\Repository\CourseRepository;
 use App\Repository\SessionRepository;
 use App\Repository\AnnouncementRepository;
+use App\Repository\DocumentRepository;
+use App\Repository\MessageRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -20,24 +22,35 @@ class UserController extends AbstractController
     /**
      * @Route("", name="_dashboard")
      */
-    public function index(AnnouncementRepository $announcementRepo, UserRepository $userRepo, SessionRepository $sessionRepo, CourseRepository $courseRepo)
+    public function index(AnnouncementRepository $announcementRepo, UserRepository $userRepo, SessionRepository $sessionRepo, CourseRepository $courseRepo, MessageRepository $messageRepo, DocumentRepository $documentRepo)
     {
         $user = $this->getUser();
+
         $sessions = $userRepo->find($user)->getSessions();
-        $sessionTable = [];
         foreach ($sessions as $session) {
-            $course = $sessionRepo->find($session)->getCourse();
-            $course = $courseRepo->find($course)->getCourseName();
-            $sessionTable[] = $session;
+            $session_id = $session->getId();
+            $course = $sessionRepo->find($session_id)->getCourse()->getId();
+            $files = $courseRepo->find($course)->getDocument();
+            // foreach ($course as $c) {
+            //     // $file = $c->getDocument();
+                dump($files);
+            // }
+            
         }
 
         $announcements = $announcementRepo->findAll();
 
+        $messages = $messageRepo->findBy(array('recipient' => $user), array('message_date' => 'DESC'), 2);
+    
+        $files = $documentRepo->getUsersDocuments($user->getId(), 2);
+
         return $this->render('user/index.html.twig', [
             'controller_name' => 'UserController',
             'user' => $user,
-            'sessions' =>  $sessionTable,
+            // 'sessions' =>  $sessionTable,
             'announcements' => $announcements,
+            'messages' => $messages,
+            'files' => $files,
         ]);
     }
 

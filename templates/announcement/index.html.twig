@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Announcement index{% endblock %}
+{% block title %}Gestion des annonces{% endblock %}
 
 {% block body %}
 {% include 'admin/nav.html.twig' %}
@@ -15,7 +15,7 @@
         </div>
 
         <div class="container">
-            <div class="card" style="padding: 24px">
+            <div class="card p-2">
                 <table class="table display compact" id="announcementList" style="width: 100%">
                     <a href="{{ path('announcement_new') }}" class="btn btn-primary-dk mb-1">+ Nouvelle annonce</a>
 

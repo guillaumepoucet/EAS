@@ -8,12 +8,11 @@
 <div class="row">
     <div class="">
         <div class="container-titles">
-            <h2>Ajouter un fichier</h2>
+            <h2>&Eacute;diter {{ document.fileName }}</h2>
             <h2 class="back-to-dashboard"><a href="{{ path('admin') }}">&#10229; Retour à l'accueil</a></h2>
         </div>
         <div class="container">
             <div class="card">
-
 
                 {{ include('document/_form.html.twig', {'button_label': 'Update'}) }}
 

@@ -174,7 +174,7 @@ class ChatController extends AbstractController
             $entityManager->persist($newMessage);
             $entityManager->flush();
 
-            return $this->redirectToRoute('chat.show', array(
+            return $this->redirectToRoute('messages_show', array(
                 'user' => $user_id,
                 'otherUser' => $other_id,
             ));

@@ -39,7 +39,7 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
     // /**
     //  * @return User[] Returns an array of User objects
     //  */
-    
+
     public function findAllButCurrentUser($user_id)
     {
         return $this->createQueryBuilder('u')
@@ -48,10 +48,20 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
             ->orderBy('u.id', 'ASC')
             // ->setMaxResults(10)
             ->getQuery()
-            ->getResult()
-        ;
+            ->getResult();
     }
-    
+
+    // public function getDocuments($user_id)
+    // {
+    //     return $this->createQueryBuilder('u')
+    //         // ->innerJoin('')
+    //         ->andWhere('u.id != :user_id')
+    //         ->setParameter('user_id', $user_id)
+    //         ->orderBy('u.id', 'ASC')
+    //         // ->setMaxResults(10)
+    //         ->getQuery()
+    //         ->getResult();
+    // }
 
     /*
     public function findOneBySomeField($value): ?User

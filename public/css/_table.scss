@@ -78,3 +78,22 @@ tbody tr td {
 //         }
 //     }
 // }
+
+.collapse-btn {
+    display: flex;
+    align-items: center;
+
+    svg {
+        margin-left: .25rem;
+    }
+}
+
+.collapse {
+    height: 0px;
+    overflow: hidden;
+    transition: .25s;
+
+    &.display {
+        height: max-content;
+    }
+}

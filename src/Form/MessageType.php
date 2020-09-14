@@ -14,7 +14,11 @@ class MessageType extends AbstractType
     {
         $builder
             ->add('message_content', TextareaType::class, [
-                'label' => 'Écrivez votre message'
+                'label' => false,
+                'attr' => [
+                    'placeholder' => 'Écrivez votre message...'
+                ]
+
             ])
             // ->add('message_date')
             // ->add('is_reported')

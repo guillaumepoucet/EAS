@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Gestion des apprenants
+{% block title %}Gestion des sessions des formations
 {% endblock %}
 
 {% block body %}
@@ -32,15 +32,15 @@
 								<td class="textcenter">{{session.endDate | date("d/m/Y")}}</td>
 								<td>{{session.course.courseName}}</td>
 								<td>
-									<a data-toggle="collapse" href="#session{{session.id}}UsersList" role="button"
-										aria-expanded="false" aria-controls="session{{session.id}}UsersList">Liste des
+									<span data-toggle="collapse" href="#session{{session.id}}UsersList" role="button" data-index={{session.id}}
+										aria-expanded="false" aria-controls="session{{session.id}}UsersList" class="collapse-btn pointer">Liste des
 										apprenants
 										<svg width="1em" height="1em" viewbox="0 0 16 16" class="bi bi-caret-down-fill"
 											fill="currentColor" xmlns="http://www.w3.org/2000/svg">
 											<path
 												d="M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
 										</svg>
-									</a>
+									</span>
 									<ul class="collapse" id="session{{session.id}}UsersList">
 										{% for user in session.user %}
 										<li>{{user.firstName}}
@@ -130,6 +130,9 @@
 					"url": "{{ asset('js/french.lang') }}"
 				},
 			});
+			$('.collapse-btn').click(function () {
+				console.log($(this).data(index))
+			})
 		});
 	</script>
 	{% endblock %}

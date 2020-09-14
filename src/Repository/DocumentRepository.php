@@ -19,6 +19,31 @@ class DocumentRepository extends ServiceEntityRepository
         parent::__construct($registry, Document::class);
     }
 
+    public function getUsersDocuments($user_id, $limit = null)
+    {
+        if ($limit != null) {
+            $limit = "LIMIT " . $limit;
+        };
+
+        $rawSql = "SELECT DISTINCT d.*, c.course_name
+            FROM
+                document d
+            inner JOIN course_document cr ON
+                cr.document_id = d.id
+            inner JOIN course c ON
+                c.id = cr.course_id
+            inner JOIN SESSION s ON
+                s.course_id = c.id
+            inner JOIN SESSION_USER su ON
+                s.id = su.session_id
+            WHERE su.user_id = " . $user_id . " " . $limit;
+
+        $stmt = $this->getEntityManager()->getConnection()->prepare($rawSql);
+        $stmt->execute([]);
+
+        return $stmt->fetchAll();
+    }
+
     // /**
     //  * @return Document[] Returns an array of Document objects
     //  */

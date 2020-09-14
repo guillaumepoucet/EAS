@@ -9,20 +9,34 @@
 
   <nav class="nav-content">
     <ul>
-      <li><a href="{{ path('admin') }}">Accueil</a></li>
-      <li><a href="{{ path('users_management') }}">Elèves</a></li>
-      <li><a href="{{ path('sessions_management') }}">Formations</a></li>
-      <li><a href="{{ path('document_index') }}">Fichiers</a>
+      <li class="nav-link"><a href="{{ path('admin') }}">Accueil</a></li>
+      {% if is_granted('ROLE_ADMIN') %}
+      <li class="nav-link {{ 'users' in route ? 'active' }}"><a href="{{ path('users_management') }}">Elèves</a></li>
+      <li class="nav-link {{ 'sessions' in route ? 'active' }}"><a
+          href="{{ path('sessions_management') }}">Formations</a></li>
+      <li class="nav-link {{ 'document' in route ? 'active' }}"><a href="{{ path('document_index') }}">Fichiers</a>
         <ul>
           <li><a href=""></a>+ Ajouter un fichier</li>
         </ul>
       </li>
-      <li><a href="{{ path('announcement_index') }}">Annonces</a>
+      <li class="nav-link {{ 'announcement' in route ? 'active' }}"><a
+          href="{{ path('announcement_index') }}">Annonces</a>
         <ul>
           <li><a href="{{ path('announcement_new') }}">+ Créer une annonce</li>
         </ul>
       </li>
-      <li><a href=" {{ path('messages_index', {user: app.user.id}) }}">Messagerie</a></li>
+      {% else %}
+      <li class="nav-link {{ 'sessions' in route ? 'active' }}"><a href="{{ path('sessions_management') }}">Vos
+          formations</a></li>
+      <li class="nav-link {{ 'document' in route ? 'active' }}"><a href="{{ path('document_index') }}">Fichiers</a>
+
+      </li>
+      <li class="nav-link {{ 'announcement' in route ? 'active' }}"><a
+          href="{{ path('announcement_index') }}">Annonces</a>
+      </li>
+      {% endif %}
+      <li class="nav-link {{ 'messages' in route ? 'active' }}"><a
+          href=" {{ path('messages_index', {user: app.user.id}) }}">Messagerie</a></li>
     </ul>
     <ul class="nav-account">
       <li><a href="{{ path('user_edit', {user: app.user.id}) }}">
