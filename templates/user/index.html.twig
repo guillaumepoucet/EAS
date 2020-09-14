@@ -82,9 +82,16 @@
                     <div class="card">
                         <div class="card-header">
                             <div><img src="{{ asset('icons/mail.svg') }}" alt=""></div>
-                            {{dump(file)}}
+                            <h4>{{file.file_name}}</h4>
                         </div>
-   
+                        <div class="card-body">
+                            <small class="">Module :</small>
+                            <p class="">{{file.course_name}}</p>
+                            {% if file.file_desc %}
+                            <small class="mt-1">Description :</small>
+                            <p>{{file.file_desc}}</p>
+                            {% endif %}
+                        </div>
                     </div>
                     {% endfor %}
                 </div>
