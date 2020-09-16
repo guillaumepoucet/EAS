@@ -51,6 +51,8 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
             ->getResult();
     }
 
+    
+
     // public function getDocuments($user_id)
     // {
     //     return $this->createQueryBuilder('u')

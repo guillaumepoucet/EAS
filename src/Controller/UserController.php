@@ -29,20 +29,30 @@ class UserController extends AbstractController
         $sessions = $userRepo->find($user)->getSessions();
         foreach ($sessions as $session) {
             $session_id = $session->getId();
-            $course = $sessionRepo->find($session_id)->getCourse()->getId();
-            $files = $courseRepo->find($course)->getDocument();
+            $course = $sessionRepo->find($session_id)->getCourse();
+            // $files = $courseRepo->find($course)->getDocument();
             // foreach ($course as $c) {
             //     // $file = $c->getDocument();
-                dump($files);
+            // $files = $documentRepo->findBy($course->getDocument());
+            // $files = $documentRepo->findBy()
+            // dump($files);
             // }
-            
         }
 
-        $announcements = $announcementRepo->findAll();
 
-        $messages = $messageRepo->findBy(array('recipient' => $user), array('message_date' => 'DESC'), 2);
-    
-        $files = $documentRepo->getUsersDocuments($user->getId(), 2);
+        $announcements = $announcementRepo->findBy(
+            ['is_draft' => 0],
+            ['announcement_date' => 'DESC'],
+            3
+        );
+
+        $messages = $messageRepo->findBy(
+            array('recipient' => $user),
+            array('message_date' => 'DESC'),
+            2
+        );
+
+        $files = $documentRepo->getUsersDocuments($user->getId(), 1);
 
         return $this->render('user/index.html.twig', [
             'controller_name' => 'UserController',

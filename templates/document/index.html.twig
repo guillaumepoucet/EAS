@@ -4,18 +4,17 @@
 {% endblock %}
 
 {% block body %}
-{% include 'admin/nav.html.twig'%}
-
-<div class="row">
+{% include 'nav.html.twig'%}
+<div class="single-row">
 	<div class="">
-		<div class="container-titles">
+		<div class="wrap-titles">
 			<h2>Liste des fichiers</h2>
 			<h2 class="back-to-dashboard"><a href="{{ path('admin') }}">&#10229; Retour à l'accueil</a></h2>
 		</div>
-		<div class="container">
+		<div class="wrap">
 			<div class="card p-2">
 
-				<table class="table display compact" id="documentList" style="width: 100%">
+				<table class="table display" id="documentList" style="width: 100%">
 					<thead>
 						<tr>
 							<th>Nom</th>
@@ -26,13 +25,13 @@
 						</tr>
 					</thead>
 					<tbody>
+
 						{% for document in documents %}
 						<tr>
 							<td>{{ document.fileName }}</td>
 							<td>{{ document.fileDesc }}</td>
 							<td>{{ document.fileSize }}</td>
 							<td>
-								{# {{ dump(document.courses.CourseName) }} #}
 								{% for course in document.courses %}
 								{{ course.courseName }}<br>
 
@@ -40,11 +39,13 @@
 							</td>
 							<td class="flex">
 								<!-- <a href="{{ path('document_show', {'id': document.id}) }}">voir</a> -->
+								{% if is_granted('ROLE_ADMIN') %}
 
 								<a href="{{ path('document_edit', {'id': document.id}) }}" style="height: 32px;">
 									<img class="icon edit" src="{{ asset('icons/edit.svg') }}" alt=""
 										title="&Eacute;diter"></a>
 								{{ include('document/_delete_form.html.twig') }}
+								{% endif %}
 							</td>
 						</tr>
 

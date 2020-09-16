@@ -43,15 +43,9 @@ class ChatController extends AbstractController
         //     return array($userMessageList);
         // }
 
-        foreach ($senderId as $id) {
-            if (!in_array($id[1], $userMessageList)) {
-                $name = $userRepo->findOneBy(array('id' => $id[1]))->getName();
-                $userMessageList[$id[1]] = array(
-                    'id' => $id[1],
-                    'name' => $name,
-                );
-            }
-        }
+        $userId = $this->getUser()->getId();
+        $aQuiParle[0] = $userId;
+
         foreach ($recipientId as $id) {
             if (!in_array($id[1], $userMessageList)) {
                 $name = $userRepo->findOneBy(array('id' => $id[1]))->getName();
@@ -62,6 +56,37 @@ class ChatController extends AbstractController
             }
         };
 
+        foreach ($senderId as $id) {
+            if (!in_array($id[1], $userMessageList)) {
+                $name = $userRepo->findOneBy(array('id' => $id[1]))->getName();
+                array_push($aQuiParle, $id[1]);
+                $userMessageList[$id[1]] = array(
+                    'id' => $id[1],
+                    'name' => $name,
+                );
+            }
+        }
+
+        $alluser = $userRepo->findAll();
+        $i = 0;
+        $tabUser = [];
+        foreach ($alluser as $value) {
+            array_push($tabUser, $value->getId());
+            $i++;
+        }
+
+        //le tableau a qui il peut parler
+        $aQuiPeutParler = array_diff($tabUser, $aQuiParle);
+        $newRecipientList = [];
+
+        foreach ($aQuiPeutParler as $a) {
+            $name = $userRepo->find($a)->getName();
+            $newRecipientList[$a] = array(
+                'id' => $a,
+                'name' => $name,
+            );
+        }
+        
         $default_user = reset($userMessageList);
         $default_user = $default_user['id'];
         $messages = $msgRepo->messages($user_id, $default_user);
@@ -94,9 +119,10 @@ class ChatController extends AbstractController
 
         return $this->render('chat/index.html.twig', [
             'controller_name' => 'ChatController',
-            // 'otherUser' => $default_user,
+            'otherUser' => $default_user,
             'userList' => $userMessageList,
             'messages' => $messages,
+            'newRecipientList' => $newRecipientList,
             'chatForm' => $chatForm->createView(),
         ]);
     }
@@ -181,9 +207,12 @@ class ChatController extends AbstractController
         }
 
 
-        return $this->render('chat/_conv.html.twig', [
+        return $this->render('chat/index.html.twig', [
             'controller_name' => 'ChatController',
+            'otherUser' => $default_user,
+            'userList' => $userMessageList,
             'messages' => $messages,
+            'newRecipientList' => $newRecipientList,
             'chatForm' => $chatForm->createView(),
         ]);
     }

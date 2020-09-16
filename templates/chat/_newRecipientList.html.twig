@@ -1,0 +1,25 @@
+{% block body %}
+<div id="newRecipientList" class="modal">
+    <div class="modal-content">
+        <div class="card">
+            <div class="card-header">
+                <div>
+                    <img src="{{ asset('icons/mail.svg') }}" alt="">
+                </div>
+                <h4>Envoyer un messsage à :</h4>
+            </div>
+            <div class="card-body">
+                <ul>
+                    {% for recipient in newRecipientList %}
+                    <li class="recipient-name"><a href="">{{ recipient.name }}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="card-btn">
+                <a href="" type="button" class="btn btn-warning btn-sm close-btn">Annuler</a>
+
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

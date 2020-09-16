@@ -4,22 +4,25 @@
 
 {% block body %}
 
-{% include 'admin/nav.html.twig'%}
-<div>
-    
-    <div class="jumbotron m-2">
-        <p>
-            <span class="h-sub">Bonjour, </span>
-            <br>
-            <span class="h-display">{{ app.user.firstname }}</span>
-        </p>
+{% include 'nav.html.twig'%}
+
+
+<div class="grid">
+    <div class="row">
+        <div class="jumbotron stretch-x">
+            <p>
+                <span class="h-sub">Bonjour, </span>
+                <br>
+                <span class="h-display">{{ app.user.firstname }}</span>
+            </p>
+        </div>
     </div>
-    <div class="grid align-top" style="min-height: calc(100vh - 146px - 24px);">
-        <div class="span-7 stretch-x">
-            <div class="container-titles">
+    <div class="row">
+        <div class="latest-announcements">
+            <div class="wrap-titles">
                 <h2>Dernières annonces</h2>
             </div>
-            <div class="container announcements container-grid">
+            <div class="wrap announcements wrap-grid">
                 {% for announcement in announcements %}
                 {% if announcement.isDraft == 0 %}
                 <div class="card">
@@ -47,25 +50,25 @@
             </div>
         </div>
 
-        <div class="span-5 stretch-x">
+        <div class="aside">
             <div class="mb-2">
-                <div class="container-titles">
+                <div class="wrap-titles">
                     <h2>Vos derniers messages</h2>
                 </div>
-                <div class="container announcements container-grid">
+                <div class="wrap announcements wrap-grid">
                     {% for message in messages %}
                     <div class="card">
                         <div class="card-header">
                             <div><img src="{{ asset('icons/mail.svg') }}" alt=""></div>
 
-                            <h4>Par {{ message.sender.name }},</h4>
+                            <h4>Par {{ message.sender.name }}</h4>
 
-                            <small class="justify-self-end">le {{ message.messageDate | date("d/m/Y") }}</small>
                         </div>
 
                         <div class="card-body">
+                            <small class="justify-self-end">le {{ message.messageDate | date("d/m/Y") }}</small>
                             <p>{{ message.messageContent }}</p>
-                            <small class="mt-1"><a href="">Lire le message >>
+                            <small class="mt-1"><a href="" class="small-link">Lire le message >>
                                 </a></small>
                         </div>
                     </div>
@@ -74,14 +77,14 @@
             </div>
 
             <div class="aside">
-                <div class="container-titles">
+                <div class="wrap-titles">
                     <h2>Derniers fichiers disponibles</h2>
                 </div>
-                <div class="container announcements container-grid">
+                <div class="wrap announcements wrap-grid">
                     {% for file in files %}
                     <div class="card">
                         <div class="card-header">
-                            <div><img src="{{ asset('icons/mail.svg') }}" alt=""></div>
+                            <div><img src="{{ asset('icons/file.svg') }}" alt=""></div>
                             <h4>{{file.file_name}}</h4>
                         </div>
                         <div class="card-body">
@@ -99,5 +102,6 @@
         </div>
     </div>
 </div>
+
 
 {% endblock %}

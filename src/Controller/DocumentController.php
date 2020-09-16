@@ -3,9 +3,11 @@
 namespace App\Controller;
 
 use App\Entity\Document;
+use App\Entity\User;
 use App\Form\DocumentType;
 use App\Repository\CourseRepository;
 use App\Repository\DocumentRepository;
+use App\Repository\SessionRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -20,8 +22,28 @@ class DocumentController extends AbstractController
     /**
      * @Route("/", name="document_index")
      */
-    public function index(DocumentRepository $documentRepository, CourseRepository $courseRepository): Response
+    public function index(SessionRepository $sessionRepo, DocumentRepository $documentRepository, CourseRepository $courseRepository): Response
     {
+        $sessions = $this->getUser()->getSessions();
+       
+        
+        $files = [];
+        $i=0;
+        
+        foreach($sessions as $session) {
+            foreach($session->getCourse()->getDocument() as $document){
+                $files[$i] = $document;
+                $i++;
+            }
+           
+            
+        }
+        // a mettre le $files dans le return pour le twig et le parcourir dans le twig
+        dump($files);
+        // $files = $documentRepository->getUsersDocuments($user->getId());
+
+
+
         $documents = $documentRepository->findAll();
         if ($documents) {
             foreach ($documents as $document) {
@@ -30,6 +52,8 @@ class DocumentController extends AbstractController
         } else {
             $courses = null;
         }
+
+        
 
         return $this->render('document/index.html.twig', [
             'documents' => $documents,

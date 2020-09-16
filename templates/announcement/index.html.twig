@@ -3,28 +3,27 @@
 {% block title %}Gestion des annonces{% endblock %}
 
 {% block body %}
-{% include 'admin/nav.html.twig' %}
-
-<div class="row" style="min-height: calc(100vh - 146px - 24px)">
-    <div class="">
-        <div class="container-titles">
+{% include 'nav.html.twig' %}
+<div class="grid">
+    <div class="" style="align-self: stretch;">
+        <div class="wrap-titles">
             <div class="d-flex">
                 <h2>Gestion des annonces</h2>
             </div>
             <h2 class="back-to-dashboard"><a href="{{ path('admin') }}">&#10229; Retour à l'accueil</a></h2>
         </div>
 
-        <div class="container">
+        <div class="wrap">
             <div class="card p-2">
-                <table class="table display compact" id="announcementList" style="width: 100%">
+                <table class="table display responsive" id="announcementList" style="width: 100%">
                     <a href="{{ path('announcement_new') }}" class="btn btn-primary-dk mb-1">+ Nouvelle annonce</a>
 
                     <thead>
                         <tr>
-                            <!-- <th>Id</th> -->
+                    
                             <th>Announcement_date</th>
                             <th>Announcement_title</th>
-                            <!-- <th>Announcement_content</th> -->
+                
                             <th>Publié</th>
                             <th>actions</th>
                         </tr>
@@ -32,10 +31,10 @@
                     <tbody>
                         {% for announcement in announcements %}
                         <tr>
-                            <!-- <td>{{ announcement.id }}</td> -->
+                    
                             <td>{{ announcement.announcementDate ? announcement.announcementDate|date('d M. Y') : '' }}
                             <td>{{ announcement.announcementTitle }}</td>
-                            <!-- <td>{{ announcement.announcementContent }}</td> -->
+                
                             </td>
                             <td class="text-center">{{ announcement.isDraft ? '' : '&#10004;' }}</td>
                             <td class="flex">
@@ -60,6 +59,7 @@
         </div>
     </div>
 </div>
+
 {% for message in app.flashes('success') %}
 
 <div class="alert success">
