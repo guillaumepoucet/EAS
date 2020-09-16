@@ -4,16 +4,16 @@
 {% endblock %}
 
 {% block body %}
-{% include 'admin/nav.html.twig'%}
+{% include 'nav.html.twig'%}
 
-<div class="container-grid">
-	<div class="row sessions-list-container">
+<div class="wrap-grid">
+	<div class="sessions-list-wrap">
 		<div class="">
-			<div class="container-titles">
+			<div class="wrap-titles">
 				<h2>Liste des sessions</h2>
 				<h2 class="back-to-dashboard"><a href="{{ path('admin') }}">&#10229; Retour à l'accueil</a></h2>
 			</div>
-			<div class="container">
+			<div class="wrap">
 				<div class="card" style="padding: 24px">
 					<table class="table nowrap display" id="sessions-table">
 						<thead>
@@ -63,13 +63,13 @@
 			</div>
 		</div>
 	</div>
-	<div class="row new-session-container">
+	<div class="new-session-wrap">
 		<div class="">
-			<div class="container-titles">
+			<div class="wrap-titles">
 				<h2>Ajouter une session</h2>
 				<h2 class="back-to-dashboard"><a href="{{ path('admin') }}">&#10229; Retour à l'accueil</a></h2>
 			</div>
-			<div class="container">
+			<div class="wrap">
 				<div class="card">
 					{{ form_start(sessionForm, {'attr': {'class': 'form'} }) }}
 					{{ form_row(sessionForm.course) }}
@@ -81,13 +81,13 @@
 			</div>
 		</div>
 	</div>
-	<div class="row new-course-container">
+	<div class="new-course-wrap">
 		<div class="">
-			<div class="container-titles">
+			<div class="wrap-titles">
 				<h2>Ajouter un module</h2>
 				<h2 class="back-to-dashboard"><a href="{{ path('admin') }}">&#10229; Retour à l'accueil</a></h2>
 			</div>
-			<div class="container">
+			<div class="wrap">
 				<div class="card">
 					{{ form_start(courseForm, {'attr': {'class': 'form'} }) }}
 					{{ form_rest(courseForm) }}

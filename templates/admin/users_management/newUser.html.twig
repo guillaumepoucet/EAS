@@ -4,15 +4,15 @@
 {% endblock %}
 
 {% block body %}
-{% include 'admin/nav.html.twig' %}
+{% include 'nav.html.twig' %}
 <div class="grid" style="min-height: calc(100vh - 48px - 24px);">
 
     <div class="">
-        <div class="container-titles">
+        <div class="wrap-titles">
             <h2>Ajouter un utilisateur</h2>
             <h2 class="back-to-dashboard"><a href="{{ path('users_management') }}">&#10229; Liste des elèves</a></h2>
         </div>
-        <div class="container">
+        <div class="wrap">
             <div class="card">
                 {{ form_start(userForm, {'attr': {'class': 'form'} }) }}
                 {{ form_row(userForm.email) }}

@@ -4,23 +4,23 @@
 {% endblock %}
 
 {% block body %}
-{% include 'admin/nav.html.twig' %}
-<div class="row" style="min-height: calc(100vh - 146px - 24px);">
+{% include 'nav.html.twig' %}
+<div class="single-row">
 	<div class="">
-		<div class="container-titles">
+		<div class="wrap-titles">
 			<h2>Liste des elèves</h2>
 			<h2 class="back-to-dashboard"><a href="{{ path('admin') }}">&#10229; Retour à l'accueil</a></h2>
 		</div>
-		<div class="container">
+		<div class="wrap">
 			<div class="card p-2">
 				<table class="table nowrap display" id="student-table" style="width: 100%">
 					<thead>
 						<tr>
-							<th data-field="lastName">Nom</th>
-							<th data-field="firstName">Prénom</th>
-							<th class="text-center" data-field="roles">Rôle</th>
-							<th data-field="sessions">Formation en cours</th>
-							<th data-field="birthDate">Née le</th>
+							<th>Nom</th>
+							<th>Prénom</th>
+							<th class="text-center">Rôle</th>
+							<th>Formation en cours</th>
+							<th>Née le</th>
 							<th class="text-center">Actions</th>
 						</tr>
 					</thead>
