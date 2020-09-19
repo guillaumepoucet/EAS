@@ -4,16 +4,14 @@
 
 {% block body %}
 
-<div class="full-grid">
+<div class="full-grid" style="width: 100vw; height: 100vh;">
     <div class="login-form d-flex">
 
         <img src="{{ asset('images/eas_small.jpg') }}" alt="">
 
        
             <form method="post" class="form">
-                {% if error %}
-                <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-                {% endif %}
+         
 
                 {% if app.user %}
                 <div class="">
@@ -22,6 +20,9 @@
                 {% endif %}
 
                 <h4 class="mb-1 text-center">Login</h4>
+                {% if error %}
+                <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                {% endif %}
                 <label for="inputEmail">Email</label>
                 <input class="mb-1" type="email" value="{{ last_username }}" name="email" id="inputEmail" class=""
                     required autofocus>

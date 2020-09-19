@@ -107,9 +107,9 @@ class ChatController extends AbstractController
             $newMessage->setRecipient($recipient);
             $newMessage->setIsReported(0);
 
-            // $entityManager = $this->getDoctrine()->getManager();
-            // $entityManager->persist($newMessage);
-            // $entityManager->flush();
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($newMessage);
+            $entityManager->flush();
 
             return $this->redirectToRoute('messages_index', array(
                 'user' => $user_id,
@@ -209,10 +209,10 @@ class ChatController extends AbstractController
 
         return $this->render('chat/index.html.twig', [
             'controller_name' => 'ChatController',
-            'otherUser' => $default_user,
-            'userList' => $userMessageList,
+            // 'otherUser' => $default_user,
+            // 'userList' => $userMessageList,
             'messages' => $messages,
-            'newRecipientList' => $newRecipientList,
+            // 'newRecipientList' => $newRecipientList,
             'chatForm' => $chatForm->createView(),
         ]);
     }

@@ -3,10 +3,23 @@
 {% block title %}&Eacute;diter mon profil{% endblock %}
 
 {% block body %}
-<div class="wrap">
-    {{ form_start(userForm) }}
-    {{ form_widget(userForm) }}
-    <button class="btn btn-primary">&Eacute;diter</button>
-    {{ form_end(userForm) }}
+{% include 'nav.html.twig' %}
+<div class="single-row grid-center">
+    <div class="">
+        <div class="wrap-titles">
+            <h2>&Eacute;diter mes informations</h2>
+        </div>
+        <div class="wrap">
+            <div class="card">
+                {{ form_start(userForm, {'attr': {'class': 'form'} }) }}
+                {{ form_row(userForm.first_name) }}
+                {{ form_row(userForm.last_name) }}
+                {{ form_row(userForm.email) }}
+                {{ form_row(userForm.birth_date, {'attr': {'class': 'select-date'} }) }}
+                <button class="btn btn-primary-dk">&Eacute;diter</button>
+                {{ form_end(userForm) }}
+            </div>
+        </div>
+    </div>
 </div>
 {% endblock %}

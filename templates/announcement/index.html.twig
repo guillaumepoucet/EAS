@@ -4,38 +4,35 @@
 
 {% block body %}
 {% include 'nav.html.twig' %}
-<div class="grid">
-    <div class="" style="align-self: stretch;">
+<div class="single-row">
+    <div class="">
         <div class="wrap-titles">
-            <div class="d-flex">
-                <h2>Gestion des annonces</h2>
-            </div>
+            <h2>Gestion des annonces</h2>
             <h2 class="back-to-dashboard"><a href="{{ path('admin') }}">&#10229; Retour à l'accueil</a></h2>
         </div>
 
         <div class="wrap">
             <div class="card p-2">
-                <table class="table display responsive" id="announcementList" style="width: 100%">
-                    <a href="{{ path('announcement_new') }}" class="btn btn-primary-dk mb-1">+ Nouvelle annonce</a>
+                <a href="{{ path('announcement_new') }}" class="btn btn-primary-dk mb-1">+ Nouvelle annonce</a>
 
+                <table class="table display responsive" id="announcementList" style="width: 100%">
                     <thead>
                         <tr>
-                    
+
                             <th>Announcement_date</th>
                             <th>Announcement_title</th>
-                
                             <th>Publié</th>
                             <th>actions</th>
+
                         </tr>
                     </thead>
                     <tbody>
                         {% for announcement in announcements %}
                         <tr>
-                    
+
                             <td>{{ announcement.announcementDate ? announcement.announcementDate|date('d M. Y') : '' }}
-                            <td>{{ announcement.announcementTitle }}</td>
-                
                             </td>
+                            <td>{{ announcement.announcementTitle }}</td>
                             <td class="text-center">{{ announcement.isDraft ? '' : '&#10004;' }}</td>
                             <td class="flex">
                                 <a href="{{ path('announcement_show', {'id': announcement.id}) }}">Voir</a>
@@ -44,12 +41,11 @@
                                     <img class="icon edit" src="{{ asset('icons/edit.svg') }}" alt=""
                                         title="&Eacute;diter"></a>
                                 {{ include('announcement/_delete_form.html.twig') }}
-
                             </td>
                         </tr>
                         {% else %}
                         <tr>
-                            <td colspan="6">Aucune annonce</td>
+                            <td colspan="4">Aucune annonce</td>
                         </tr>
                         {% endfor %}
                     </tbody>
@@ -91,7 +87,6 @@
             "language": {
                 "url": "{{ asset('js/french.lang') }}"
             },
-
         });
     });
 </script>
