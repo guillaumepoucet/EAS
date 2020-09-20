@@ -46,6 +46,10 @@ class UserController extends AbstractController
             3
         );
 
+        foreach ($announcements as $announcement) {
+            $author = $announcement->getUser()->getName();
+        }
+
         $messages = $messageRepo->findBy(
             array('recipient' => $user),
             array('message_date' => 'DESC'),

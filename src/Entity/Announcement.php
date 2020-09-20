@@ -33,7 +33,7 @@ class Announcement
     private $announcement_date;
 
     /**
-dev     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="announcements")
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="announcements")
      * @ORM\JoinColumn(nullable=false)
      */
     private $user;
@@ -83,28 +83,28 @@ dev     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="announcements")
 
         return $this;
     }
+    
+    public function getIsDraft(): ?bool
+    {
+        return $this->is_draft;
+    }
+    
+    public function setIsDraft(bool $is_draft): self
+    {
+        $this->is_draft = $is_draft;
+        
+        return $this;
+    }
 
     public function getUser(): ?user
     {
         return $this->user;
     }
-
+    
     public function setUser(?user $user): self
     {
         $this->user = $user;
-
-        return $this;
-    }
-
-    public function getIsDraft(): ?bool
-    {
-        return $this->is_draft;
-    }
-
-    public function setIsDraft(bool $is_draft): self
-    {
-        $this->is_draft = $is_draft;
-
+    
         return $this;
     }
 }
