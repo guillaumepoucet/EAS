@@ -529,6 +529,28 @@ textarea {
   width: 80px;
 }
 
+.login-form {
+  -webkit-box-shadow: 0 0 15px #00000029;
+          box-shadow: 0 0 15px #00000029;
+  background-color: white;
+}
+
+.login-form h4 {
+  font-family: roboto-medium;
+}
+
+.login-form label {
+  margin-bottom: .5rem;
+}
+
+.login-form img {
+  height: 303px;
+}
+
+.login-form form {
+  padding: 2rem;
+}
+
 .alert {
   position: absolute;
   right: 24px;
@@ -586,28 +608,6 @@ body {
   display: grid;
   place-items: center;
   background-color: #F5F5F5;
-}
-
-.full-grid .login-form {
-  -webkit-box-shadow: 0 0 15px #00000029;
-          box-shadow: 0 0 15px #00000029;
-  background-color: white;
-}
-
-.full-grid .login-form h4 {
-  font-family: roboto-medium;
-}
-
-.full-grid .login-form label {
-  margin-bottom: .5rem;
-}
-
-.full-grid .login-form img {
-  height: 303px;
-}
-
-.full-grid .login-form form {
-  padding: 2rem;
 }
 
 .navbar {

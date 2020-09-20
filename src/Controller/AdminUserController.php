@@ -26,7 +26,7 @@ class AdminUserController extends AbstractController
         // retrieve users info
         $users = $userRepo->findAll();
 
-        return $this->render('admin/users_management/index.html.twig', [
+        return $this->render('users_management/index.html.twig', [
             'controller_name' => 'AdminUserController',
             'users' => $users,
         ]);
@@ -94,7 +94,7 @@ class AdminUserController extends AbstractController
             return $this->redirectToRoute('users_management');
         }
 
-        return $this->render('admin/users_management/newUser.html.twig', [
+        return $this->render('users_management/newUser.html.twig', [
             'controller_name' => 'AdminUserController',
             'userForm' => $userForm->createView(),
         ]);
@@ -121,7 +121,7 @@ class AdminUserController extends AbstractController
             return $this->redirectToRoute('users_management');
         }
 
-        return $this->render('admin/users_management/editUser.html.twig', [
+        return $this->render('users_management/editUser.html.twig', [
             'controller_name' => 'AdminUserController',
             'user' => $user,
             'userForm' => $userForm->createView(),

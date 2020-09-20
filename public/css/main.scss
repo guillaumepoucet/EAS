@@ -18,28 +18,6 @@ body {
     // width: 100vw;
     place-items: center;
     background-color: $gray-lg;
-
-    .login-form {
-        box-shadow: 0 0 15px #00000029;
-        background-color: $white;
-
-        h4 {
-            font-family: roboto-medium;
-        }
-
-        label {
-            margin-bottom: .5rem;
-        }
-
-        img {
-            height: 303px;
-        }
-
-        form {
-            padding: 2rem;
-
-        }
-    }
 }
 
 .navbar {

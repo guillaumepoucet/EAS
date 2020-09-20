@@ -66,7 +66,7 @@ class AdminSessionsController extends AbstractController
             return $this->redirectToRoute('sessions_management');
         }
 
-        return $this->render('admin/sessions_management/index.html.twig', [
+        return $this->render('sessions_management/index.html.twig', [
             'controller_name' => 'AdminSessionsController',
             'courses' => $courses,
             'sessions' => $sessions,
@@ -109,7 +109,7 @@ class AdminSessionsController extends AbstractController
             return $this->redirectToRoute('sessions_management');
         }
 
-        return $this->render('admin/sessions_management/editSession.html.twig', [
+        return $this->render('sessions_management/editSession.html.twig', [
             'controller_name' => 'AdminSessionsController',
             'session' => $session,
             'sessions' => $sessions,

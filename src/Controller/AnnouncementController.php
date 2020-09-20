@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/admin/announcement")
+ * @Route("/announcement")
  */
 class AnnouncementController extends AbstractController
 {
