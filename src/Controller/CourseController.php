@@ -11,7 +11,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 /**
  * @Route("/admin/course", name="course_")
  */
-class AdminCourseController extends AbstractController
+class CourseController extends AbstractController
 {
     /**
      * @Route("/delete/{id}", name="delete")

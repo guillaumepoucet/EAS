@@ -17,7 +17,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
  /**
      * @Route("/admin/sessions", name="sessions_")
      */
-class AdminSessionsController extends AbstractController
+class SessionsController extends AbstractController
 {
     /**
      * @Route("", name="management")
