@@ -33,7 +33,7 @@ class Announcement
     private $announcement_date;
 
     /**
-     * @ORM\ManyToOne(targetEntity=user::class, inversedBy="announcements")
+dev     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="announcements")
      * @ORM\JoinColumn(nullable=false)
      */
     private $user;
