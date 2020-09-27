@@ -1,0 +1,94 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Tableau de bord
+{% endblock %}
+
+{% block body %}
+
+	{% include 'nav.html.twig'%}
+
+
+	<div class="grid">
+		<div class="row">
+			<div class="jumbotron stretch-x">
+				<p>
+					<span class="h-sub">Bonjour,
+					</span>
+					<br>
+					<span class="h-display">{{ app.user.firstname }}</span>
+				</p>
+			</div>
+		</div>
+		<div class="row">
+			<div class="latest-announcements">
+				<div class="wrap-titles">
+					<h2>Dernières annonces</h2>
+				</div>
+
+				<div class="wrap announcements wrap-grid">
+					{% for announcement in announcements %}
+						{% include "announcement/_card.html.twig" %}
+					{% endfor %}
+				</div>
+                
+			</div>
+
+			<div class="aside">
+				<div class="mb-2">
+					<div class="wrap-titles">
+						<h2>Vos derniers messages</h2>
+					</div>
+					<div class="wrap announcements wrap-grid">
+						{% for message in messages %}
+							<div class="card">
+								<div class="card-header">
+									<div><img src="{{ asset('icons/mail.svg') }}" alt=""></div>
+
+									<h4>Par
+										{{ message.sender.name }}</h4>
+
+								</div>
+
+								<div class="card-body">
+									<small class="justify-self-end">le
+										{{ message.messageDate | date("d/m/Y") }}</small>
+									<p>{{ message.messageContent }}</p>
+									<small class="mt-1">
+										<a href="" class="small-link">Lire le message >>
+										</a>
+									</small>
+								</div>
+							</div>
+						{% endfor %}
+					</div>
+				</div>
+
+				<div class="aside">
+					<div class="wrap-titles">
+						<h2>Derniers fichiers disponibles</h2>
+					</div>
+					<div class="wrap announcements wrap-grid">
+						{% for file in files %}
+							<div class="card">
+								<div class="card-header">
+									<div><img src="{{ asset('icons/file.svg') }}" alt=""></div>
+									<h4>{{file.file_name}}</h4>
+								</div>
+								<div class="card-body">
+									<small class="">Module :</small>
+									<p class="">{{file.course_name}}</p>
+									{% if file.file_desc %}
+										<small class="mt-1">Description :</small>
+										<p>{{file.file_desc}}</p>
+									{% endif %}
+								</div>
+							</div>
+						{% endfor %}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+{% endblock %}

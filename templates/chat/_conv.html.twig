@@ -1,0 +1,47 @@
+{% block body %}
+
+{# <h5 class="card-header">{{ otherUser.firstName}}</h5> #}
+<div class="conv">
+	<div class="messages-list">
+		{% for message in messages | sort %}
+		<div class="{{ app.user.id == message.sender.id ? 'text-right' :'text-left' }} message">
+			<small class="date">{{message.messageDate | date('d M. Y H:m')}}</small>
+			<p class="messageContent">{{ message.messageContent }}</p>
+			<!-- <small>Reporter</small> -->
+			<small class="sender">
+				{% if message.sender.id != app.user.id %}
+				{{ message.sender.firstName }}
+				{% else %}
+				Moi
+				{% endif %}
+			</small>
+		</div>
+		{% endfor %}
+	</div>
+
+	<div class="card-footer">
+		{{ form_start(chatForm, {'attr': {'class': 'form'} }) }}
+		{{ form_widget(chatForm) }}
+		<button class="btn btn-primary-dk send" type="submit">Envoyer</button>
+		{{ form_end(chatForm) }}
+	</div>
+</div>
+
+
+
+
+<script>
+
+	var messageBody = document.querySelector('.messages-list');
+	messageBody.scrollTop = messageBody.scrollHeight - messageBody.clientHeight;
+
+	// URL is a built-in JavaScript class to manipulate URLs
+	const url = new URL('http://localhost:3000/.well-known/mercure');
+	url.searchParams.append('topic', 'http://localhost:8000/messages/{{ app.user.id }}');
+
+	const eventSource = new EventSource(url);
+	eventSource.onmessage = event => {
+		$('.card').insertAdjacentHTML('afterend', "<div class=\"alert alert-success\">mercure</div>")
+	}
+</script>
+{% endblock %}

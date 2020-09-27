@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" viewBox="0 0 35 35">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+        stroke: #000;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-width: 3px;
+      }
+    </style>
+  </defs>
+  <g id="Icon_feather-edit" data-name="Icon feather-edit" transform="translate(-1.5 -1.318)">
+    <path id="Tracé_1" data-name="Tracé 1" class="cls-1" d="M17.409,6H6.2A3.2,3.2,0,0,0,3,9.2V31.616a3.2,3.2,0,0,0,3.2,3.2H28.616a3.2,3.2,0,0,0,3.2-3.2V20.409" transform="translate(0 0)"/>
+    <path id="Tracé_2" data-name="Tracé 2" class="cls-1" d="M27.75,3.75a3.182,3.182,0,0,1,4.5,4.5L18,22.5,12,24l1.5-6Z" transform="translate(1.818)"/>
+  </g>
+</svg>

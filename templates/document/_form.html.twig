@@ -1,0 +1,15 @@
+{{ form_start(form, {'attr': {'class': 'form'} }) }}
+{{ form_row(form.file_name) }}
+{{ form_row(form.file_desc) }}
+{{ form_row(form.file) }}
+<div>
+    {{ form_label(form.courses) }}
+</div>
+<div class="form-children">
+    {% for course in form.courses %}
+    {{ form_row(course, { 'attr': {'class': 'children'} }) }}
+    {% endfor %}
+</div>
+{{ form_rest(form) }}
+<button class="btn btn-primary-dk">{{ button_label|default('Enregistrer') }}</button>
+{{ form_end(form) }}

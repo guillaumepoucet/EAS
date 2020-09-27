@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="25.6" viewBox="0 0 32 25.6">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #fff;
+      }
+    </style>
+  </defs>
+  <path id="mail" class="cls-1" d="M33.941,7.712H8.341a3.186,3.186,0,0,0-3.184,3.2l-.016,19.2a3.2,3.2,0,0,0,3.2,3.2h25.6a3.2,3.2,0,0,0,3.2-3.2v-19.2a3.2,3.2,0,0,0-3.2-3.2Zm0,6.4-12.8,8-12.8-8v-3.2l12.8,8,12.8-8v3.2Z" transform="translate(-5.141 -7.712)"/>
+</svg>

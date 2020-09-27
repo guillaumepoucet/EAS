@@ -1,0 +1,15 @@
+{% block body %}
+<div class="list-user-panel p-2">
+	<ul class="list-group">
+		<a id="newConvBtn" class="btn btn-primary-dk mb-1 ">+ Nouvelle conversation</a>
+		{% for user in userList %}
+		<li class="list-group-item">
+			<a href="{{ path('messages_show', {user: app.user.id, otherUser: user.id}) }}" data-index="{{user.id}}"
+				class="user-chat-list">
+				{{user.name}}
+			</a>
+		</li>
+		{% endfor %}
+	</ul>
+</div>
+{% endblock %}

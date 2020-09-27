@@ -1,0 +1,44 @@
+.alert {
+    position: absolute;
+    right: 24px;
+    top: 74px;
+    font-family: roboto-medium;
+
+    p {
+        padding: 1rem;
+        color: $white;
+    }
+
+    &.success {
+        border: 2px solid rgba($primary-dk, .25);
+        border-radius: 8px;
+        background-color: $primary-dk;
+
+        p::before {
+            content: '\2714';
+            padding-right: .5rem;
+        }
+    }
+
+    &.delete {
+        border: 2px solid rgba($danger, .25);
+        border-radius: 8px;
+        background-color: $danger;
+
+        p::before {
+            content: '\2714';
+            padding-right: .5rem;
+        }
+    }
+
+    &.edit {
+        border: 2px solid rgba($warning, .25);
+        border-radius: 8px;
+        background-color: $warning;
+
+        p::before {
+            content: '\2714';
+            padding-right: .5rem;
+        }
+    }
+}

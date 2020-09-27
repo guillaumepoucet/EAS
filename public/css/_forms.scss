@@ -1,0 +1,92 @@
+.form {
+
+    display: grid;
+    padding: 24px;
+
+    div {
+
+        display: grid;
+
+        label {
+            margin: .75rem 0 .25rem;
+            font-family: roboto-medium;
+        }
+
+        textarea {
+            font-family: roboto-medium;
+            font-size: .85rem;
+        }
+
+    }
+
+    .form-children {
+
+        div {
+            grid-auto-flow: column;
+            grid-template-columns: min-content auto;
+            grid-column-gap: 0.5rem;
+
+            input {
+                grid-column: 1;
+                justify-self: start;
+                margin: .75rem 0 .25rem;
+            }
+        }
+
+        label {
+            font-family: roboto !important;
+        }
+    }
+
+    button {
+        margin-top: 1rem;
+    }
+
+    .option {
+        font-size: .85rem;
+    }
+}
+
+
+input[type=search],
+input[type=email],
+input[type=password],
+input[type=text],
+input[type=file]::-webkit-file-upload-button,
+select,
+textarea {
+    padding: 0.5rem;
+    font-family: roboto-medium;
+}
+
+.select-date {
+    grid-auto-flow: column;
+    grid-column-gap: .5rem;
+    justify-content: start;
+
+    select {
+        width: max(80px);
+    }
+}
+
+.login-form {
+    box-shadow: 0 0 15px #00000029;
+    background-color: $white;
+
+    h4 {
+        font-family: roboto-medium;
+    }
+
+    label {
+        margin-bottom: .5rem;
+    }
+
+    img {
+        height: 303px;
+    }
+
+    form {
+        padding: 2rem;
+
+    }
+}

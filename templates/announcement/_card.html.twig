@@ -1,0 +1,19 @@
+<div class="card">
+	<div class="card-header">
+		<div><img src="{{ asset('icons/horn.svg') }}" alt=""></div>
+		<h4>{{ announcement.announcementTitle}}</h4>
+	</div>
+
+	<div class="card-body">
+		<small class="mb-1">{{ announcement.announcementDate | date("d/m/Y") }}</small>
+		<p>{{ announcement.announcementContent | raw }}</p>
+		<small class="mt-1">{{ announcement.user.firstName }}
+			{{announcement.user.lastName }}</small>
+	</div>
+	{% if is_granted('ROLE_ADMIN') %}
+		<div class="card-btn">
+			<a href="{{ path('announcement_edit', {id: announcement.id}) }}" type="button" class="btn btn-warning btn-sm">&Eacute;diter</a>
+			<a href="{{ path('announcement_delete', {id: announcement.id}) }}" type="button" class="btn btn-danger btn-sm">Supprimer</a>
+		</div>
+	{% endif %}
+</div>

@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Document{% endblock %}
+
+{% block body %}
+{% include 'nav.html.twig'%}
+
+<div class="single-row">
+    <div class="">
+        <div class="wrap-titles">
+            <h2>&Eacute;diter {{ document.fileName }}</h2>
+            <h2 class="back-to-dashboard"><a href="{{ path('admin') }}">&#10229; Retour à l'accueil</a></h2>
+        </div>
+        <div class="wrap">
+            <div class="card">
+
+                {{ include('document/_form.html.twig', {'button_label': 'Update'}) }}
+
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

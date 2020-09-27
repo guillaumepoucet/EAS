@@ -1,0 +1,150 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}&Eacute;diter
+{{session.course.courseName}}
+{% endblock %}
+
+{% block body %}
+{% include 'nav.html.twig' %}
+<div class="single-row">
+	<div class="">
+		<div class="wrap-titles">
+			<h2>&Eacute;diter
+				{{session.course.courseName}}</h2>
+			<h2 class="back-to-dashboard"><a href="{{ path('sessions_management') }}">&#10229; Retour aux sessions</a></h2>
+		</div>
+		<div class="wrap">
+			<div class="grid-row">
+			<div class="card">
+				<div class="card-header">
+					<div><img src="{{ asset('icons/edit-lg.svg') }}" alt=""></div>
+					<h4>Modifier la session</h4>
+				</div>
+				<div class="card-body">
+					{{ form_start(sessionForm, {'attr': {'class': 'form'} }) }}
+					{{ form_row(sessionForm.start_date, {'attr': {'class': 'select-date'}})}}
+					{{ form_row(sessionForm.end_date, {'attr': {'class': 'select-date'}})}}
+					{{ form_row(sessionForm.course) }}
+					<button class="btn btn-primary-dk" type="submit">Ajouter</button>
+					{{ form_end(sessionForm) }}
+				</div>
+			</div>
+
+			<div class="card">
+				<div class="card-header">
+					<div><img src="{{ asset('icons/user-edit.svg') }}" alt=""></div>
+					<h4>Liste des elèves</h4>
+				</div>
+				<div class="card-body">
+					<table id="sessionUsersList" class="table  display">
+						<thead>
+							<tr>
+								<th>Nom, Prénom</th>
+								<th class="text-center">Enlever</th>
+							</tr>
+						</thead>
+						<tbody>
+							{% for user in session.user %}
+							<tr>
+								<td>{{user.fullName}}</td>
+								<td class="text-center">
+									<a href="{{ path('sessions_remove_user', {user: user.id, session: session.id}) }}"
+										class="del-link"><img src="{{ asset('icons/delete.svg') }}" alt="" style="width: 16px;"></a>
+								</td>
+							</tr>
+							{% endfor %}
+						</tbody>
+					</table>
+
+				</div>
+			</div>
+		</div>
+
+			<div class="grid-row">
+
+
+				<div class="card">
+					<div class="card-header">
+						<div><img src="{{ asset('icons/user-edit.svg') }}" alt=""></div>
+						<h4>Ajouter des elèves</h4>
+					</div>
+					<div class="card-body">
+						<table id="userList" class="table compact display">
+							<thead>
+								<tr>
+									<th>Nom, Prénom</th>
+									<th class="text-center">Ajouter</th>
+								</tr>
+							</thead>
+							<tbody>
+								{% for user in users %}
+								<tr>
+									<td>{{user.fullName}}</td>
+									<td class="text-center">
+										{% set inSession = "" %}
+										{% for sessions in user.sessions %}
+										{% if session.id == sessions.id %}
+										{% set inSession = true %}
+										{% endif %}
+										{% endfor %}
+										{% if inSession == true %}
+										<button type="button" class="btn btn-gray-dk" disabled style="width: 85px;">
+											Déjà inscrit</button>
+										{% else %}
+										<a href="{{ path('sessions_add_user', {user: user.id, session: session.id}) }}"
+											type="button" class="btn btn-warning" style="width: 61px;">+
+											Ajouter</a>
+										{% endif %}
+									</td>
+								</tr>
+								{% endfor %}
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{% for message in app.flashes('success') %}
+
+<div class="alert success">
+	<p>{{ message }}</p>
+</div>
+
+{% endfor %}
+
+{% for message in app.flashes('delete') %}
+
+<div class="alert delete">
+	<p>{{ message }}</p>
+</div>
+
+{% endfor %}
+
+{% for message in app.flashes('edit') %}
+
+<div class="alert edit">
+	<p>{{ message }}</p>
+</div>
+
+{% endfor %}
+<script>
+	$(document).ready(function () {
+		$('#userList').DataTable({
+			fixedColumns: true,
+			"language": {
+				"url": "{{ asset('js/french.lang') }}"
+			},
+
+		});
+		$('#sessionUsersList').DataTable({
+			fixedColumns: true,
+			"language": {
+				"url": "{{ asset('js/french.lang') }}"
+			},
+
+		});
+	});
+</script>
+{% endblock %}

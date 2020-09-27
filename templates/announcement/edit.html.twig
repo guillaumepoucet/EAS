@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}&Eacute;diter une annonce{% endblock %}
+
+{% block body %}
+{% include 'nav.html.twig' %}
+
+<div class="single-row">
+	<div class="">
+		<div class="wrap-titles">
+			<h2>&Eacute;diter une annonce</h2>
+			<h2 class="back-to-dashboard"><a href="{{ path('announcement_index') }}">&#10229; Retour aux annonces</a></h2>
+		</div>
+		<div class="wrap">
+            <div class="card">
+                {{ include('announcement/_form.html.twig', {'button_label': 'Update'}) }}
+			</div>
+		</div>
+	</div>
+</div>
+
+
+    <a href="">back to list</a>
+
+    {{ include('announcement/_delete_form.html.twig') }}
+{% endblock %}

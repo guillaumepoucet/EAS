@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Messagerie{% endblock %}
+
+{% block body %}
+{% include 'nav.html.twig' %}
+<div class="single-row">
+    <!-- <div class="row span-8"> -->
+    <div class="" style="width: max-content; margin: auto; max-height: calc(100vh - 4rem);">
+        <div class="wrap-titles">
+            <h2>Messagerie</h2>
+            <h2 class="back-to-dashboard"><a href="{{ path('admin') }}">&#10229; Retour à l'accueil</a></h2>
+        </div>
+
+        <div class="wrap">
+            <div class="card wrap-grid chat-grid">
+                {% include 'chat/_userList.html.twig' %}
+                {% include 'chat/_conv.html.twig' %}
+            </div>
+
+        </div>
+    </div>
+    <!-- </div> -->
+</div>
+{% include 'chat/_newRecipientList.html.twig' %}
+{% endblock %}
+
+{% block javascripts %}
+<script>
+    $(document).ready(function () {
+        $('#newConvBtn').click(function(e) {
+            e.preventDefault();
+            $('#newRecipientList').fadeIn();
+        });
+        $('.close-btn').click(function(e) {
+            e.preventDefault();
+            $('#newRecipientList').fadeOut();
+        })
+    })
+</script>
+{% endblock %}

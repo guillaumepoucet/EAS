@@ -1,0 +1,60 @@
+{% block body%}
+
+<div id="navbar">
+  <div class="navbar">
+    <div class="pointer nav-menu-link">
+      <img src="{{ asset('icons/menu.svg') }}" alt="">
+      <span>MENU</span>
+    </div>
+  </div>
+
+  <nav class="nav-content">
+    <ul>
+      {% if is_granted('ROLE_ADMIN') %}
+      <a href="{{ path('admin') }}">
+        <li class="nav-link {{ 'admin' in route ? 'active' }}">Accueil</li>
+      </a>
+      <a href="{{ path('users_management') }}">
+        <li class="nav-link {{ 'users' in route ? 'active' }}">Elèves</li>
+      </a>
+      <a href="{{ path('sessions_management') }}">
+        <li class="nav-link {{ 'sessions' in route ? 'active' }}">Formations</li>
+      </a>
+      <a href="{{ path('document_index') }}">
+        <li class="nav-link {{ 'document' in route ? 'active' }}">Fichiers</li>
+      </a>
+      <a href="">
+        <li class="nav-link sub-nav-link">+ Ajouter un fichier</li>
+      </a>
+      <a href="{{ path('announcement_index') }}">
+        <li class="nav-link {{ 'announcement' in route ? 'active' }}">Annonces</li>
+      </a>
+      <a href="{{ path('announcement_new') }}">
+        <li class="nav-link sub-nav-link">+ Créer une annonce</li>
+      </a>
+
+
+      {% else %}
+      <li class="nav-link {{ 'dashboard' in route ? 'active' }}"><a href="{{ path('user_dashboard') }}">Accueil</a></li>
+      <li class="nav-link {{ 'sessions' in route ? 'active' }}"><a href="{{ path('sessions_management') }}">Vos
+          formations</a></li>
+      <li class="nav-link {{ 'document' in route ? 'active' }}"><a href="{{ path('document_index') }}">Fichiers</a>
+
+      </li>
+      <li class="nav-link {{ 'announcement' in route ? 'active' }}"><a
+          href="{{ path('announcement_index') }}">Annonces</a>
+      </li>
+      {% endif %}
+      <li class="nav-link {{ 'messages' in route ? 'active' }}"><a
+          href=" {{ path('messages_index', {user: app.user.id}) }}">Messagerie</a></li>
+    </ul>
+    <ul class="nav-account">
+      <li>{{ app.user.name }}</li>
+      <li><a href="{{ path('user_edit', {user: app.user.id}) }}">
+          <img src="{{ asset('icons/settings-lg.svg') }}" alt="">Mon compte</a></li>
+      <li><a href="{{ path('logout') }}">
+          <img src="{{ asset('icons/logout-lg.svg') }}" alt="">Déconnection</a></li>
+    </ul>
+  </nav>
+</div>
+{% endblock %}

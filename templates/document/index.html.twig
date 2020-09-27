@@ -1,0 +1,101 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des documents
+{% endblock %}
+
+{% block body %}
+{% include 'nav.html.twig'%}
+<div class="single-row">
+	<div class="">
+		<div class="wrap-titles">
+			<h2>Liste des fichiers</h2>
+			<h2 class="back-to-dashboard"><a href="{{ path('admin') }}">&#10229; Retour à l'accueil</a></h2>
+		</div>
+		<div class="wrap">
+			<div class="card p-2">
+
+				<table class="table display" id="documentList" style="width: 100%">
+					<thead>
+						<tr>
+							<th>Nom</th>
+							<th>Description</th>
+							<th>Taille</th>
+							<th>Disponibilité(s)</th>
+							<th>Actions</th>
+						</tr>
+					</thead>
+					<tbody>
+
+						{% for document in documents %}
+						<tr>
+							<td>{{ document.fileName }}</td>
+							<td>{{ document.fileDesc }}</td>
+							<td>{{ document.fileSize }}</td>
+							<td>
+								{% for course in document.courses %}
+								{{ course.courseName }}<br>
+
+								{% endfor %}
+							</td>
+							<td class="flex">
+								<!-- <a href="{{ path('document_show', {'id': document.id}) }}">voir</a> -->
+								{% if is_granted('ROLE_ADMIN') %}
+
+								<a href="{{ path('document_edit', {'id': document.id}) }}" style="height: 32px;">
+									<img class="icon edit" src="{{ asset('icons/edit.svg') }}" alt=""
+										title="&Eacute;diter"></a>
+								{{ include('document/_delete_form.html.twig') }}
+								{% endif %}
+							</td>
+						</tr>
+
+						{% else %}
+						<tr>
+							<td colspan="5">Aucun fichier(s)</td>
+						</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+
+				<a href="{{ path('document_new') }}" class="btn btn-primary-dk">+ Nouveau fichier</a>
+
+			</div>
+		</div>
+	</div>
+</div>
+{% for message in app.flashes('success') %}
+
+<div class="alert success">
+	<p>{{ message }}</p>
+</div>
+
+{% endfor %}
+
+{% for message in app.flashes('delete') %}
+
+<div class="alert delete">
+	<p>{{ message }}</p>
+</div>
+
+{% endfor %}
+
+{% for message in app.flashes('edit') %}
+
+<div class="alert edit">
+	<p>{{ message }}</p>
+</div>
+
+{% endfor %}
+<script>
+	$(document).ready(function () {
+		$('#documentList').DataTable({
+			"scrollX": true,
+			fixedColumns: true,
+			"language": {
+				"url": "{{ asset('js/french.lang') }}"
+			},
+
+		});
+	});
+</script>
+{% endblock %}

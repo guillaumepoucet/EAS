@@ -1,0 +1,99 @@
+.text-center {
+    text-align: center;
+}
+
+.dataTables_length,
+.dataTables_filter {
+    margin: 1rem 0;
+    font-size: .8rem;
+}
+
+.dataTables_scroll {
+    font-size: .9rem;
+    margin: 1rem 0 !important;
+}
+
+.dataTables_info,
+#student-table_paginate,
+#sessions-table_paginate,
+#userList_paginate,
+#sessionUsersList_paginate,
+#documentList_previous,
+#announcementList_previous,
+.dataTables_paginate .paging_simple_numbers {
+    font-size: .8rem;
+    margin-bottom: 1rem;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+    font-family: roboto-medium !important;
+}
+
+.paginate_button.current,
+.paginate_button.current:hover {
+    background: $gray-lg !important;
+    border-radius: 50% !important;
+    border: 0 !important;
+
+}
+
+.dataTables_scrollHead tr th,
+thead tr th {
+    font-family: roboto-medium;
+    font-weight: normal !important;
+}
+
+tbody tr td {
+    vertical-align: top;
+}
+
+.del-link {
+    height: 24px;
+    display: grid;
+    place-items: center;
+}
+
+.flex {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    column-gap: .5rem;
+}
+
+// #sessionUsersList {
+//     thead tr {
+//         border-bottom: 1px solid black;
+
+//         th {
+//             padding: 4px 17px;
+//         }
+
+//     }
+
+//     tbody tr {
+//         height: 40px;
+//         td {
+//             padding: 4px;
+//             border-bottom: 1px solid #e1e1e1;
+//         }
+//     }
+// }
+
+.collapse-btn {
+    display: flex;
+    align-items: center;
+
+    svg {
+        margin-left: .25rem;
+    }
+}
+
+.collapse {
+    height: 0px;
+    overflow: hidden;
+    transition: .25s;
+
+    &.display {
+        height: max-content;
+    }
+}
