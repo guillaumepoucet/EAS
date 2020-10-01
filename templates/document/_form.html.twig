@@ -3,12 +3,12 @@
 {{ form_row(form.file_desc) }}
 {{ form_row(form.file) }}
 <div>
-    {{ form_label(form.courses) }}
+	{{ form_label(form.courses) }}
 </div>
 <div class="form-children">
-    {% for course in form.courses %}
-    {{ form_row(course, { 'attr': {'class': 'children'} }) }}
-    {% endfor %}
+	{% for course in form.courses %}
+		{{ form_row(course, { 'attr': {'class': 'children'} }) }}
+	{% endfor %}
 </div>
 {{ form_rest(form) }}
 <button class="btn btn-primary-dk">{{ button_label|default('Enregistrer') }}</button>

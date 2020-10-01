@@ -19,6 +19,9 @@ class CourseController extends AbstractController
 
     public function deleteCourse(CourseRepository $courseRepo, $id)
     {
+        // guaranty that the user won't be able to access this
+        $this->denyAccessUnlessGranted('ROLE_ADMIN');
+
         $entityManager = $this->getDoctrine()->getManager();
         $course = $courseRepo->find($id);
         $entityManager->remove($course);

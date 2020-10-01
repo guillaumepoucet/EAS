@@ -35,13 +35,13 @@
 	var messageBody = document.querySelector('.messages-list');
 	messageBody.scrollTop = messageBody.scrollHeight - messageBody.clientHeight;
 
-	// URL is a built-in JavaScript class to manipulate URLs
-	const url = new URL('http://localhost:3000/.well-known/mercure');
-	url.searchParams.append('topic', 'http://localhost:8000/messages/{{ app.user.id }}');
+	// // URL is a built-in JavaScript class to manipulate URLs
+	// const url = new URL('http://localhost:3000/.well-known/mercure');
+	// url.searchParams.append('topic', 'http://localhost:8000/messages/{{ app.user.id }}');
 
-	const eventSource = new EventSource(url);
-	eventSource.onmessage = event => {
-		$('.card').insertAdjacentHTML('afterend', "<div class=\"alert alert-success\">mercure</div>")
-	}
+	// const eventSource = new EventSource(url);
+	// eventSource.onmessage = event => {
+	// 	$('.card').insertAdjacentHTML('afterend', "<div class=\"alert alert-success\">mercure</div>")
+	// }
 </script>
 {% endblock %}

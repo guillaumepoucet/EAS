@@ -39,7 +39,7 @@ class DocumentController extends AbstractController
             
         }
         // a mettre le $files dans le return pour le twig et le parcourir dans le twig
-        dump($files);
+        // dump($files);
         // $files = $documentRepository->getUsersDocuments($user->getId());
 
 
@@ -66,6 +66,8 @@ class DocumentController extends AbstractController
      */
     public function new(Request $request): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN');
+
         $newDocument = new Document();
         $form = $this->createForm(DocumentType::class, $newDocument);
 
@@ -140,6 +142,8 @@ class DocumentController extends AbstractController
      */
     public function edit(Request $request, Document $document): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN');
+
         $form = $this->createForm(DocumentType::class, $document);
         $form->handleRequest($request);
 
@@ -162,6 +166,8 @@ class DocumentController extends AbstractController
      */
     public function delete(Request $request, Document $document): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN');
+
         if ($this->isCsrfTokenValid('delete' . $document->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($document);

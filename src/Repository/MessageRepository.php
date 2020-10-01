@@ -26,7 +26,8 @@ class MessageRepository extends ServiceEntityRepository
     public function messages($user_id, $otherUser)
     {
         return $this->createQueryBuilder('m')
-            ->andWhere('m.sender = :user_id or m.sender = :otherUser', 'm.recipient = :otherUser or m.recipient = :user_id')
+            ->andWhere( 'm.sender = :user_id or m.sender = :otherUser', 
+                        'm.recipient = :otherUser or m.recipient = :user_id')
             ->setParameters(array(
                 'user_id' => $user_id,
                 'otherUser' => $otherUser

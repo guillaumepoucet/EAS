@@ -6,9 +6,9 @@ use App\Entity\Announcement;
 use Symfony\Component\Form\AbstractType;
 use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 
 class AnnouncementType extends AbstractType
 {
@@ -23,7 +23,11 @@ class AnnouncementType extends AbstractType
                 'label' => 'Enregistrer comme brouillon',
                 'required' => false,
             ])
-            ->add('announcement_date')
+            ->add('announcement_date', DateType::class, [
+                'days' => range(date('d'), 31),
+                'months' => range(date('m'), 12),
+                'years' => range(date('Y'), date('Y')+100),
+            ])
             // ->add('user')
         ;
     }

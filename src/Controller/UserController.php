@@ -69,10 +69,18 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/edit/{user}", name="_edit")
+     * @Route("/edit/{id}", name="_edit")
      */
-    public function editProfile(User $user, Request $request)
+    public function editProfile(User $user, Request $request, $id)
     {
+        $user = $this->getUser();
+
+        $user_id = $user->getId();
+        $val = (int)$user_id === (int)$id;
+        if ($val === false) {
+            $this->denyAccessUnlessGranted('ROLE_ADMIN');
+        };
+
         $userForm = $this->createForm(EditUserType::class, $user);
 
         $userForm->handleRequest($request);
@@ -83,7 +91,11 @@ class UserController extends AbstractController
 
             $entityManager->flush();
 
-            return $this->redirectToRoute('user');
+            if ($this->isGranted('ROLE_ADMIN')) {
+                return $this->redirectToRoute('admin');
+            } else {
+                return $this->redirectToRoute('user_dashboard');
+            }
         }
 
 

@@ -30,7 +30,7 @@
 						{% include "announcement/_card.html.twig" %}
 					{% endfor %}
 				</div>
-                
+
 			</div>
 
 			<div class="aside">
@@ -54,7 +54,7 @@
 										{{ message.messageDate | date("d/m/Y") }}</small>
 									<p>{{ message.messageContent }}</p>
 									<small class="mt-1">
-										<a href="" class="small-link">Lire le message >>
+										<a href="{{ path('messages_show', {user: app.user.id, otherUser: message.sender.id}) }}" class="small-link">Lire le message >>
 										</a>
 									</small>
 								</div>

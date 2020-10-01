@@ -12,6 +12,10 @@ $warning: #FCB624;
     place-content: center;
 }
 
+strong {
+    font-weight: bold;
+}
+
 small {
     font-size: .7rem;
 
@@ -185,7 +189,7 @@ small {
             margin-right: .5rem;
             align-self: stretch;
             width: 41px;
-            
+
             &:first-of-type {
                 box-shadow: 0px 1px 12px rgba(1, 31, 140, 0.23);
             }
@@ -213,8 +217,15 @@ small {
             display: block;
             // margin-bottom: .5rem;
         }
-    }
 
+        ul {
+            list-style-type: disc;
+
+            li {
+                margin-left: 2rem;
+            }
+        }
+    }
 }
 
 .card-btn {
@@ -325,6 +336,8 @@ small {
     border-radius: 12px;
     color: white;
     font-size: .8rem;
+    // box-shadow: 0px 1px 12px rgb(1 31 140 / 11%);
+
 
     &.user {
         width: min-content;
@@ -345,6 +358,7 @@ small {
 
     &.trash {
         background-color: $danger;
+        cursor: pointer;
     }
 
     &.edit:hover {

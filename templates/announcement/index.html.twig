@@ -1,93 +1,118 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Gestion des annonces{% endblock %}
+{% block title %}Gestion des annonces
+{% endblock %}
 
 {% block body %}
-{% include 'nav.html.twig' %}
-<div class="single-row">
-    <div class="">
-        <div class="wrap-titles">
-            <h2>Gestion des annonces</h2>
-            <h2 class="back-to-dashboard"><a href="{{ path('admin') }}">&#10229; Retour à l'accueil</a></h2>
-        </div>
+	{% include 'nav.html.twig' %}
+	<div class="single-row">
+		<div class="">
+			<div class="wrap-titles">
+				<h2>Gestion des annonces</h2>
+				<h2 class="back-to-dashboard">
+					{% if is_granted('ROLE_ADMIN') %}
+						<a href="{{ path('admin') }}">&#10229; Retour à l'accueil</a>
+					{% else %}
+						<a href="{{ path('user_dashboard') }}">&#10229; Retour à l'accueil</a>
+					{% endif %}
+				</h2>
+			</div>
 
-        <div class="wrap">
-            <div class="card p-2">
-                <a href="{{ path('announcement_new') }}" class="btn btn-primary-dk mb-1">+ Nouvelle annonce</a>
+			<div class="wrap">
+				<div class="card p-2">
+					{% if is_granted('ROLE_ADMIN') %}
+						<a href="{{ path('announcement_new') }}" class="btn btn-primary-dk mb-1">+ Nouvelle annonce</a>
+					{% endif %}
 
-                <table class="table display responsive" id="announcementList" style="width: 100%">
-                    <thead>
-                        <tr>
+					<table class="table display responsive" id="announcementList" style="width: 100%">
+						<thead>
+							<tr>
 
-                            <th>Announcement_date</th>
-                            <th>Announcement_title</th>
-                            <th>Publié</th>
-                            <th>actions</th>
+								<th>Date de création</th>
+								<th>Titre</th>
+								{% if is_granted('ROLE_ADMIN') %}
+									<th>Publié</th>
+								{% endif %}
+								<th>Actions</th>
 
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for announcement in announcements %}
-                        <tr>
+							</tr>
+						</thead>
+						<tbody>
+							{# for each announcements #}
+							{% for announcement in announcements %}
+								<tr>
+									{# date #}
+									<td>{{ announcement.announcementDate ? announcement.announcementDate|date('d M. Y') : '' }}</td>
+									{# title #}
+									<td>{{ announcement.announcementTitle }}</td>
+									{# hidden to user - if published -> check mark #}
+									{% if is_granted('ROLE_ADMIN') %}
+										<td class="text-center">{{ announcement.isDraft ? '' : '&#10004;' }}</td>
+									{% endif %}
+									<td
+										class="flex">
+										{# see announcement #}
+										<a href="{{ path('announcement_show', {'id': announcement.id}) }}">Voir</a>
+										{# hidden to user #}
+										{% if is_granted('ROLE_ADMIN') %}
+											{# edit announcement #}
+											<a href="{{ path('announcement_edit', {'id': announcement.id}) }}" style="height: 32px;">
+												<img class="icon edit" src="{{ asset('icons/edit.svg') }}" alt="" title="&Eacute;diter">
+											</a>
+											{# include delete form #}
+											{{ include('announcement/_delete_form.html.twig') }}
+										{% endif %}
 
-                            <td>{{ announcement.announcementDate ? announcement.announcementDate|date('d M. Y') : '' }}
-                            </td>
-                            <td>{{ announcement.announcementTitle }}</td>
-                            <td class="text-center">{{ announcement.isDraft ? '' : '&#10004;' }}</td>
-                            <td class="flex">
-                                <a href="{{ path('announcement_show', {'id': announcement.id}) }}">Voir</a>
-                                <a href="{{ path('announcement_edit', {'id': announcement.id}) }}"
-                                    style="height: 32px;">
-                                    <img class="icon edit" src="{{ asset('icons/edit.svg') }}" alt=""
-                                        title="&Eacute;diter"></a>
-                                {{ include('announcement/_delete_form.html.twig') }}
-                            </td>
-                        </tr>
-                        {% else %}
-                        <tr>
-                            <td colspan="4">Aucune annonce</td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
+									</td>
+								</tr>
+							{% else %}
+								{# if no announcements #}
+								<tr>
+									<td colspan="4">Aucune annonce</td>
+								</tr>
+							{% endfor %}
+						</tbody>
+					</table>
 
-            </div>
-        </div>
-    </div>
-</div>
+				</div>
+			</div>
+		</div>
+	</div>
 
-{% for message in app.flashes('success') %}
+	{% for message in app.flashes('success') %}
 
-<div class="alert success">
-    <p>{{ message }}</p>
-</div>
+		<div class="alert success">
+			<p>{{ message }}</p>
+		</div>
 
-{% endfor %}
+	{% endfor %}
 
-{% for message in app.flashes('delete') %}
+	{% for message in app.flashes('delete') %}
 
-<div class="alert delete">
-    <p>{{ message }}</p>
-</div>
+		<div class="alert delete">
+			<p>{{ message }}</p>
+		</div>
 
-{% endfor %}
+	{% endfor %}
 
-{% for message in app.flashes('edit') %}
+	{% for message in app.flashes('edit') %}
 
-<div class="alert edit">
-    <p>{{ message }}</p>
-</div>
+		<div class="alert edit">
+			<p>{{ message }}</p>
+		</div>
 
-{% endfor %}
-<script>
-    $(document).ready(function () {
-        $('#announcementList').DataTable({
-            "scrollX": true,
-            fixedColumns: true,
-            "language": {
-                "url": "{{ asset('js/french.lang') }}"
-            },
-        });
-    });
-</script>
+	{% endfor %}
+
+	<script>
+		$(document).ready(function () {
+$('#announcementList').DataTable({
+"scrollX": true,
+fixedColumns: true,
+"order": [ [ 0, 'desc' ]],
+"language": {
+"url": "{{ asset('js/french.lang') }}"
+}
+});
+});
+	</script>
 {% endblock %}

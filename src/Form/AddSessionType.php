@@ -9,14 +9,23 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 
 class AddSessionType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('start_date')
-            ->add('end_date')
+            ->add('start_date', DateType::class, [
+                'days' => range(date('d'), 31),
+                'months' => range(date('m'), 12),
+                'years' => range(date('Y'), date('Y')+100),
+            ])
+            ->add('end_date', DateType::class, [
+                'days' => range(date('d'), 31),
+                'months' => range(date('m'), 12),
+                'years' => range(date('Y'), date('Y')+100),
+            ])
             // ->add('user', EntityType::class, [
             //     'class' => User::class,
             //     'choice_label' => 'fullName',

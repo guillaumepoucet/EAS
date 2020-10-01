@@ -11,7 +11,7 @@
             <div class="card-body">
                 <ul>
                     {% for recipient in newRecipientList %}
-                    <li class="recipient-name"><a href="">{{ recipient.name }}</a></li>
+                    <li class="recipient-name"><a href="{{ path('messages_show', {user: app.user.id, otherUser: recipient.id}) }}">{{ recipient.name }}</a></li>
                     {% endfor %}
                 </ul>
             </div>

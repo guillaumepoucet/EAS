@@ -24,28 +24,7 @@
 			</div>
 			<div class="wrap announcements wrap-grid">
 				{% for announcement in announcements %}
-				{% if announcement.isDraft == 0 %}
-				<div class="card">
-					<div class="card-header">
-						<div><img src="{{ asset('icons/horn.svg') }}" alt=""></div>
-
-						<h4>{{ announcement.announcementTitle}}</h4>
-					</div>
-
-					<div class="card-body">
-						<small>{{ announcement.announcementDate | date("d/m/Y") }}</small>
-						<p>{{ announcement.announcementContent | raw }}</p>
-					</div>
-					{% if is_granted('ROLE_ADMIN') %}
-					<div class="card-btn">
-						<a href=" {{ path('announcement_edit', {id: announcement.id}) }}" type="button"
-							class="btn btn-warning btn-sm">&Eacute;diter</a>
-						<a href=" {{ path('announcement_delete', {id: announcement.id}) }}" type="button"
-							class="btn btn-danger btn-sm">Supprimer</a>
-					</div>
-					{% endif %}
-				</div>
-				{% endif %}
+				{% include "announcement/_card.html.twig" %}
 				{% endfor %}
 			</div>
 		</div>
@@ -80,6 +59,4 @@
 	</div>
 </div>
 
-<p>Roboto</p>
-<p style="font-family: roboto-medium;">Roboto Medium</p>
 {% endblock %}

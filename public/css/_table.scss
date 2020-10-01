@@ -91,7 +91,7 @@ tbody tr td {
 .collapse {
     height: 0px;
     overflow: hidden;
-    transition: .25s;
+    transition: height .25s;
 
     &.display {
         height: max-content;

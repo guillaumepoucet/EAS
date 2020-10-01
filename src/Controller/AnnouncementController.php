@@ -30,18 +30,23 @@ class AnnouncementController extends AbstractController
      */
     public function new(Request $request): Response
     {
+        // guaranty that the user won't be able to access this
+        $this->denyAccessUnlessGranted('ROLE_ADMIN');
+
         $announcement = new Announcement();
         $form = $this->createForm(AnnouncementType::class, $announcement);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             
+            // set the current user as author
             $announcement->setUser($this->getUser());
 
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($announcement);
             $entityManager->flush();
             
+            // sends a flash messages for success
             $this->addFlash('success', 'Nouvelle annonce créée');
 
             return $this->redirectToRoute('announcement_index');
@@ -58,6 +63,8 @@ class AnnouncementController extends AbstractController
      */
     public function show(Announcement $announcement): Response
     {
+        // $this->denyAccessUnlessGranted('ROLE_ADMIN');
+
         return $this->render('announcement/show.html.twig', [
             'announcement' => $announcement,
         ]);
@@ -68,6 +75,8 @@ class AnnouncementController extends AbstractController
      */
     public function edit(Request $request, Announcement $announcement): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN');
+
         $form = $this->createForm(AnnouncementType::class, $announcement);
         $form->handleRequest($request);
 
@@ -90,6 +99,8 @@ class AnnouncementController extends AbstractController
      */
     public function delete(Request $request, Announcement $announcement): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN');
+
         if ($this->isCsrfTokenValid('delete'.$announcement->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($announcement);

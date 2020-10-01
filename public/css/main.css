@@ -2,6 +2,10 @@
   place-content: center;
 }
 
+strong {
+  font-weight: bold;
+}
+
 small {
   font-size: .7rem;
 }
@@ -207,6 +211,14 @@ small .small-link {
   display: block;
 }
 
+.card .card-body ul {
+  list-style-type: disc;
+}
+
+.card .card-body ul li {
+  margin-left: 2rem;
+}
+
 .card-btn {
   border-bottom-right-radius: 8px;
   border-bottom-left-radius: 8px;
@@ -342,6 +354,7 @@ small .small-link {
 
 .icon.trash {
   background-color: #C92A14;
+  cursor: pointer;
 }
 
 .icon.edit:hover {
@@ -447,8 +460,8 @@ tbody tr td {
 .collapse {
   height: 0px;
   overflow: hidden;
-  -webkit-transition: .25s;
-  transition: .25s;
+  -webkit-transition: height .25s;
+  transition: height .25s;
 }
 
 .collapse.display {
@@ -661,16 +674,14 @@ body {
   line-height: 1.5rem;
 }
 
-.nav-content > ul li {
-  padding: .5rem 1rem .5rem 2rem;
-}
-
 .nav-content > ul .nav-link {
   border-radius: 8px;
   -webkit-transition: .25s;
   transition: .25s;
   position: relative;
   cursor: pointer;
+  display: block;
+  padding: .5rem 1rem .5rem 2rem;
 }
 
 .nav-content > ul .nav-link:hover:not(.active) {
@@ -744,6 +755,7 @@ body {
   background-color: white;
   display: -ms-grid;
   display: grid;
+  gap: 1.5rem;
 }
 
 .grid .overflow-auto {
@@ -778,6 +790,12 @@ body {
   width: max-content;
 }
 
+.row {
+  display: -ms-grid;
+  display: grid;
+  gap: 1.5rem;
+}
+
 .wrap {
   background-color: rgba(1, 31, 140, 0.25);
   padding: 1.5rem;
@@ -787,7 +805,7 @@ body {
 }
 
 .messages-list {
-  max-height: 64vh;
+  max-height: 55vh;
   overflow-y: auto;
 }
 
@@ -822,10 +840,22 @@ body {
 
 .chat-grid {
   border-radius: 8px;
+  min-height: 70vh;
 }
 
 .card-header div {
   height: 44px;
+}
+
+.conv {
+  display: -ms-grid;
+  display: grid;
+}
+
+.conv .card-footer {
+  -ms-flex-item-align: end;
+      -ms-grid-row-align: end;
+      align-self: end;
 }
 
 .modal {
@@ -851,6 +881,32 @@ body {
 
 #newRecipientList .recipient-name {
   margin: .25rem;
+}
+
+#newRecipientList .wrap-grid {
+  -ms-grid-row: 1;
+  -ms-grid-row-span: 2;
+  grid-row: 1 / span 2;
+  display: -ms-grid;
+  display: grid;
+  gap: 1.5rem;
+  padding: 1.5rem;
+}
+
+.role-btn {
+  background-color: #c92a1482 !important;
+  -webkit-transition: .25s;
+  transition: .25s;
+}
+
+.role-btn:hover {
+  background-color: #C92A14 !important;
+}
+
+.expanded.collapse {
+  height: -webkit-fit-content !important;
+  height: -moz-fit-content !important;
+  height: fit-content !important;
 }
 
 @media screen and (min-width: 960px) {
@@ -923,6 +979,9 @@ body {
   body .grid .span-1 {
     grid-column: span 1;
   }
+  .mobile-grid {
+    margin-top: 0 !important;
+  }
   .single-row {
     display: -ms-grid;
     display: grid;
@@ -954,8 +1013,6 @@ body {
     grid-column: span 5;
   }
   .grid-row {
-    display: -ms-grid;
-    display: grid;
     grid-auto-flow: column;
     grid-column-gap: 24px;
     margin-bottom: 24px;
@@ -975,8 +1032,6 @@ body {
     -ms-grid-row: 1;
     -ms-grid-row-span: 2;
     grid-row: 1 / span 2;
-    display: -ms-grid;
-    display: grid;
     gap: 1.5rem;
     padding: 1.5rem;
   }
@@ -1022,5 +1077,12 @@ body {
     border-top-left-radius: 0;
     border-top-right-radius: 0;
   }
+}
+
+.mobile-grid {
+  display: -ms-grid;
+  display: grid;
+  gap: 1.5rem;
+  margin-top: 1.5rem;
 }
 /*# sourceMappingURL=main.css.map */

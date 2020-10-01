@@ -5,7 +5,7 @@
 {% block body %}
 {% include 'nav.html.twig'%}
 
-<div class="row">
+<div class="single-row">
     <div class="">
         <div class="wrap-titles">
             <h2>Publier une nouvelle annonce</h2>
@@ -14,7 +14,7 @@
         <div class="wrap">
             <div class="card">
 
-                {{ include('announcement/_form.html.twig') }}
+                {{ include('announcement/_form.html.twig', {'button_label': 'Publier'}) }}
 
             </div>
         </div>

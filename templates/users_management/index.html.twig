@@ -11,7 +11,7 @@
 			<h2>Liste des elèves</h2>
 			<h2 class="back-to-dashboard"><a href="{{ path('admin') }}">&#10229; Retour à l'accueil</a></h2>
 		</div>
-		
+
 		<div class="wrap">
 			<div class="card p-2">
 				<table class="table nowrap display" id="student-table" style="width: 100%">
@@ -39,16 +39,16 @@
 										title="Révoquer les droits administrateurs">&#215;</a>
 								</div>
 								{% else %}
-								<!-- <div class="badge-btn"> -->
-								<p class="badge user">elève</p>
-								<!-- <a href="{{ path('users_promote', {id: user.id}) }}">Modifier</a> -->
-								<!-- </div> -->
+								<div class="badge-btn role-btn">
+									<p class="badge user">elève</p>
+									<a href="{{ path('users_promote', {id: user.id}) }}" style="font-size: .6rem">Modifier</a>
+								</div>
 								{% endif %}
 
 							</td>
 							<td>
 								{% for session in user.sessions %}
-								{{session.course.courseName}}<br>
+								<span><strong>{{session.course.courseName}}</strong>, <small>du <strong>{{ session.startDate | date("d/m/Y") }}</strong> au <strong>{{ session.endDate | date("d/m/Y") }}</strong></small><br>
 								{% else %}
 								(Aucune sessions)<br>
 								{% endfor %}

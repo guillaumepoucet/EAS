@@ -68,7 +68,7 @@ body {
         line-height: 1.5rem;
 
         li {
-            padding: .5rem 1rem .5rem 2rem;
+            // padding: .5rem 1rem .5rem 2rem;
         }
 
         .nav-link {
@@ -76,6 +76,8 @@ body {
             transition: .25s;
             position: relative;
             cursor: pointer;
+            display: block;
+            padding: .5rem 1rem .5rem 2rem;
 
             &:hover:not(.active) {
                 color: $primary-dk;
@@ -151,6 +153,7 @@ body {
 .grid {
     background-color: white;
     display: grid;
+    gap: 1.5rem;
     // place-items: center;
     // padding-top: 18px;
     // padding-bottom: 24px;
@@ -179,7 +182,11 @@ body {
         width: max-content;
     }
 
+}
 
+.row {
+    display: grid;
+    gap: 1.5rem;
 }
 
 .wrap {
@@ -192,8 +199,9 @@ body {
     border-bottom-left-radius: 4px;
 }
 
+// chat
 .messages-list {
-    max-height: 64vh;
+    max-height: 55vh;
     overflow-y: auto;
 }
 
@@ -227,11 +235,20 @@ body {
 
 .chat-grid {
     border-radius: 8px;
+    min-height: 70vh;
 }
 
 .card-header {
     div {
         height: 44px;
+    }
+}
+
+.conv {
+    display: grid;
+
+    .card-footer {
+        align-self: end;
     }
 }
 
@@ -258,8 +275,32 @@ body {
 
     .recipient-name {
         margin: .25rem;
+
+    }
+
+    .wrap-grid {
+        grid-row: 1 / span 2;
+        display: grid;
+        gap: 1.5rem;
+        padding: 1.5rem;
     }
 }
+
+.role-btn {
+    background-color: #c92a1482 !important;
+    transition: .25s;
+}
+
+.role-btn:hover {
+    background-color: $danger !important;
+}
+
+.expanded {
+    &.collapse {
+        height: fit-content !important;
+    }
+}
+
 
 @media screen and (min-width: 960px) {
     body {
@@ -342,6 +383,10 @@ body {
 
     }
 
+    .mobile-grid {
+        margin-top: 0 !important;
+    }
+
     .single-row {
         display: grid;
         grid-auto-flow: row;
@@ -380,7 +425,7 @@ body {
     // }
 
     .grid-row {
-        display: grid;
+        // display: grid;
         grid-auto-flow: column;
         grid-column-gap: 24px;
         margin-bottom: 24px;
@@ -398,7 +443,7 @@ body {
 
     .wrap-grid {
         grid-row: 1 / span 2;
-        display: grid;
+        // display: grid;
         gap: 1.5rem;
         padding: 1.5rem;
 
@@ -447,4 +492,10 @@ body {
             }
         }
     }
+}
+
+.mobile-grid {
+    display: grid;
+    gap: 1.5rem;
+    margin-top: 1.5rem;
 }

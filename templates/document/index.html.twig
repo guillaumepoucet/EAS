@@ -38,7 +38,7 @@
 								{% endfor %}
 							</td>
 							<td class="flex">
-								<!-- <a href="{{ path('document_show', {'id': document.id}) }}">voir</a> -->
+								<a href="{{ asset('documents/' ~ document.fileName) }}">Télécharger</a>
 								{% if is_granted('ROLE_ADMIN') %}
 
 								<a href="{{ path('document_edit', {'id': document.id}) }}" style="height: 32px;">
@@ -56,8 +56,9 @@
 						{% endfor %}
 					</tbody>
 				</table>
-
+				{% if is_granted('ROLE_ADMIN') %}
 				<a href="{{ path('document_new') }}" class="btn btn-primary-dk">+ Nouveau fichier</a>
+				{% endif %}
 
 			</div>
 		</div>
