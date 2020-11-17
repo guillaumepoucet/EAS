@@ -62,7 +62,6 @@
 											{# include delete form #}
 											{{ include('announcement/_delete_form.html.twig') }}
 										{% endif %}
-
 									</td>
 								</tr>
 							{% else %}
@@ -106,9 +105,11 @@
 	<script>
 		$(document).ready(function () {
 $('#announcementList').DataTable({
-"scrollX": true,
-fixedColumns: true,
-"order": [ [ 0, 'desc' ]],
+// "scrollX": true,
+// fixedColumns: true,
+"order": 
+[0, 'desc']
+,
 "language": {
 "url": "{{ asset('js/french.lang') }}"
 }
