@@ -76,6 +76,7 @@ class UserController extends AbstractController
         $user = $this->getUser();
 
         $user_id = $user->getId();
+        
         $val = (int)$user_id === (int)$id;
         if ($val === false) {
             $this->denyAccessUnlessGranted('ROLE_ADMIN');
