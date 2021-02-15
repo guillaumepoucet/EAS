@@ -175,7 +175,6 @@ class DocumentController extends AbstractController
         }
         $this->addFlash('delete', 'Document supprimé');
 
-
         return $this->redirectToRoute('document_index');
     }
 }
